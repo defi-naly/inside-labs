@@ -25,12 +25,12 @@ const CoreGeodesic = () => {
       </mesh>
       {/* Outer wireframe */}
       <mesh>
-        <icosahedronGeometry args={[1.5, 1]} />
+        <icosahedronGeometry args={[1.2, 1]} />
         <meshBasicMaterial wireframe color="#ffffff" transparent opacity={0.7} />
       </mesh>
       {/* Inner wireframe */}
       <mesh>
-        <icosahedronGeometry args={[1.1, 1]} />
+        <icosahedronGeometry args={[0.85, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.3} />
       </mesh>
     </group>
@@ -278,7 +278,7 @@ const NetworkScene = () => {
 
   const satellites = useMemo(() => {
     const sats: { pos: [number, number, number]; radius: number; depth: number; orbitSpeed: number; orbitPhase: number }[] = [];
-    const count = 20;
+    const count = 26;
     const shellRadius = 4.8;
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
