@@ -41,11 +41,14 @@ const BentoCard = ({
       ref={ref}
       onClick={onClick}
       className={cn(
-        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 ease-out",
+        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border transition-all duration-500 ease-out",
         "hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-[3px]",
         visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
         className
       )}
+      style={{
+        background: "linear-gradient(165deg, hsl(230 15% 6%) 0%, hsl(230 20% 4%) 50%, hsl(230 15% 5%) 100%)",
+      }}
     >
       {/* Subtle red gradient mesh inside */}
       <div
