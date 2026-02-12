@@ -121,7 +121,7 @@ const DynamicLines = ({
     const positions = new Float32Array(neighbors.length * 6);
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    const m = new THREE.LineBasicMaterial({ color: "#f0f0f5", transparent: true, opacity: 0.08 });
+    const m = new THREE.LineBasicMaterial({ color: "#f0f0f5", transparent: true, opacity: 0.2 });
     return { interGeo: g, interMat: m };
   }, [neighbors.length]);
 
