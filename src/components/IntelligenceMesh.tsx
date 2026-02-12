@@ -76,7 +76,7 @@ const Satellite = ({
     }
   });
 
-  const opacity = THREE.MathUtils.lerp(0.5, 0.1, depth);
+  const opacity = 0.6;
 
   return (
     <group ref={groupRef}>
