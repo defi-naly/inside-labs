@@ -310,7 +310,7 @@ const NetworkScene = () => {
         dists.push({ idx: j, dist: Math.sqrt(dx * dx + dy * dy + dz * dz) });
       }
       dists.sort((a, b) => a.dist - b.dist);
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 5; k++) {
         const a = Math.min(i, dists[k].idx);
         const b = Math.max(i, dists[k].idx);
         const key = `${a}-${b}`;
