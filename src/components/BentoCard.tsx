@@ -41,15 +41,23 @@ const BentoCard = ({
       ref={ref}
       onClick={onClick}
       className={cn(
-        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border/40 bg-card transition-all duration-500 ease-out",
-        "hover:shadow-2xl hover:shadow-black/10 hover:border-border/80",
+        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 ease-out",
+        "hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-[3px]",
         visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
         className
       )}
     >
+      {/* Subtle red gradient mesh inside */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          background: `radial-gradient(ellipse at 70% 30%, ${accentColor}, transparent 70%)`,
+        }}
+      />
+
       {/* Expand icon */}
-      <div className="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-border/50 bg-background/80 backdrop-blur-sm transition-all duration-300 group-hover:border-foreground/20 group-hover:bg-background">
-        <ArrowUpRight size={14} className="text-muted-foreground transition-all duration-300 group-hover:text-foreground group-hover:scale-110" />
+      <div className="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card/80 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30">
+        <ArrowUpRight size={14} className="text-secondary transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
       </div>
 
       {/* Text */}
@@ -59,7 +67,7 @@ const BentoCard = ({
         </h3>
       </div>
 
-      {/* Image with subtle gradient */}
+      {/* Image */}
       <div
         className="relative w-full overflow-hidden"
         style={{
@@ -67,7 +75,7 @@ const BentoCard = ({
         }}
       >
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-30"
           style={{
             background: `radial-gradient(ellipse at 80% 30%, ${accentColor}25, transparent 70%)`,
           }}
