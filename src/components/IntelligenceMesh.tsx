@@ -16,8 +16,8 @@ const CoreShape = () => {
 
   return (
     <mesh ref={ref}>
-      <dodecahedronGeometry args={[1.8, 0]} />
-      <meshBasicMaterial wireframe color="#999999" transparent opacity={0.3} />
+      <dodecahedronGeometry args={[1.0, 0]} />
+      <meshBasicMaterial wireframe color="#aaaaaa" transparent opacity={0.5} />
     </mesh>
   );
 };
@@ -126,9 +126,9 @@ const NetworkScene = () => {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
     const mat = new THREE.LineBasicMaterial({
-      color: "#999999",
+      color: "#aaaaaa",
       transparent: true,
-      opacity: 0.06,
+      opacity: 0.15,
     });
     return new THREE.LineSegments(g, mat);
   }, [positions]);
