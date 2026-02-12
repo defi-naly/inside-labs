@@ -20,7 +20,7 @@ const CoreGeodesic = () => {
     <group ref={ref}>
       {/* Red glowing core mesh */}
       <mesh>
-        <icosahedronGeometry args={[0.45, 1]} />
+        <icosahedronGeometry args={[0.25, 2]} />
         <meshBasicMaterial wireframe color="#e63946" transparent opacity={0.6} />
       </mesh>
       {/* Outer wireframe */}
