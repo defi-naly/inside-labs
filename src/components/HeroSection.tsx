@@ -16,72 +16,63 @@ const HeroSection = () => {
             filter: "blur(80px)",
           }}
         />
-        <div
-          className="absolute -left-[5%] -top-[10%] h-[50%] w-[40%] opacity-[0.04]"
-          style={{
-            background: "radial-gradient(ellipse, hsl(0 84% 60%), transparent 70%)",
-            filter: "blur(60px)",
-          }}
-        />
       </div>
 
-      {/* Content */}
+      {/* 3D Mesh — full width behind everything */}
+      <div className="pointer-events-auto absolute inset-0 z-0">
+        <IntelligenceMesh />
+      </div>
+
+      {/* Content overlaid on mesh */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          {/* Left — Text */}
-          <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Welcome to Inside Labs
-            </p>
+        <div className="max-w-2xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            Welcome to Inside Labs
+          </p>
 
-            <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-              Engage with{" "}
-              <span className="relative inline-block">
-                Intelligence
-                <span
-                  className="absolute -bottom-1.5 left-0 h-2 w-full rounded-full opacity-30"
-                  style={{
-                    background: "linear-gradient(90deg, hsl(0 84% 60%), hsl(0 0% 30%))",
-                  }}
-                />
-              </span>
-              .
-            </h1>
+          <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
+            Engage with{" "}
+            <span className="relative inline-block">
+              Intelligence
+              <span
+                className="absolute -bottom-1.5 left-0 h-2 w-full rounded-full opacity-30"
+                style={{
+                  background:
+                    "linear-gradient(90deg, hsl(0 84% 60%), hsl(0 0% 30%))",
+                }}
+              />
+            </span>
+            .
+          </h1>
 
-            <p className="mb-10 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              Tourism's leading data-driven, event-triggered customer engagement
-              platform. From first touch to lifelong loyalty.
-            </p>
+          <p className="mb-10 max-w-lg text-lg leading-relaxed text-muted-foreground">
+            Tourism's leading data-driven, event-triggered customer engagement
+            platform. From first touch to lifelong loyalty.
+          </p>
 
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="/omni-suite"
-                className="group inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-semibold text-background transition-all hover:opacity-90"
-              >
-                Explore the Omni Suite
-                <ArrowRight
-                  size={16}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
-              >
-                Get in Touch
-              </a>
-            </div>
-          </div>
-
-          {/* Right — 3D Mesh */}
-          <div className="relative h-[400px] w-full lg:h-[500px] lg:max-w-none">
-            <IntelligenceMesh />
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="/omni-suite"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-semibold text-background transition-all hover:opacity-90"
+            >
+              Explore the Omni Suite
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              Get in Touch
+            </a>
           </div>
         </div>
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
     </section>
   );
 };
