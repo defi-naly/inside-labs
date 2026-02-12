@@ -11,19 +11,6 @@ const SocialProofSection = () => {
   return (
     <section className="py-32 lg:py-40 px-6">
       <div className="mx-auto max-w-7xl">
-        {/* Logos */}
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-10">
-          Trusted by leading tourism brands
-        </p>
-        <div className="flex justify-center mb-24">
-          <img
-            src={clients}
-            alt="Client logos"
-            className="h-16 w-auto object-contain md:h-24"
-            style={{ filter: "brightness(0) invert(1)" }}
-          />
-        </div>
-
         {/* Case Study Stats */}
         <div className="text-center mb-16">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
@@ -34,7 +21,7 @@ const SocialProofSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-8">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center py-8">
               <p className="text-4xl md:text-5xl font-bold text-primary leading-none mb-3">
@@ -47,9 +34,22 @@ const SocialProofSection = () => {
           ))}
         </div>
 
-        <p className="text-center mt-8 text-xs text-muted-foreground">
+        <p className="text-center mb-24 text-xs text-muted-foreground">
           * Values in Swiss Franc (CHF). Winter 2018/19 season.
         </p>
+
+        {/* Logos */}
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-10">
+          Trusted by leading tourism brands
+        </p>
+        <div className="flex justify-center">
+          <img
+            src={clients}
+            alt="Client logos"
+            className="h-16 w-auto object-contain md:h-24"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
+        </div>
       </div>
     </section>
   );
