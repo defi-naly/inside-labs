@@ -360,7 +360,7 @@ const IntelligenceMesh = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Canvas
-        camera={{ position: [0, 0, 16], fov: 50 }}
+        camera={{ position: [0, 0, 14], fov: 50 }}
         style={{ touchAction: "none", background: "transparent", width: "100%", height: "100%" }}
         gl={{ alpha: true, antialias: true }}
         dpr={[1, 2]}
