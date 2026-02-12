@@ -18,10 +18,21 @@ const CoreGeodesic = () => {
 
   return (
     <group ref={ref}>
+      {/* Tiny red core glow */}
+      <mesh>
+        <sphereGeometry args={[0.35, 16, 16]} />
+        <meshBasicMaterial color="#e63946" transparent opacity={0.5} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[0.6, 16, 16]} />
+        <meshBasicMaterial color="#e63946" transparent opacity={0.15} />
+      </mesh>
+      {/* Outer wireframe */}
       <mesh>
         <icosahedronGeometry args={[1.5, 1]} />
         <meshBasicMaterial wireframe color="#ffffff" transparent opacity={0.7} />
       </mesh>
+      {/* Inner wireframe */}
       <mesh>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.3} />
