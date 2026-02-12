@@ -2,7 +2,7 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-/* ── Central geodesic — wireframe only, no fill ── */
+/* ── Central geodesic — wireframe only ── */
 const CoreGeodesic = () => {
   const ref = useRef<THREE.Group>(null);
 
@@ -18,17 +18,31 @@ const CoreGeodesic = () => {
 
   return (
     <group ref={ref}>
-      {/* Outer wireframe */}
       <mesh>
         <icosahedronGeometry args={[1.5, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.4} />
       </mesh>
-      {/* Inner wireframe for depth */}
       <mesh>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.15} />
       </mesh>
     </group>
+  );
+};
+
+/* ── Helper: compute current satellite position (must match useFrame logic) ── */
+const getSatPosition = (
+  base: THREE.Vector3,
+  orbitSpeed: number,
+  orbitPhase: number,
+  time: number
+): THREE.Vector3 => {
+  const angle = time * orbitSpeed + orbitPhase;
+  const orbRadius = 0.3;
+  return new THREE.Vector3(
+    base.x + Math.sin(angle) * orbRadius,
+    base.y + Math.cos(angle * 0.7) * orbRadius * 0.5,
+    base.z + Math.cos(angle) * orbRadius
   );
 };
 
@@ -57,13 +71,8 @@ const Satellite = ({
       ref.current.rotation.x += 0.15 * 0.016;
     }
     if (groupRef.current) {
-      const angle = t * orbitSpeed + orbitPhase;
-      const orbRadius = 0.3;
-      groupRef.current.position.set(
-        baseVec.x + Math.sin(angle) * orbRadius,
-        baseVec.y + Math.cos(angle * 0.7) * orbRadius * 0.5,
-        baseVec.z + Math.cos(angle) * orbRadius
-      );
+      const pos = getSatPosition(baseVec, orbitSpeed, orbitPhase, t);
+      groupRef.current.position.copy(pos);
     }
   });
 
@@ -79,70 +88,180 @@ const Satellite = ({
   );
 };
 
-/* ── Flowing particles — fewer, slower ── */
-const FlowingParticles = ({
-  from,
-  to,
-  count,
-  depth,
+/* ── Dynamic lines that follow satellites ── */
+const DynamicLines = ({
+  satellites,
+  neighbors,
 }: {
-  from: THREE.Vector3;
-  to: THREE.Vector3;
-  count: number;
-  depth: number;
+  satellites: { pos: [number, number, number]; depth: number; orbitSpeed: number; orbitPhase: number }[];
+  neighbors: [number, number][];
 }) => {
-  const ref = useRef<THREE.Points>(null);
+  const radialRef = useRef<THREE.LineSegments>(null);
+  const interRef = useRef<THREE.LineSegments>(null);
 
-  const { positions, offsets, speeds, directions } = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const off = new Float32Array(count);
-    const spd = new Float32Array(count);
-    const dir = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      off[i] = Math.random();
-      spd[i] = 0.06 + Math.random() * 0.1;
-      dir[i] = Math.random() > 0.4 ? 1 : -1;
-    }
-    return { positions: pos, offsets: off, speeds: spd, directions: dir };
-  }, [count]);
+  const baseVecs = useMemo(
+    () => satellites.map((s) => new THREE.Vector3(...s.pos)),
+    [satellites]
+  );
+
+  // Radial lines: center → each satellite
+  const { radialGeo, radialMat } = useMemo(() => {
+    const count = satellites.length;
+    const positions = new Float32Array(count * 6);
+    const colors = new Float32Array(count * 6);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    g.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    const m = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.25 });
+    return { radialGeo: g, radialMat: m };
+  }, [satellites.length]);
+
+  // Inter-satellite lines
+  const { interGeo, interMat } = useMemo(() => {
+    const positions = new Float32Array(neighbors.length * 6);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    const m = new THREE.LineBasicMaterial({ color: "#f0f0f5", transparent: true, opacity: 0.08 });
+    return { interGeo: g, interMat: m };
+  }, [neighbors.length]);
+
+  const red = useMemo(() => new THREE.Color("#e63946"), []);
+  const white = useMemo(() => new THREE.Color("#f0f0f5"), []);
 
   useFrame(({ clock }) => {
-    if (!ref.current) return;
     const t = clock.getElapsedTime();
-    const posAttr = ref.current.geometry.attributes.position;
 
-    for (let i = 0; i < count; i++) {
-      let progress = (offsets[i] + t * speeds[i] * directions[i]) % 1;
-      if (progress < 0) progress += 1;
-      posAttr.setXYZ(
-        i,
-        from.x + (to.x - from.x) * progress,
-        from.y + (to.y - from.y) * progress,
-        from.z + (to.z - from.z) * progress
-      );
+    // Update radial lines
+    const rPos = radialGeo.attributes.position as THREE.BufferAttribute;
+    const rCol = radialGeo.attributes.color as THREE.BufferAttribute;
+    for (let i = 0; i < satellites.length; i++) {
+      const sat = satellites[i];
+      const current = getSatPosition(baseVecs[i], sat.orbitSpeed, sat.orbitPhase, t);
+      // From center
+      rPos.setXYZ(i * 2, 0, 0, 0);
+      rCol.setXYZ(i * 2, red.r, red.g, red.b);
+      // To satellite center
+      rPos.setXYZ(i * 2 + 1, current.x, current.y, current.z);
+      rCol.setXYZ(i * 2 + 1, white.r, white.g, white.b);
     }
-    posAttr.needsUpdate = true;
+    rPos.needsUpdate = true;
+    rCol.needsUpdate = true;
+
+    // Update inter-satellite lines
+    const iPos = interGeo.attributes.position as THREE.BufferAttribute;
+    for (let i = 0; i < neighbors.length; i++) {
+      const [a, b] = neighbors[i];
+      const posA = getSatPosition(baseVecs[a], satellites[a].orbitSpeed, satellites[a].orbitPhase, t);
+      const posB = getSatPosition(baseVecs[b], satellites[b].orbitSpeed, satellites[b].orbitPhase, t);
+      iPos.setXYZ(i * 2, posA.x, posA.y, posA.z);
+      iPos.setXYZ(i * 2 + 1, posB.x, posB.y, posB.z);
+    }
+    iPos.needsUpdate = true;
   });
 
-  const opacity = THREE.MathUtils.lerp(0.5, 0.1, depth);
+  return (
+    <>
+      <lineSegments ref={radialRef} geometry={radialGeo} material={radialMat} />
+      <lineSegments ref={interRef} geometry={interGeo} material={interMat} />
+    </>
+  );
+};
+
+/* ── Dynamic particles that follow satellites ── */
+const DynamicParticles = ({
+  satellites,
+  neighbors,
+}: {
+  satellites: { pos: [number, number, number]; depth: number; orbitSpeed: number; orbitPhase: number }[];
+  neighbors: [number, number][];
+}) => {
+  const radialRef = useRef<THREE.Points>(null);
+  const interRef = useRef<THREE.Points>(null);
+  const baseVecs = useMemo(() => satellites.map((s) => new THREE.Vector3(...s.pos)), [satellites]);
+
+  // Radial particles: 2 per satellite
+  const radialCount = satellites.length * 2;
+  const { rPositions, rOffsets, rSpeeds, rDirs, rSatIdx } = useMemo(() => {
+    const pos = new Float32Array(radialCount * 3);
+    const off = new Float32Array(radialCount);
+    const spd = new Float32Array(radialCount);
+    const dir = new Float32Array(radialCount);
+    const idx = new Uint8Array(radialCount);
+    for (let i = 0; i < radialCount; i++) {
+      off[i] = Math.random();
+      spd[i] = 0.04 + Math.random() * 0.06;
+      dir[i] = i % 2 === 0 ? 1 : -1;
+      idx[i] = Math.floor(i / 2);
+    }
+    return { rPositions: pos, rOffsets: off, rSpeeds: spd, rDirs: dir, rSatIdx: idx };
+  }, [radialCount]);
+
+  // Inter particles: 1 per neighbor edge
+  const interCount = neighbors.length;
+  const { iPositions, iOffsets, iSpeeds, iDirs } = useMemo(() => {
+    const pos = new Float32Array(interCount * 3);
+    const off = new Float32Array(interCount);
+    const spd = new Float32Array(interCount);
+    const dir = new Float32Array(interCount);
+    for (let i = 0; i < interCount; i++) {
+      off[i] = Math.random();
+      spd[i] = 0.03 + Math.random() * 0.05;
+      dir[i] = Math.random() > 0.5 ? 1 : -1;
+    }
+    return { iPositions: pos, iOffsets: off, iSpeeds: spd, iDirs: dir };
+  }, [interCount]);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+
+    // Radial particles
+    if (radialRef.current) {
+      const posAttr = radialRef.current.geometry.attributes.position;
+      for (let i = 0; i < radialCount; i++) {
+        let progress = (rOffsets[i] + t * rSpeeds[i] * rDirs[i]) % 1;
+        if (progress < 0) progress += 1;
+        const si = rSatIdx[i];
+        const target = getSatPosition(baseVecs[si], satellites[si].orbitSpeed, satellites[si].orbitPhase, t);
+        posAttr.setXYZ(i, target.x * progress, target.y * progress, target.z * progress);
+      }
+      posAttr.needsUpdate = true;
+    }
+
+    // Inter particles
+    if (interRef.current) {
+      const posAttr = interRef.current.geometry.attributes.position;
+      for (let i = 0; i < interCount; i++) {
+        let progress = (iOffsets[i] + t * iSpeeds[i] * iDirs[i]) % 1;
+        if (progress < 0) progress += 1;
+        const [a, b] = neighbors[i];
+        const posA = getSatPosition(baseVecs[a], satellites[a].orbitSpeed, satellites[a].orbitPhase, t);
+        const posB = getSatPosition(baseVecs[b], satellites[b].orbitSpeed, satellites[b].orbitPhase, t);
+        posAttr.setXYZ(
+          i,
+          posA.x + (posB.x - posA.x) * progress,
+          posA.y + (posB.y - posA.y) * progress,
+          posA.z + (posB.z - posA.z) * progress
+        );
+      }
+      posAttr.needsUpdate = true;
+    }
+  });
 
   return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-          count={count}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        color="#e63946"
-        size={0.06}
-        transparent
-        opacity={opacity}
-        sizeAttenuation
-      />
-    </points>
+    <>
+      <points ref={radialRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[rPositions, 3]} count={radialCount} />
+        </bufferGeometry>
+        <pointsMaterial color="#e63946" size={0.06} transparent opacity={0.45} sizeAttenuation />
+      </points>
+      <points ref={interRef}>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[iPositions, 3]} count={interCount} />
+        </bufferGeometry>
+        <pointsMaterial color="#e63946" size={0.05} transparent opacity={0.3} sizeAttenuation />
+      </points>
+    </>
   );
 };
 
@@ -150,7 +269,6 @@ const FlowingParticles = ({
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Satellites distributed spherically around center (Fibonacci sphere)
   const satellites = useMemo(() => {
     const sats: { pos: [number, number, number]; radius: number; depth: number; orbitSpeed: number; orbitPhase: number }[] = [];
     const count = 20;
@@ -178,39 +296,31 @@ const NetworkScene = () => {
     return sats;
   }, []);
 
-  // Gradient lines: red center → white at satellites
-  const connectionLines = useMemo(() => {
-    const center = new THREE.Vector3(0, 0, 0);
-    const segments = 20;
-    const positions: number[] = [];
-    const colors: number[] = [];
-    const red = new THREE.Color("#e63946");
-    const white = new THREE.Color("#f0f0f5");
-
-    for (const sat of satellites) {
-      const target = new THREE.Vector3(...sat.pos);
-      for (let s = 0; s < segments; s++) {
-        const t1 = s / segments;
-        const t2 = (s + 1) / segments;
-        const p1 = center.clone().lerp(target, t1);
-        const p2 = center.clone().lerp(target, t2);
-        positions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-
-        const c1 = red.clone().lerp(white, t1);
-        const c2 = red.clone().lerp(white, t2);
-        colors.push(c1.r, c1.g, c1.b, c2.r, c2.g, c2.b);
+  // Find 3 nearest neighbors for each satellite → inter-satellite edges
+  const neighbors = useMemo(() => {
+    const edges = new Set<string>();
+    const result: [number, number][] = [];
+    for (let i = 0; i < satellites.length; i++) {
+      const dists: { idx: number; dist: number }[] = [];
+      for (let j = 0; j < satellites.length; j++) {
+        if (i === j) continue;
+        const dx = satellites[i].pos[0] - satellites[j].pos[0];
+        const dy = satellites[i].pos[1] - satellites[j].pos[1];
+        const dz = satellites[i].pos[2] - satellites[j].pos[2];
+        dists.push({ idx: j, dist: Math.sqrt(dx * dx + dy * dy + dz * dz) });
+      }
+      dists.sort((a, b) => a.dist - b.dist);
+      for (let k = 0; k < 3; k++) {
+        const a = Math.min(i, dists[k].idx);
+        const b = Math.max(i, dists[k].idx);
+        const key = `${a}-${b}`;
+        if (!edges.has(key)) {
+          edges.add(key);
+          result.push([a, b]);
+        }
       }
     }
-
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-    g.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
-    const mat = new THREE.LineBasicMaterial({
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.25,
-    });
-    return new THREE.LineSegments(g, mat);
+    return result;
   }, [satellites]);
 
   useFrame(({ clock }) => {
@@ -220,12 +330,11 @@ const NetworkScene = () => {
     }
   });
 
-  const origin = useMemo(() => new THREE.Vector3(0, 0, 0), []);
-
   return (
     <group ref={groupRef}>
       <CoreGeodesic />
-      <primitive object={connectionLines} />
+      <DynamicLines satellites={satellites} neighbors={neighbors} />
+      <DynamicParticles satellites={satellites} neighbors={neighbors} />
       {satellites.map((sat, i) => (
         <Satellite
           key={i}
@@ -234,15 +343,6 @@ const NetworkScene = () => {
           depth={sat.depth}
           orbitSpeed={sat.orbitSpeed}
           orbitPhase={sat.orbitPhase}
-        />
-      ))}
-      {satellites.map((sat, i) => (
-        <FlowingParticles
-          key={`p-${i}`}
-          from={origin}
-          to={new THREE.Vector3(...sat.pos)}
-          count={sat.depth < 0.5 ? 3 : 2}
-          depth={sat.depth}
         />
       ))}
     </group>
