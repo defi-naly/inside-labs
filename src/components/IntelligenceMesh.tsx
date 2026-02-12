@@ -43,7 +43,7 @@ const ConnectionLine = ({
     const mat = new THREE.LineBasicMaterial({
       color: "#aaaaaa",
       transparent: true,
-      opacity: 0.06,
+      opacity: 0.015,
     });
     return new THREE.Line(g, mat);
   }, [start, end]);
@@ -54,56 +54,48 @@ const ConnectionLine = ({
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Generate ~60 spheres arranged on a large spherical shell
+  // Evenly distributed on a sphere surface using Fibonacci lattice
   const spheres = useMemo<SphereNode[]>(() => {
     const nodes: SphereNode[] = [];
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    const count = 55;
+    const count = 50;
     const shellRadius = 6;
 
     for (let i = 0; i < count; i++) {
-      const t = i / count;
+      const t = (i + 0.5) / count;
       const inclination = Math.acos(1 - 2 * t);
       const azimuth = goldenAngle * i;
 
-      const r = shellRadius + (Math.random() - 0.5) * 2;
-      const x = r * Math.sin(inclination) * Math.cos(azimuth);
-      const y = r * Math.sin(inclination) * Math.sin(azimuth);
-      const z = r * Math.cos(inclination);
+      const x = shellRadius * Math.sin(inclination) * Math.cos(azimuth);
+      const y = shellRadius * Math.sin(inclination) * Math.sin(azimuth);
+      const z = shellRadius * Math.cos(inclination);
 
-      const radius = 0.25 + Math.random() * 0.55;
+      const radius = 0.3 + Math.random() * 0.4;
       nodes.push({
         position: [x, y, z],
         radius,
         rotationSpeed: [
-          (Math.random() - 0.5) * 0.2,
-          (Math.random() - 0.5) * 0.2,
+          (Math.random() - 0.5) * 0.15,
+          (Math.random() - 0.5) * 0.15,
         ],
       });
     }
     return nodes;
   }, []);
 
+  // Connect every node to every other node
   const connections = useMemo(() => {
     const lines: {
       start: [number, number, number];
       end: [number, number, number];
     }[] = [];
-    const maxDist = 5;
 
     for (let i = 0; i < spheres.length; i++) {
       for (let j = i + 1; j < spheres.length; j++) {
-        const dx = spheres[i].position[0] - spheres[j].position[0];
-        const dy = spheres[i].position[1] - spheres[j].position[1];
-        const dz = spheres[i].position[2] - spheres[j].position[2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        if (dist < maxDist) {
-          lines.push({
-            start: spheres[i].position,
-            end: spheres[j].position,
-          });
-        }
+        lines.push({
+          start: spheres[i].position,
+          end: spheres[j].position,
+        });
       }
     }
     return lines;
