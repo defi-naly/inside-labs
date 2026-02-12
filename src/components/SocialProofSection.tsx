@@ -25,7 +25,8 @@ const SocialProofSection = () => {
           <img
             src={clients}
             alt="Client logos"
-            className="h-12 w-auto object-contain brightness-0 invert md:h-16"
+            className="h-16 w-auto object-contain md:h-24"
+            style={{ filter: "brightness(0) invert(1)" }}
           />
         </div>
 
