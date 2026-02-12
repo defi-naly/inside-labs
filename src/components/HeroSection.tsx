@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-transparent pt-28">
       {/* 3D Mesh — pushed right 60% */}
-      <div className="pointer-events-auto absolute top-0 right-0 bottom-0 w-[70%] z-0">
+      <div className="pointer-events-auto absolute inset-0 z-[1]">
         <IntelligenceMesh />
       </div>
 
@@ -24,7 +24,7 @@ const HeroSection = () => {
       />
 
       {/* Content left-aligned */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+      <div className="relative z-[2] mx-auto w-full max-w-7xl px-6">
         <div className="max-w-2xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Welcome to Inside Labs

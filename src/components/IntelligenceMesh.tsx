@@ -2,10 +2,9 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-/* ── Central geodesic "brain" ── */
+/* ── Central geodesic — wireframe only, no fill ── */
 const CoreGeodesic = () => {
   const ref = useRef<THREE.Group>(null);
-  const glowRef = useRef<THREE.Mesh>(null);
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -15,25 +14,16 @@ const CoreGeodesic = () => {
       const breath = 1 + Math.sin(t * 0.8) * 0.02;
       ref.current.scale.setScalar(breath);
     }
-    if (glowRef.current) {
-      const glowBreath = 0.1 + Math.sin(t * 0.8) * 0.05;
-      (glowRef.current.material as THREE.MeshBasicMaterial).opacity = glowBreath;
-    }
   });
 
   return (
     <group ref={ref}>
-      {/* Red inner glow */}
-      <mesh ref={glowRef}>
-        <sphereGeometry args={[1.35, 24, 24]} />
-        <meshBasicMaterial color="#e63946" transparent opacity={0.1} />
-      </mesh>
-      {/* Outer wireframe — white/light */}
+      {/* Outer wireframe */}
       <mesh>
         <icosahedronGeometry args={[1.5, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.4} />
       </mesh>
-      {/* Inner wireframe */}
+      {/* Inner wireframe for depth */}
       <mesh>
         <icosahedronGeometry args={[1.1, 1]} />
         <meshBasicMaterial wireframe color="#f0f0f5" transparent opacity={0.15} />
@@ -67,7 +57,6 @@ const Satellite = ({
       ref.current.rotation.x += 0.15 * 0.016;
     }
     if (groupRef.current) {
-      // Slow orbital drift
       const angle = t * orbitSpeed + orbitPhase;
       const orbRadius = 0.3;
       groupRef.current.position.set(
@@ -90,7 +79,7 @@ const Satellite = ({
   );
 };
 
-/* ── Flowing particles ── */
+/* ── Flowing particles — fewer, slower ── */
 const FlowingParticles = ({
   from,
   to,
@@ -111,7 +100,7 @@ const FlowingParticles = ({
     const dir = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       off[i] = Math.random();
-      spd[i] = 0.15 + Math.random() * 0.25;
+      spd[i] = 0.06 + Math.random() * 0.1;
       dir[i] = Math.random() > 0.4 ? 1 : -1;
     }
     return { positions: pos, offsets: off, speeds: spd, directions: dir };
@@ -135,7 +124,7 @@ const FlowingParticles = ({
     posAttr.needsUpdate = true;
   });
 
-  const opacity = THREE.MathUtils.lerp(0.7, 0.15, depth);
+  const opacity = THREE.MathUtils.lerp(0.5, 0.1, depth);
 
   return (
     <points ref={ref}>
@@ -148,7 +137,7 @@ const FlowingParticles = ({
       </bufferGeometry>
       <pointsMaterial
         color="#e63946"
-        size={0.07}
+        size={0.06}
         transparent
         opacity={opacity}
         sizeAttenuation
@@ -161,18 +150,27 @@ const FlowingParticles = ({
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
 
-  const satellites = useMemo(
-    () => [
-      { pos: [4.5, 1.5, 2.5] as [number, number, number], radius: 0.45, depth: 0.1, orbitSpeed: 0.15, orbitPhase: 0 },
-      { pos: [-3.8, -1.0, 3.0] as [number, number, number], radius: 0.38, depth: 0.15, orbitSpeed: 0.12, orbitPhase: 1.2 },
-      { pos: [2.5, -3.5, 1.0] as [number, number, number], radius: 0.3, depth: 0.4, orbitSpeed: 0.1, orbitPhase: 2.4 },
-      { pos: [-2.0, 3.2, -1.5] as [number, number, number], radius: 0.28, depth: 0.45, orbitSpeed: 0.13, orbitPhase: 3.6 },
-      { pos: [0.5, 4.0, 2.0] as [number, number, number], radius: 0.32, depth: 0.35, orbitSpeed: 0.11, orbitPhase: 4.8 },
-      { pos: [-4.5, 0.5, -3.5] as [number, number, number], radius: 0.18, depth: 0.85, orbitSpeed: 0.08, orbitPhase: 5.5 },
-      { pos: [3.0, -2.0, -4.0] as [number, number, number], radius: 0.15, depth: 0.9, orbitSpeed: 0.09, orbitPhase: 6.0 },
-    ],
-    []
-  );
+  // More satellites arranged in a circular topology
+  const satellites = useMemo(() => {
+    const sats: { pos: [number, number, number]; radius: number; depth: number; orbitSpeed: number; orbitPhase: number }[] = [];
+    const count = 12;
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2;
+      const ringRadius = 4.5 + (i % 3) * 0.6; // slight variation
+      const y = (Math.sin(angle * 2) * 1.2); // vertical spread
+      const z = Math.cos(angle) * ringRadius * 0.4; // depth variation
+      const x = Math.sin(angle) * ringRadius;
+      const isForeground = Math.abs(z) < 2;
+      sats.push({
+        pos: [x, y, z],
+        radius: 0.15 + (i % 4) * 0.08, // varied sizes
+        depth: isForeground ? 0.1 + (i % 3) * 0.15 : 0.6 + (i % 3) * 0.12,
+        orbitSpeed: 0.06 + (i % 5) * 0.02,
+        orbitPhase: angle,
+      });
+    }
+    return sats;
+  }, []);
 
   // Gradient lines: red center → white at satellites
   const connectionLines = useMemo(() => {
@@ -204,7 +202,7 @@ const NetworkScene = () => {
     const mat = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.25,
     });
     return new THREE.LineSegments(g, mat);
   }, [satellites]);
@@ -237,7 +235,7 @@ const NetworkScene = () => {
           key={`p-${i}`}
           from={origin}
           to={new THREE.Vector3(...sat.pos)}
-          count={sat.depth < 0.5 ? 8 : 4}
+          count={sat.depth < 0.5 ? 3 : 2}
           depth={sat.depth}
         />
       ))}
