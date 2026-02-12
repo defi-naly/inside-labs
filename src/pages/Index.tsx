@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SocialProofSection from "@/components/SocialProofSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
-import FeatureOutcomesSection from "@/components/FeatureOutcomesSection";
+import OmniSuiteSection from "@/components/OmniSuiteSection";
 import ProductDemoSection from "@/components/ProductDemoSection";
 import ResultsSection from "@/components/ResultsSection";
 import CTASection from "@/components/CTASection";
@@ -15,7 +15,7 @@ const Index = () => {
       <HeroSection />
       <SocialProofSection />
       <ProblemSolutionSection />
-      <FeatureOutcomesSection />
+      <OmniSuiteSection />
       <ProductDemoSection />
       <ResultsSection />
       <CTASection />

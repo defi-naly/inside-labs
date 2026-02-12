@@ -125,7 +125,7 @@ const OmniSuiteSection = () => {
 
   return (
     <>
-      <section className="mx-auto w-full max-w-7xl px-6 py-24 lg:py-32">
+      <section className="mx-auto w-full max-w-7xl px-6 py-32 lg:py-40 border-t border-border/40">
         {/* Header */}
         <div className="mb-16 max-w-2xl">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground lg:text-5xl">
