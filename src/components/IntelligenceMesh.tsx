@@ -3,6 +3,25 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
+const CoreShape = () => {
+  const ref = useRef<THREE.Mesh>(null);
+
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x += 0.05 * delta;
+      ref.current.rotation.y += 0.08 * delta;
+      ref.current.rotation.z += 0.03 * delta;
+    }
+  });
+
+  return (
+    <mesh ref={ref}>
+      <dodecahedronGeometry args={[1.8, 0]} />
+      <meshBasicMaterial wireframe color="#999999" transparent opacity={0.3} />
+    </mesh>
+  );
+};
+
 const WireNode = ({ position }: { position: [number, number, number] }) => {
   const ref = useRef<THREE.Mesh>(null);
   const speed = useMemo(
@@ -99,6 +118,21 @@ const NetworkScene = () => {
     return new THREE.LineSegments(g, mat);
   }, [positions]);
 
+  const radialLinesObj = useMemo(() => {
+    const verts: number[] = [];
+    for (const pos of positions) {
+      verts.push(0, 0, 0, pos[0], pos[1], pos[2]);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
+    const mat = new THREE.LineBasicMaterial({
+      color: "#999999",
+      transparent: true,
+      opacity: 0.06,
+    });
+    return new THREE.LineSegments(g, mat);
+  }, [positions]);
+
   useFrame(({ clock }) => {
     if (groupRef.current) {
       groupRef.current.rotation.y = clock.getElapsedTime() * 0.06;
@@ -109,6 +143,8 @@ const NetworkScene = () => {
 
   return (
     <group ref={groupRef}>
+      <CoreShape />
+      <primitive object={radialLinesObj} />
       <primitive object={linesObj} />
       {positions.map((pos, i) => (
         <WireNode key={i} position={pos} />
