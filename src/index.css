@@ -7,51 +7,51 @@
 
 @layer base {
   :root {
-    /* Background: #0a0a0f */
-    --background: 240 25% 4.7%;
-    /* Foreground / primary text: #f0f0f5 */
-    --foreground: 240 20% 95.3%;
+    /* Background: near-black space */
+    --background: 230 15% 3%;
+    /* Foreground: crisp white */
+    --foreground: 0 0% 95%;
 
-    /* Card: #12121a */
-    --card: 240 19% 8.6%;
-    --card-foreground: 240 20% 95.3%;
+    /* Card: very subtle lift */
+    --card: 230 15% 5%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 240 19% 8.6%;
-    --popover-foreground: 240 20% 95.3%;
+    --popover: 230 15% 5%;
+    --popover-foreground: 0 0% 95%;
 
     /* Primary accent: #e63946 */
     --primary: 355 78% 56.1%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary text / muted: #8a8a9a */
-    --secondary: 240 8% 56.9%;
-    --secondary-foreground: 240 20% 95.3%;
+    /* Secondary text / muted */
+    --secondary: 220 5% 50%;
+    --secondary-foreground: 0 0% 95%;
 
-    /* Muted / dim: #4a4a5a */
-    --muted: 240 10% 32.2%;
-    --muted-foreground: 240 8% 56.9%;
+    /* Muted */
+    --muted: 220 8% 18%;
+    --muted-foreground: 220 5% 50%;
 
-    /* Accent soft: subtle red tint */
+    /* Accent */
     --accent: 355 78% 56.1%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 355 78% 56.1%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Border: #1e1e2a */
-    --border: 240 19% 14.1%;
-    --input: 240 19% 14.1%;
+    /* Border: barely visible */
+    --border: 230 10% 10%;
+    --input: 230 10% 10%;
     --ring: 355 78% 56.1%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 240 25% 4.7%;
-    --sidebar-foreground: 240 20% 95.3%;
+    --sidebar-background: 230 15% 3%;
+    --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 355 78% 56.1%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 19% 14.1%;
-    --sidebar-accent-foreground: 240 20% 95.3%;
-    --sidebar-border: 240 19% 14.1%;
+    --sidebar-accent: 230 10% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 230 10% 10%;
     --sidebar-ring: 355 78% 56.1%;
   }
 }
@@ -63,7 +63,7 @@
 
   body {
     @apply bg-background text-foreground;
-    background: radial-gradient(ellipse at center, hsl(350 40% 8%) 0%, hsl(240 25% 4.7%) 70%);
+    background: hsl(230 15% 3%);
     min-height: 100vh;
   }
 }
