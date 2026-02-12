@@ -153,7 +153,7 @@ const NetworkScene = () => {
   // Satellites distributed spherically around center (Fibonacci sphere)
   const satellites = useMemo(() => {
     const sats: { pos: [number, number, number]; radius: number; depth: number; orbitSpeed: number; orbitPhase: number }[] = [];
-    const count = 12;
+    const count = 20;
     const shellRadius = 4.8;
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
@@ -166,10 +166,10 @@ const NetworkScene = () => {
       const y = shellRadius * Math.sin(inclination) * Math.sin(azimuth);
       const z = shellRadius * Math.cos(inclination);
 
-      const depthVal = (z + shellRadius) / (2 * shellRadius); // 0=front, 1=back
+      const depthVal = (z + shellRadius) / (2 * shellRadius);
       sats.push({
         pos: [x, y, z],
-        radius: 0.18 + (i % 4) * 0.07,
+        radius: 0.22,
         depth: depthVal * 0.8 + 0.1,
         orbitSpeed: 0.05 + (i % 5) * 0.015,
         orbitPhase: azimuth,
