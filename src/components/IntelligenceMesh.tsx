@@ -18,15 +18,10 @@ const CoreGeodesic = () => {
 
   return (
     <group ref={ref}>
-      {/* Outer glow halo */}
+      {/* Subtle glow halo — very faint */}
       <mesh>
-        <sphereGeometry args={[2.0, 24, 24]} />
-        <meshBasicMaterial color="#f0f0f5" transparent opacity={0.04} />
-      </mesh>
-      {/* Mid glow */}
-      <mesh>
-        <sphereGeometry args={[1.7, 24, 24]} />
-        <meshBasicMaterial color="#f0f0f5" transparent opacity={0.06} />
+        <sphereGeometry args={[1.8, 24, 24]} />
+        <meshBasicMaterial color="#f0f0f5" transparent opacity={0.02} />
       </mesh>
       {/* Outer wireframe — bright */}
       <mesh>
@@ -363,14 +358,16 @@ const NetworkScene = () => {
 
 const IntelligenceMesh = () => {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 12], fov: 50 }}
-      style={{ touchAction: "none", background: "transparent" }}
-      gl={{ alpha: true, antialias: true }}
-      dpr={[1, 2]}
-    >
-      <NetworkScene />
-    </Canvas>
+    <div style={{ width: "100%", height: "100%" }}>
+      <Canvas
+        camera={{ position: [0, 0, 12], fov: 50 }}
+        style={{ touchAction: "none", background: "transparent", width: "100%", height: "100%" }}
+        gl={{ alpha: true, antialias: true }}
+        dpr={[1, 2]}
+      >
+        <NetworkScene />
+      </Canvas>
+    </div>
   );
 };
 
