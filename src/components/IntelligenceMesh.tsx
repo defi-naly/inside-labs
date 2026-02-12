@@ -1,153 +1,232 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
-const CoreShape = () => {
-  const ref = useRef<THREE.Mesh>(null);
+/* ── Central geodesic "brain" ── */
+const CoreGeodesic = () => {
+  const ref = useRef<THREE.Group>(null);
+  const glowRef = useRef<THREE.Mesh>(null);
 
-  useFrame((_, delta) => {
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
     if (ref.current) {
-      ref.current.rotation.x += 0.05 * delta;
-      ref.current.rotation.y += 0.08 * delta;
-      ref.current.rotation.z += 0.03 * delta;
+      ref.current.rotation.y = t * 0.12;
+      ref.current.rotation.x = Math.sin(t * 0.08) * 0.15;
+      // Breathing scale
+      const breath = 1 + Math.sin(t * 0.8) * 0.04;
+      ref.current.scale.setScalar(breath);
+    }
+    if (glowRef.current) {
+      const glowBreath = 0.12 + Math.sin(t * 0.8) * 0.04;
+      (glowRef.current.material as THREE.MeshBasicMaterial).opacity = glowBreath;
     }
   });
 
   return (
-    <mesh ref={ref}>
-      <dodecahedronGeometry args={[1.0, 0]} />
-      <meshBasicMaterial wireframe color="#aaaaaa" transparent opacity={0.5} />
-    </mesh>
+    <group ref={ref}>
+      {/* Inner glow sphere */}
+      <mesh ref={glowRef}>
+        <sphereGeometry args={[1.35, 24, 24]} />
+        <meshBasicMaterial color="#3dd8d5" transparent opacity={0.12} />
+      </mesh>
+      {/* Geodesic wireframe shell */}
+      <mesh>
+        <icosahedronGeometry args={[1.5, 1]} />
+        <meshBasicMaterial wireframe color="#5eeae6" transparent opacity={0.45} />
+      </mesh>
+      {/* Secondary inner shell for depth */}
+      <mesh>
+        <icosahedronGeometry args={[1.1, 1]} />
+        <meshBasicMaterial wireframe color="#3dd8d5" transparent opacity={0.2} />
+      </mesh>
+    </group>
   );
 };
 
-const WireNode = ({ position }: { position: [number, number, number] }) => {
+/* ── Satellite node ── */
+const Satellite = ({
+  position,
+  radius,
+  depth,
+}: {
+  position: [number, number, number];
+  radius: number;
+  depth: number; // 0 = foreground, 1 = background
+}) => {
   const ref = useRef<THREE.Mesh>(null);
-  const speed = useMemo(
-    () => [(Math.random() - 0.5) * 0.15, (Math.random() - 0.5) * 0.15],
-    []
-  );
 
   useFrame((_, delta) => {
     if (ref.current) {
-      ref.current.rotation.x += speed[0] * delta;
-      ref.current.rotation.y += speed[1] * delta;
+      ref.current.rotation.y += 0.3 * delta;
+      ref.current.rotation.x += 0.15 * delta;
     }
   });
+
+  const opacity = THREE.MathUtils.lerp(0.5, 0.12, depth);
+  // Teal near center → coral far away
+  const color = new THREE.Color().lerpColors(
+    new THREE.Color("#5eeae6"),
+    new THREE.Color("#e8927c"),
+    depth
+  );
 
   return (
     <mesh ref={ref} position={position}>
-      <sphereGeometry args={[0.55, 10, 10]} />
-      <meshBasicMaterial wireframe color="#888888" transparent opacity={0.22} />
+      <sphereGeometry args={[radius, 8, 8]} />
+      <meshBasicMaterial wireframe color={color} transparent opacity={opacity} />
     </mesh>
   );
 };
 
+/* ── Traveling particles along a connection ── */
+const FlowingParticles = ({
+  from,
+  to,
+  count,
+  depth,
+}: {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  count: number;
+  depth: number;
+}) => {
+  const ref = useRef<THREE.Points>(null);
+
+  const { positions, offsets, speeds, directions } = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const off = new Float32Array(count);
+    const spd = new Float32Array(count);
+    const dir = new Float32Array(count); // 1 = toward center, -1 = away
+    for (let i = 0; i < count; i++) {
+      off[i] = Math.random();
+      spd[i] = 0.15 + Math.random() * 0.25;
+      dir[i] = Math.random() > 0.4 ? 1 : -1;
+    }
+    return { positions: pos, offsets: off, speeds: spd, directions: dir };
+  }, [count]);
+
+  useFrame(({ clock }) => {
+    if (!ref.current) return;
+    const t = clock.getElapsedTime();
+    const geo = ref.current.geometry;
+    const posAttr = geo.attributes.position;
+
+    for (let i = 0; i < count; i++) {
+      let progress = (offsets[i] + t * speeds[i] * directions[i]) % 1;
+      if (progress < 0) progress += 1;
+
+      const x = from.x + (to.x - from.x) * progress;
+      const y = from.y + (to.y - from.y) * progress;
+      const z = from.z + (to.z - from.z) * progress;
+
+      posAttr.setXYZ(i, x, y, z);
+    }
+    posAttr.needsUpdate = true;
+  });
+
+  const opacity = THREE.MathUtils.lerp(0.6, 0.1, depth);
+
+  return (
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[positions, 3]}
+          count={count}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#5eeae6"
+        size={0.06}
+        transparent
+        opacity={opacity}
+        sizeAttenuation
+      />
+    </points>
+  );
+};
+
+/* ── Main scene ── */
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const shellRadius = 6;
-  const nodeCount = 30;
 
-  const positions = useMemo<[number, number, number][]>(() => {
-    const pts: [number, number, number][] = [];
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  // Purposeful satellite placements with hierarchy
+  const satellites = useMemo(
+    () => [
+      // Foreground (large, bright)
+      { pos: [4.5, 1.5, 2.5] as [number, number, number], radius: 0.45, depth: 0.1 },
+      { pos: [-3.8, -1.0, 3.0] as [number, number, number], radius: 0.38, depth: 0.15 },
+      // Mid-ground
+      { pos: [2.5, -3.5, 1.0] as [number, number, number], radius: 0.3, depth: 0.4 },
+      { pos: [-2.0, 3.2, -1.5] as [number, number, number], radius: 0.28, depth: 0.45 },
+      { pos: [0.5, 4.0, 2.0] as [number, number, number], radius: 0.32, depth: 0.35 },
+      // Background (small, faded)
+      { pos: [-4.5, 0.5, -3.5] as [number, number, number], radius: 0.18, depth: 0.85 },
+      { pos: [3.0, -2.0, -4.0] as [number, number, number], radius: 0.15, depth: 0.9 },
+    ],
+    []
+  );
 
-    for (let i = 0; i < nodeCount; i++) {
-      const t = (i + 0.5) / nodeCount;
-      const inclination = Math.acos(1 - 2 * t);
-      const azimuth = goldenAngle * i;
+  // Gradient connection lines: teal center → coral at satellite
+  const connectionLines = useMemo(() => {
+    const center = new THREE.Vector3(0, 0, 0);
+    const segments = 20;
+    const positions: number[] = [];
+    const colors: number[] = [];
+    const teal = new THREE.Color("#5eeae6");
+    const coral = new THREE.Color("#e8927c");
 
-      pts.push([
-        shellRadius * Math.sin(inclination) * Math.cos(azimuth),
-        shellRadius * Math.sin(inclination) * Math.sin(azimuth),
-        shellRadius * Math.cos(inclination),
-      ]);
-    }
-    return pts;
-  }, []);
+    for (const sat of satellites) {
+      const target = new THREE.Vector3(...sat.pos);
+      for (let s = 0; s < segments; s++) {
+        const t1 = s / segments;
+        const t2 = (s + 1) / segments;
+        const p1 = center.clone().lerp(target, t1);
+        const p2 = center.clone().lerp(target, t2);
+        positions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
 
-  // Connect only nearest neighbors — lines stay on surface
-  const linesObj = useMemo(() => {
-    const verts: number[] = [];
-    const maxNeighbors = 5;
-
-    for (let i = 0; i < positions.length; i++) {
-      // Calculate distances to all other nodes
-      const distances: { idx: number; dist: number }[] = [];
-      for (let j = 0; j < positions.length; j++) {
-        if (i === j) continue;
-        const dx = positions[i][0] - positions[j][0];
-        const dy = positions[i][1] - positions[j][1];
-        const dz = positions[i][2] - positions[j][2];
-        distances.push({ idx: j, dist: Math.sqrt(dx * dx + dy * dy + dz * dz) });
-      }
-      // Sort and pick nearest neighbors
-      distances.sort((a, b) => a.dist - b.dist);
-      const neighbors = distances.slice(0, maxNeighbors);
-
-      for (const n of neighbors) {
-        // Only add if i < n.idx to avoid duplicates
-        if (i < n.idx) {
-          // Create arc points along the sphere surface between the two nodes
-          const arcSegments = 12;
-          const from = new THREE.Vector3(...positions[i]);
-          const to = new THREE.Vector3(...positions[n.idx]);
-
-          for (let s = 0; s < arcSegments; s++) {
-            const t1 = s / arcSegments;
-            const t2 = (s + 1) / arcSegments;
-
-            // Slerp for great circle arc on sphere surface
-            const p1 = new THREE.Vector3().copy(from).lerp(to, t1).normalize().multiplyScalar(shellRadius);
-            const p2 = new THREE.Vector3().copy(from).lerp(to, t2).normalize().multiplyScalar(shellRadius);
-
-            verts.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-          }
-        }
+        const c1 = teal.clone().lerp(coral, t1 * sat.depth);
+        const c2 = teal.clone().lerp(coral, t2 * sat.depth);
+        colors.push(c1.r, c1.g, c1.b, c2.r, c2.g, c2.b);
       }
     }
 
     const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
+    g.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    g.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
     const mat = new THREE.LineBasicMaterial({
-      color: "#999999",
+      vertexColors: true,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.3,
     });
     return new THREE.LineSegments(g, mat);
-  }, [positions]);
-
-  const radialLinesObj = useMemo(() => {
-    const verts: number[] = [];
-    for (const pos of positions) {
-      verts.push(0, 0, 0, pos[0], pos[1], pos[2]);
-    }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
-    const mat = new THREE.LineBasicMaterial({
-      color: "#aaaaaa",
-      transparent: true,
-      opacity: 0.15,
-    });
-    return new THREE.LineSegments(g, mat);
-  }, [positions]);
+  }, [satellites]);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = clock.getElapsedTime() * 0.06;
+      groupRef.current.rotation.y = clock.getElapsedTime() * 0.05;
       groupRef.current.rotation.x =
-        Math.sin(clock.getElapsedTime() * 0.03) * 0.1;
+        Math.sin(clock.getElapsedTime() * 0.03) * 0.08;
     }
   });
 
+  const origin = useMemo(() => new THREE.Vector3(0, 0, 0), []);
+
   return (
     <group ref={groupRef}>
-      <CoreShape />
-      <primitive object={radialLinesObj} />
-      <primitive object={linesObj} />
-      {positions.map((pos, i) => (
-        <WireNode key={i} position={pos} />
+      <CoreGeodesic />
+      <primitive object={connectionLines} />
+      {satellites.map((sat, i) => (
+        <Satellite key={i} position={sat.pos} radius={sat.radius} depth={sat.depth} />
+      ))}
+      {satellites.map((sat, i) => (
+        <FlowingParticles
+          key={`p-${i}`}
+          from={origin}
+          to={new THREE.Vector3(...sat.pos)}
+          count={sat.depth < 0.5 ? 8 : 4}
+          depth={sat.depth}
+        />
       ))}
     </group>
   );
@@ -156,20 +235,12 @@ const NetworkScene = () => {
 const IntelligenceMesh = () => {
   return (
     <Canvas
-      camera={{ position: [0, 0, 16], fov: 50 }}
+      camera={{ position: [0, 0, 12], fov: 50 }}
       style={{ touchAction: "none", background: "transparent" }}
       gl={{ alpha: true, antialias: true }}
       dpr={[1, 2]}
     >
       <NetworkScene />
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        autoRotate
-        autoRotateSpeed={0.4}
-        maxPolarAngle={Math.PI * 0.75}
-        minPolarAngle={Math.PI * 0.25}
-      />
     </Canvas>
   );
 };
