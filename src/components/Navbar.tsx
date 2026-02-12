@@ -15,15 +15,15 @@ const Navbar = () => {
   const [lang, setLang] = useState<"EN" | "DE">("EN");
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/60 backdrop-blur-xl">
       {/* Top bar */}
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs text-muted-foreground">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs text-secondary">
         <div className="flex gap-3">
           <button
             onClick={() => setLang("EN")}
             className={cn(
               "font-semibold transition-colors",
-              lang === "EN" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              lang === "EN" ? "text-foreground" : "text-secondary hover:text-foreground"
             )}
           >
             EN
@@ -32,7 +32,7 @@ const Navbar = () => {
             onClick={() => setLang("DE")}
             className={cn(
               "font-semibold transition-colors",
-              lang === "DE" ? "text-destructive" : "text-muted-foreground hover:text-foreground"
+              lang === "DE" ? "text-primary" : "text-secondary hover:text-foreground"
             )}
           >
             DE
@@ -49,7 +49,7 @@ const Navbar = () => {
       {/* Main bar */}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="/" className="flex items-center gap-3">
-          <img src={logo} alt="Inside Labs" className="h-10 invert dark:invert-0" />
+          <img src={logo} alt="Inside Labs" className="h-10 brightness-0 invert" />
         </a>
 
         {/* Desktop links */}
@@ -58,7 +58,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="rounded-lg px-4 py-2 text-sm font-medium text-secondary transition-colors hover:text-primary"
             >
               {link.label}
             </a>
@@ -68,13 +68,13 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <a
             href="/contact"
-            className="hidden rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90 md:inline-flex"
+            className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/25 md:inline-flex"
           >
             Get in Touch
           </a>
           <button
             onClick={() => setOpen(!open)}
-            className="rounded-lg p-2 text-foreground transition-colors hover:bg-muted lg:hidden"
+            className="rounded-lg p-2 text-foreground transition-colors hover:text-primary lg:hidden"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -88,14 +88,14 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
+              className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:text-primary"
             >
               {link.label}
             </a>
           ))}
           <a
             href="/contact"
-            className="mt-3 block rounded-full bg-foreground px-5 py-3 text-center text-sm font-semibold text-background"
+            className="mt-3 block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground"
           >
             Get in Touch
           </a>

@@ -23,15 +23,13 @@ const Footer = () => {
     <footer className="border-t border-border/40 bg-background">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
-          {/* Logo / tagline */}
           <div className="lg:col-span-2">
-            <img src={logo} alt="Inside Labs" className="mb-4 h-10 invert dark:invert-0" />
-            <p className="text-sm leading-relaxed text-muted-foreground max-w-xs">
+            <img src={logo} alt="Inside Labs" className="mb-4 h-10 brightness-0 invert" />
+            <p className="text-sm leading-relaxed text-secondary max-w-xs">
               Engage with Intelligence. Tourism's leading data-driven customer engagement platform.
             </p>
           </div>
 
-          {/* Link columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h4 className="mb-4 text-sm font-semibold text-foreground">{title}</h4>
@@ -40,7 +38,7 @@ const Footer = () => {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-secondary transition-colors hover:text-primary"
                     >
                       {link.label}
                     </a>
@@ -51,7 +49,6 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Bottom */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-8 md:flex-row">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Inside Labs AG. All rights reserved.
