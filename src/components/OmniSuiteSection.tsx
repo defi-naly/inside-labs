@@ -15,7 +15,6 @@ const cards = [
     image: usp1,
     gradientFrom: "#f43f5e",
     gradientTo: "#ec4899",
-    imagePosition: "right" as const,
   },
   {
     icon: <ShoppingCart size={24} className="text-blue-500" />,
@@ -25,7 +24,6 @@ const cards = [
     image: usp2,
     gradientFrom: "#3b82f6",
     gradientTo: "#6366f1",
-    imagePosition: "left" as const,
   },
   {
     icon: <Smartphone size={24} className="text-emerald-500" />,
@@ -35,7 +33,6 @@ const cards = [
     image: usp3,
     gradientFrom: "#10b981",
     gradientTo: "#14b8a6",
-    imagePosition: "right" as const,
   },
   {
     icon: <Users size={24} className="text-amber-500" />,
@@ -45,7 +42,6 @@ const cards = [
     image: usp4,
     gradientFrom: "#f59e0b",
     gradientTo: "#f97316",
-    imagePosition: "left" as const,
   },
   {
     icon: <Sparkles size={24} className="text-violet-500" />,
@@ -55,7 +51,6 @@ const cards = [
     image: usp5,
     gradientFrom: "#8b5cf6",
     gradientTo: "#a855f7",
-    imagePosition: "right" as const,
   },
 ];
 
