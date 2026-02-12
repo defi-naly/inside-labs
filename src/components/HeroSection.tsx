@@ -25,21 +25,25 @@ const HeroSection = () => {
 
       {/* Content left-aligned */}
       <div className="relative z-[2] mx-auto w-full max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-            Welcome to Inside Labs
+        <div className="max-w-2xl space-y-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">
+            Inside Labs
           </p>
 
-          <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-            Engage with Intelligence.
+          <h1 className="text-5xl font-extrabold leading-[1.02] tracking-tight text-foreground md:text-7xl lg:text-8xl">
+            Engage with
+            <br />
+            <span className="text-primary">Intelligence.</span>
           </h1>
 
-          <p className="mb-10 max-w-lg text-lg leading-relaxed text-secondary">
-            Tourism's leading data-driven, event-triggered customer engagement
-            platform. From first touch to lifelong loyalty.
+          <p className="max-w-lg text-xl leading-relaxed text-secondary md:text-2xl">
+            The first event-triggered engagement platform built exclusively for tourism.
+            <span className="block mt-2 text-muted-foreground text-base md:text-lg">
+              From anonymous visitor to lifelong advocate — no channel left behind.
+            </span>
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 pt-2">
             <a
               href="/omni-suite"
               className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/25"
