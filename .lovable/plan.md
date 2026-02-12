@@ -1,41 +1,37 @@
 
 
-# Redesign the Omni Suite Section
+# Add a Results Stats Section After the Hero
 
 ## Overview
-Unify the bento grid cards and product tier cards into a cohesive, better-organized section. Add SVG icons to product titles, apply matching gradient backgrounds to the bento cards, and elevate the APP (Omni Explore) as the hero product.
+Create a new bold stats section placed directly after the hero, showcasing the LAAX App case study results. The design will use the existing crimson + dark theme with large, impactful numbers in a grid layout inspired by the reference image.
 
 ## Changes
 
-### 1. Apply gradient backgrounds to the Bento Grid cards
-**File: `src/components/BentoCard.tsx`**
-- Replace the flat `bg-card` background with the same `linear-gradient(165deg, ...)` treatment used on the product cards
-- Ensure the subtle crimson radial overlay remains for the hover glow effect
-- Match the dark space aesthetic consistently across both card types
+### 1. Create a new `ResultsSection` component
+**File: `src/components/ResultsSection.tsx` (new)**
+- A full-width section with a "By the numbers" intro and a 2x3 or 3x2 grid of stat cards
+- Stats to display:
+  - **200k** — Active app users
+  - **50%** — Of all ticket sales via app
+  - **19M*** — Ticket Revenue (up from 2.8M)
+  - **300k** — App downloads post-launch
+  - **30%** — Of all users completed a purchase
+  - **300%** — Increase in online sales
+- Each stat card: large bold white number, smaller white label beneath
+- Cards use a semi-transparent crimson background (`bg-primary/90`) for the bold, bright look from the reference
+- A small footnote: "* Values quoted in Swiss Franc (CHF). As at Winter 2018/19."
+- Left side: section title "By the numbers: **LAAX App**" styled large and bold
+- Layout: on desktop, title on the left ~1/3, stats grid on the right ~2/3. On mobile, title stacks above the grid
 
-### 2. Add SVG icons next to product tier titles
-**File: `src/components/ProductCards.tsx`**
-- Add relevant Lucide icons next to each product name:
-  - **Omni Engage**: `Zap` (activation/energy)
-  - **Omni Explore**: `Smartphone` (the app - since this is the main product)
-  - **Omni Endeavor**: `Trophy` (loyalty/gamification/enterprise)
-- Icons styled in the primary crimson color, placed inline before each product name
-
-### 3. Reorganize the section to hero the APP
-**File: `src/components/ProductCards.tsx`**
-- Restructure the layout: keep the 3-column grid but make the middle card (Omni Explore / the APP) visually larger and more prominent
-- Use a layout where Omni Explore spans a taller or more emphasized card with a larger image area
-- Add a subtle "Featuring the Omni App" callout or badge to reinforce the app as the core product
-- Update the section header to better frame the products ("Choose your tier" or similar)
-
-### 4. Integrate app content more prominently
-**File: `src/components/ProductCards.tsx`**
-- For Omni Explore (the APP tier), increase the image display area and show the app screenshot more prominently
-- Add a brief "Powered by the Omni App" line or similar to the Endeavor card as well, reinforcing that the app runs through the higher tiers
+### 2. Add `ResultsSection` to the page
+**File: `src/pages/Index.tsx`**
+- Import and place `ResultsSection` directly after `HeroSection` and before `ClientsSection`
 
 ### Technical Details
-- All gradient values use HSL to match the existing design system (`hsl(230 15% 6%)`, `hsl(355 40% 8%)`, etc.)
-- Icons imported from `lucide-react` (already installed): `Zap`, `Smartphone`, `Trophy`
-- BentoCard gradient will use inline `style` prop like the ProductCards already do, replacing the Tailwind `bg-card` class
-- No new dependencies required
+- No new dependencies needed
+- Stats grid uses Tailwind's `grid grid-cols-2` with `gap-4`
+- Stat values use `text-5xl md:text-6xl font-extrabold` for impact
+- Labels use `text-sm md:text-base font-medium`
+- Cards styled with `background: hsl(355 85% 40%)` with slight transparency for depth
+- Section background stays transparent to show the wireframe grid beneath
 
