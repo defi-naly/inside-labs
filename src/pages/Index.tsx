@@ -4,7 +4,6 @@ import SocialProofSection from "@/components/SocialProofSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import OmniSuiteSection from "@/components/OmniSuiteSection";
 import ProductDemoSection from "@/components/ProductDemoSection";
-import ResultsSection from "@/components/ResultsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -17,7 +16,6 @@ const Index = () => {
       <ProblemSolutionSection />
       <OmniSuiteSection />
       <ProductDemoSection />
-      <ResultsSection />
       <CTASection />
       <Footer />
     </main>
