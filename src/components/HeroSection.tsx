@@ -74,7 +74,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right — 3D Mesh */}
-          <div className="relative aspect-square w-full max-w-lg mx-auto lg:max-w-none">
+          <div className="relative h-[400px] w-full lg:h-[500px] lg:max-w-none">
             <IntelligenceMesh />
           </div>
         </div>
