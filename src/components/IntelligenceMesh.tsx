@@ -150,23 +150,29 @@ const FlowingParticles = ({
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
 
-  // More satellites arranged in a circular topology
+  // Satellites distributed spherically around center (Fibonacci sphere)
   const satellites = useMemo(() => {
     const sats: { pos: [number, number, number]; radius: number; depth: number; orbitSpeed: number; orbitPhase: number }[] = [];
     const count = 12;
+    const shellRadius = 4.8;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
     for (let i = 0; i < count; i++) {
-      const angle = (i / count) * Math.PI * 2;
-      const ringRadius = 4.5 + (i % 3) * 0.6; // slight variation
-      const y = (Math.sin(angle * 2) * 1.2); // vertical spread
-      const z = Math.cos(angle) * ringRadius * 0.4; // depth variation
-      const x = Math.sin(angle) * ringRadius;
-      const isForeground = Math.abs(z) < 2;
+      const t = (i + 0.5) / count;
+      const inclination = Math.acos(1 - 2 * t);
+      const azimuth = goldenAngle * i;
+
+      const x = shellRadius * Math.sin(inclination) * Math.cos(azimuth);
+      const y = shellRadius * Math.sin(inclination) * Math.sin(azimuth);
+      const z = shellRadius * Math.cos(inclination);
+
+      const depthVal = (z + shellRadius) / (2 * shellRadius); // 0=front, 1=back
       sats.push({
         pos: [x, y, z],
-        radius: 0.15 + (i % 4) * 0.08, // varied sizes
-        depth: isForeground ? 0.1 + (i % 3) * 0.15 : 0.6 + (i % 3) * 0.12,
-        orbitSpeed: 0.06 + (i % 5) * 0.02,
-        orbitPhase: angle,
+        radius: 0.18 + (i % 4) * 0.07,
+        depth: depthVal * 0.8 + 0.1,
+        orbitSpeed: 0.05 + (i % 5) * 0.015,
+        orbitPhase: azimuth,
       });
     }
     return sats;
