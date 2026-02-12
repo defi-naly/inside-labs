@@ -3,119 +3,68 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
-interface SphereNode {
-  position: [number, number, number];
-  radius: number;
-  rotationSpeed: [number, number];
-}
-
-const WireSphere = ({ position, radius, rotationSpeed }: SphereNode) => {
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame((_, delta) => {
-    if (ref.current) {
-      ref.current.rotation.x += rotationSpeed[0] * delta;
-      ref.current.rotation.y += rotationSpeed[1] * delta;
-    }
-  });
-
-  return (
-    <mesh ref={ref} position={position}>
-      <icosahedronGeometry args={[radius, 2]} />
-      <meshBasicMaterial wireframe color="#888888" transparent opacity={0.18} />
-    </mesh>
-  );
-};
-
-const ConnectionLine = ({
-  start,
-  end,
-}: {
-  start: [number, number, number];
-  end: [number, number, number];
-}) => {
-  const lineObj = useMemo(() => {
-    const g = new THREE.BufferGeometry();
-    g.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute([...start, ...end], 3)
-    );
-    const mat = new THREE.LineBasicMaterial({
-      color: "#aaaaaa",
-      transparent: true,
-      opacity: 0.015,
-    });
-    return new THREE.Line(g, mat);
-  }, [start, end]);
-
-  return <primitive object={lineObj} />;
-};
-
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const shellRadius = 6;
+  const nodeCount = 60;
+  const nodeSize = 0.12;
 
-  // Evenly distributed on a sphere surface using Fibonacci lattice
-  const spheres = useMemo<SphereNode[]>(() => {
-    const nodes: SphereNode[] = [];
+  // All nodes exactly on the sphere surface — Fibonacci lattice
+  const positions = useMemo<[number, number, number][]>(() => {
+    const pts: [number, number, number][] = [];
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-    const count = 50;
-    const shellRadius = 6;
 
-    for (let i = 0; i < count; i++) {
-      const t = (i + 0.5) / count;
+    for (let i = 0; i < nodeCount; i++) {
+      const t = (i + 0.5) / nodeCount;
       const inclination = Math.acos(1 - 2 * t);
       const azimuth = goldenAngle * i;
 
-      const x = shellRadius * Math.sin(inclination) * Math.cos(azimuth);
-      const y = shellRadius * Math.sin(inclination) * Math.sin(azimuth);
-      const z = shellRadius * Math.cos(inclination);
-
-      const radius = 0.3 + Math.random() * 0.4;
-      nodes.push({
-        position: [x, y, z],
-        radius,
-        rotationSpeed: [
-          (Math.random() - 0.5) * 0.15,
-          (Math.random() - 0.5) * 0.15,
-        ],
-      });
+      pts.push([
+        shellRadius * Math.sin(inclination) * Math.cos(azimuth),
+        shellRadius * Math.sin(inclination) * Math.sin(azimuth),
+        shellRadius * Math.cos(inclination),
+      ]);
     }
-    return nodes;
+    return pts;
   }, []);
 
-  // Connect every node to every other node
-  const connections = useMemo(() => {
-    const lines: {
-      start: [number, number, number];
-      end: [number, number, number];
-    }[] = [];
-
-    for (let i = 0; i < spheres.length; i++) {
-      for (let j = i + 1; j < spheres.length; j++) {
-        lines.push({
-          start: spheres[i].position,
-          end: spheres[j].position,
-        });
+  // All-to-all connections as a single LineSegments object for performance
+  const linesObj = useMemo(() => {
+    const verts: number[] = [];
+    for (let i = 0; i < positions.length; i++) {
+      for (let j = i + 1; j < positions.length; j++) {
+        verts.push(...positions[i], ...positions[j]);
       }
     }
-    return lines;
-  }, [spheres]);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
+    const mat = new THREE.LineBasicMaterial({
+      color: "#999999",
+      transparent: true,
+      opacity: 0.035,
+    });
+    return new THREE.LineSegments(g, mat);
+  }, [positions]);
 
   useFrame(({ clock }) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = clock.getElapsedTime() * 0.04;
+      groupRef.current.rotation.y = clock.getElapsedTime() * 0.06;
       groupRef.current.rotation.x =
-        Math.sin(clock.getElapsedTime() * 0.025) * 0.08;
+        Math.sin(clock.getElapsedTime() * 0.03) * 0.1;
     }
   });
 
   return (
     <group ref={groupRef}>
-      {spheres.map((s, i) => (
-        <WireSphere key={i} {...s} />
-      ))}
-      {connections.map((c, i) => (
-        <ConnectionLine key={`c-${i}`} {...c} />
+      {/* Connection lines */}
+      <primitive object={linesObj} />
+
+      {/* Nodes — identical size, on circumference */}
+      {positions.map((pos, i) => (
+        <mesh key={i} position={pos}>
+          <sphereGeometry args={[nodeSize, 12, 12]} />
+          <meshBasicMaterial color="#666666" transparent opacity={0.7} />
+        </mesh>
       ))}
     </group>
   );
@@ -134,7 +83,7 @@ const IntelligenceMesh = () => {
         enableZoom={false}
         enablePan={false}
         autoRotate
-        autoRotateSpeed={0.3}
+        autoRotateSpeed={0.4}
         maxPolarAngle={Math.PI * 0.75}
         minPolarAngle={Math.PI * 0.25}
       />
