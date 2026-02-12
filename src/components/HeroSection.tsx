@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import heroMountains from "@/assets/hero-mountains.jpg";
 
 const HeroSection = () => {
   const [stage, setStage] = useState(0);
@@ -7,53 +8,66 @@ const HeroSection = () => {
   useEffect(() => {
     const timers = [
       setTimeout(() => setStage(1), 200),
-      setTimeout(() => setStage(2), 500),
-      setTimeout(() => setStage(3), 900),
+      setTimeout(() => setStage(2), 600),
+      setTimeout(() => setStage(3), 1000),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-transparent pt-40 pb-32 lg:pt-48 lg:pb-40">
-      {/* Subtle glow */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Mountain background */}
+      <img
+        src={heroMountains}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Dark overlay for text legibility */}
       <div
-        className="pointer-events-none absolute z-0"
+        className="absolute inset-0"
         style={{
-          top: "40%",
-          left: "50%",
-          width: "800px",
-          height: "800px",
-          transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, hsl(355 85% 40% / 0.06) 0%, transparent 70%)",
+          background:
+            "linear-gradient(to bottom, hsl(0 0% 0% / 0.55) 0%, hsl(0 0% 0% / 0.4) 50%, hsl(0 0% 0% / 0.85) 100%)",
         }}
       />
 
-      <div className="relative z-[2] mx-auto w-full max-w-3xl px-6 text-center">
-        <h1
-          className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground md:text-6xl lg:text-7xl transition-all duration-700 ease-out"
+      {/* Content */}
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center pt-20">
+        <p
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground/70 transition-all duration-700 ease-out mb-6"
           style={{
             opacity: stage >= 1 ? 1 : 0,
-            transform: stage >= 1 ? "translateY(0)" : "translateY(24px)",
+            transform: stage >= 1 ? "translateY(0)" : "translateY(16px)",
           }}
         >
-          Turn anonymous visitors into
-          <br />
-          <span className="text-primary">lifelong advocates.</span>
+          Inside Labs
+        </p>
+
+        <h1
+          className="text-5xl font-bold leading-[1.05] tracking-tight text-primary-foreground md:text-7xl lg:text-8xl transition-all duration-700 ease-out mb-6"
+          style={{
+            opacity: stage >= 2 ? 1 : 0,
+            transform: stage >= 2 ? "translateY(0)" : "translateY(24px)",
+          }}
+        >
+          Engage with{" "}
+          <span className="text-primary">Intelligence.</span>
         </h1>
 
         <p
-          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground transition-all duration-700 ease-out"
+          className="mx-auto max-w-xl text-lg leading-relaxed text-primary-foreground/70 transition-all duration-700 ease-out mb-10"
           style={{
             opacity: stage >= 2 ? 1 : 0,
             transform: stage >= 2 ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          The event-triggered engagement platform purpose-built for tourism.
-          Activate guests across every channel with data they already generate.
+          Tourism's leading event-triggered engagement platform —
+          turning anonymous visitors into lifelong advocates.
         </p>
 
         <div
-          className="mt-10 transition-all duration-700 ease-out"
+          className="transition-all duration-700 ease-out"
           style={{
             opacity: stage >= 3 ? 1 : 0,
             transform: stage >= 3 ? "translateY(0)" : "translateY(20px)",
@@ -68,6 +82,9 @@ const HeroSection = () => {
           </a>
         </div>
       </div>
+
+      {/* Bottom fade into page background */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
     </section>
   );
 };
