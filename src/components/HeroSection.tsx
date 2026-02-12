@@ -62,8 +62,7 @@ const HeroSection = () => {
             transform: stage >= 2 ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          Tourism's leading event-triggered engagement platform —
-          turning anonymous visitors into lifelong advocates.
+          Tourism's leading data-driven engagement platform.
         </p>
 
         <div
