@@ -1,27 +1,41 @@
 
 
-## Add a Central 3D Shape Inside the Network
+# Redesign the Omni Suite Section
 
-Place a wireframe 3D topology shape at the center of the sphere network to visually represent "Inside Labs" — something literally *inside* the network.
+## Overview
+Unify the bento grid cards and product tier cards into a cohesive, better-organized section. Add SVG icons to product titles, apply matching gradient backgrounds to the bento cards, and elevate the APP (Omni Explore) as the hero product.
 
-### Shape Choice
+## Changes
 
-A **dodecahedron** (12-sided polyhedron) works well here — it's visually distinct from the outer sphere nodes, has a recognizable "topology" feel, and symbolizes complexity/intelligence. It will be rendered as a wireframe to match the existing aesthetic.
+### 1. Apply gradient backgrounds to the Bento Grid cards
+**File: `src/components/BentoCard.tsx`**
+- Replace the flat `bg-card` background with the same `linear-gradient(165deg, ...)` treatment used on the product cards
+- Ensure the subtle crimson radial overlay remains for the hover glow effect
+- Match the dark space aesthetic consistently across both card types
 
-### Changes to `src/components/IntelligenceMesh.tsx`
+### 2. Add SVG icons next to product tier titles
+**File: `src/components/ProductCards.tsx`**
+- Add relevant Lucide icons next to each product name:
+  - **Omni Engage**: `Zap` (activation/energy)
+  - **Omni Explore**: `Smartphone` (the app - since this is the main product)
+  - **Omni Endeavor**: `Trophy` (loyalty/gamification/enterprise)
+- Icons styled in the primary crimson color, placed inline before each product name
 
-1. **Add a `CoreShape` component** — a wireframe dodecahedron at the origin (`[0, 0, 0]`) with:
-   - `dodecahedronGeometry` with radius ~1.8 (large enough to be prominent but well inside the shell radius of 6)
-   - Wireframe material matching the existing style but slightly brighter (opacity ~0.3) so it stands out as the focal point
-   - Slow independent rotation on multiple axes for visual interest
+### 3. Reorganize the section to hero the APP
+**File: `src/components/ProductCards.tsx`**
+- Restructure the layout: keep the 3-column grid but make the middle card (Omni Explore / the APP) visually larger and more prominent
+- Use a layout where Omni Explore spans a taller or more emphasized card with a larger image area
+- Add a subtle "Featuring the Omni App" callout or badge to reinforce the app as the core product
+- Update the section header to better frame the products ("Choose your tier" or similar)
 
-2. **Add faint connection lines from the core to the outer nodes** — subtle radial lines from the core shape's center to each of the 30 outer nodes, reinforcing the idea that the "inside" is connected to the network. These will be straight lines with very low opacity (~0.06).
-
-3. **Render `CoreShape` inside the rotating `<group>`** in `NetworkScene` so it rotates with the rest of the network.
+### 4. Integrate app content more prominently
+**File: `src/components/ProductCards.tsx`**
+- For Omni Explore (the APP tier), increase the image display area and show the app screenshot more prominently
+- Add a brief "Powered by the Omni App" line or similar to the Endeavor card as well, reinforcing that the app runs through the higher tiers
 
 ### Technical Details
-
-- New `CoreShape` component using `useRef` and `useFrame` for independent rotation
-- Radial connection lines built as a separate `THREE.LineSegments` object in the `NetworkScene` memo
-- No new dependencies needed — uses existing Three.js primitives
+- All gradient values use HSL to match the existing design system (`hsl(230 15% 6%)`, `hsl(355 40% 8%)`, etc.)
+- Icons imported from `lucide-react` (already installed): `Zap`, `Smartphone`, `Trophy`
+- BentoCard gradient will use inline `style` prop like the ProductCards already do, replacing the Tailwind `bg-card` class
+- No new dependencies required
 
