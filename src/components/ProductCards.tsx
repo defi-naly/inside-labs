@@ -74,10 +74,25 @@ const ProductCards = () => {
             key={product.name}
             className={`group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-lg ${
               product.highlighted
-                ? "border-primary/40 bg-card shadow-md shadow-primary/5"
-                : "border-border bg-card hover:border-primary/20 hover:shadow-primary/5"
+                ? "border-primary/40 shadow-md shadow-primary/10"
+                : "border-border hover:border-primary/20 hover:shadow-primary/5"
             }`}
+            style={{
+              background: product.highlighted
+                ? "linear-gradient(165deg, hsl(230 15% 7%) 0%, hsl(355 40% 8%) 40%, hsl(230 15% 5%) 100%)"
+                : "linear-gradient(165deg, hsl(230 15% 6%) 0%, hsl(230 20% 4%) 50%, hsl(230 15% 5%) 100%)",
+            }}
           >
+            {/* Gradient mesh overlay */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-30"
+              style={{
+                background: product.highlighted
+                  ? "radial-gradient(ellipse at 70% 0%, hsl(355 85% 40% / 0.3), transparent 60%)"
+                  : "radial-gradient(ellipse at 70% 0%, hsl(230 30% 20% / 0.4), transparent 60%)",
+              }}
+            />
+
             {product.highlighted && (
               <div className="absolute right-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
                 Most Popular
@@ -91,7 +106,7 @@ const ProductCards = () => {
                 alt={product.name}
                 className="h-full w-full object-cover opacity-50 transition-opacity duration-300 group-hover:opacity-70"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/70 to-transparent" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, hsl(230 15% 5%), hsl(230 15% 5% / 0.7), transparent)" }} />
             </div>
 
             {/* Content */}
