@@ -76,7 +76,7 @@ const Satellite = ({
     }
   });
 
-  const opacity = 0.6;
+  const opacity = 0.2;
 
   return (
     <group ref={groupRef}>
