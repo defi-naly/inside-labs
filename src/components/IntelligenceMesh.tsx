@@ -3,13 +3,30 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
+const WireNode = ({ position }: { position: [number, number, number] }) => {
+  const ref = useRef<THREE.Mesh>(null);
+  const speed = useMemo(() => [(Math.random() - 0.5) * 0.15, (Math.random() - 0.5) * 0.15], []);
+
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.x += speed[0] * delta;
+      ref.current.rotation.y += speed[1] * delta;
+    }
+  });
+
+  return (
+    <mesh ref={ref} position={position}>
+      <icosahedronGeometry args={[0.55, 1]} />
+      <meshBasicMaterial wireframe color="#888888" transparent opacity={0.22} />
+    </mesh>
+  );
+};
+
 const NetworkScene = () => {
   const groupRef = useRef<THREE.Group>(null);
   const shellRadius = 6;
-  const nodeCount = 60;
-  const nodeSize = 0.12;
+  const nodeCount = 30;
 
-  // All nodes exactly on the sphere surface — Fibonacci lattice
   const positions = useMemo<[number, number, number][]>(() => {
     const pts: [number, number, number][] = [];
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
@@ -28,7 +45,6 @@ const NetworkScene = () => {
     return pts;
   }, []);
 
-  // All-to-all connections as a single LineSegments object for performance
   const linesObj = useMemo(() => {
     const verts: number[] = [];
     for (let i = 0; i < positions.length; i++) {
@@ -41,7 +57,7 @@ const NetworkScene = () => {
     const mat = new THREE.LineBasicMaterial({
       color: "#999999",
       transparent: true,
-      opacity: 0.035,
+      opacity: 0.045,
     });
     return new THREE.LineSegments(g, mat);
   }, [positions]);
@@ -56,15 +72,9 @@ const NetworkScene = () => {
 
   return (
     <group ref={groupRef}>
-      {/* Connection lines */}
       <primitive object={linesObj} />
-
-      {/* Nodes — identical size, on circumference */}
       {positions.map((pos, i) => (
-        <mesh key={i} position={pos}>
-          <sphereGeometry args={[nodeSize, 12, 12]} />
-          <meshBasicMaterial color="#666666" transparent opacity={0.7} />
-        </mesh>
+        <WireNode key={i} position={pos} />
       ))}
     </group>
   );
