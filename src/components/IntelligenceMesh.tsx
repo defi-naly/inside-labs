@@ -5,7 +5,10 @@ import * as THREE from "three";
 
 const WireNode = ({ position }: { position: [number, number, number] }) => {
   const ref = useRef<THREE.Mesh>(null);
-  const speed = useMemo(() => [(Math.random() - 0.5) * 0.15, (Math.random() - 0.5) * 0.15], []);
+  const speed = useMemo(
+    () => [(Math.random() - 0.5) * 0.15, (Math.random() - 0.5) * 0.15],
+    []
+  );
 
   useFrame((_, delta) => {
     if (ref.current) {
@@ -45,19 +48,53 @@ const NetworkScene = () => {
     return pts;
   }, []);
 
+  // Connect only nearest neighbors — lines stay on surface
   const linesObj = useMemo(() => {
     const verts: number[] = [];
+    const maxNeighbors = 5;
+
     for (let i = 0; i < positions.length; i++) {
-      for (let j = i + 1; j < positions.length; j++) {
-        verts.push(...positions[i], ...positions[j]);
+      // Calculate distances to all other nodes
+      const distances: { idx: number; dist: number }[] = [];
+      for (let j = 0; j < positions.length; j++) {
+        if (i === j) continue;
+        const dx = positions[i][0] - positions[j][0];
+        const dy = positions[i][1] - positions[j][1];
+        const dz = positions[i][2] - positions[j][2];
+        distances.push({ idx: j, dist: Math.sqrt(dx * dx + dy * dy + dz * dz) });
+      }
+      // Sort and pick nearest neighbors
+      distances.sort((a, b) => a.dist - b.dist);
+      const neighbors = distances.slice(0, maxNeighbors);
+
+      for (const n of neighbors) {
+        // Only add if i < n.idx to avoid duplicates
+        if (i < n.idx) {
+          // Create arc points along the sphere surface between the two nodes
+          const arcSegments = 12;
+          const from = new THREE.Vector3(...positions[i]);
+          const to = new THREE.Vector3(...positions[n.idx]);
+
+          for (let s = 0; s < arcSegments; s++) {
+            const t1 = s / arcSegments;
+            const t2 = (s + 1) / arcSegments;
+
+            // Slerp for great circle arc on sphere surface
+            const p1 = new THREE.Vector3().copy(from).lerp(to, t1).normalize().multiplyScalar(shellRadius);
+            const p2 = new THREE.Vector3().copy(from).lerp(to, t2).normalize().multiplyScalar(shellRadius);
+
+            verts.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+          }
+        }
       }
     }
+
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
     const mat = new THREE.LineBasicMaterial({
       color: "#999999",
       transparent: true,
-      opacity: 0.045,
+      opacity: 0.15,
     });
     return new THREE.LineSegments(g, mat);
   }, [positions]);
