@@ -1,45 +1,27 @@
 
 
-## "Meet the Omni Suite" — Animated Bento Cards Section
+## Add a Central 3D Shape Inside the Network
 
-Build an interactive bento-grid section on the homepage inspired by the screenshot reference, where each card represents an Omni Suite capability. Cards animate on hover (scale, shadow lift) and can be clicked/expanded to reveal deeper descriptive text.
+Place a wireframe 3D topology shape at the center of the sphere network to visually represent "Inside Labs" — something literally *inside* the network.
 
----
+### Shape Choice
 
-### Section Layout
+A **dodecahedron** (12-sided polyhedron) works well here — it's visually distinct from the outer sphere nodes, has a recognizable "topology" feel, and symbolizes complexity/intelligence. It will be rendered as a wireframe to match the existing aesthetic.
 
-**Header area:**
-- Large bold heading: "Meet the Omni Suite."
-- Subtitle: "Tourism's leading data-driven, event-triggered customer engagement platform."
+### Changes to `src/components/IntelligenceMesh.tsx`
 
-**Bento Grid — 5 interactive cards in an asymmetric layout:**
-Cards arranged in a visually interesting grid (2 large cards on first row, 3 cards on second row) similar to the screenshot's alternating text-left/image-right pattern.
+1. **Add a `CoreShape` component** — a wireframe dodecahedron at the origin (`[0, 0, 0]`) with:
+   - `dodecahedronGeometry` with radius ~1.8 (large enough to be prominent but well inside the shell radius of 6)
+   - Wireframe material matching the existing style but slightly brighter (opacity ~0.3) so it stands out as the focal point
+   - Slow independent rotation on multiple axes for visual interest
 
-### The 5 Cards (with existing content from insidelabs.tech)
+2. **Add faint connection lines from the core to the outer nodes** — subtle radial lines from the core shape's center to each of the 30 outer nodes, reinforcing the idea that the "inside" is connected to the network. These will be straight lines with very low opacity (~0.06).
 
-1. **Customer Relationships** — Icon: heart · "Create long-lasting, meaningful, customer relationships" · Deeper text: "by using data to power your guest engagement."
-2. **E-Commerce Traffic** — Icon: shopping cart · "Drive more qualified traffic to your e-commerce layer" · Deeper text: "by supercharging your crosschannel marketing automation."
-3. **White-Label App** — Icon: smartphone · "Launch a state of the art white-label app" · Deeper text: "and offer your guests a central platform that evolves based on their customer journey."
-4. **Membership Programs** — Icon: users · "Start your own membership programs" · Deeper text: "to boost loyalty & guest satisfaction."
-5. **AI Communication** — Icon: sparkles · "Enable personalized omni-channel communication" · Deeper text: "powered by cutting-edge AI technology."
+3. **Render `CoreShape` inside the rotating `<group>`** in `NetworkScene` so it rotates with the rest of the network.
 
-### Card Behavior & Animation
+### Technical Details
 
-- **Default state**: Each card shows an icon, bold headline, and a subtle "Learn more" indicator. Cards have a clean, minimal background (alternating light gray / dark tones like the screenshot).
-- **Hover animation**: Card gently scales up (~1.02), shadow lifts, and a subtle gradient border or glow appears — smooth 300ms transition.
-- **Click/expand**: Card expands smoothly (animated height transition) to reveal the deeper description text, a more detailed paragraph, and a "Learn more →" link to the Omni Suite page. Other cards stay in place (no accordion — each card expands independently).
-- **Close**: Click again or click a close button to smoothly collapse back.
-
-### Design Details
-- Stripe-inspired colorful gradient accents on card borders or background on hover
-- Clean typography with bold headlines and muted subtitles
-- Smooth fade-in animations as cards scroll into view
-- Fully responsive: stacks to single column on mobile
-- EN/DE content support (all text available in both languages)
-
-### Technical Approach
-- Reusable `BentoCard` component with expand/collapse state
-- CSS transitions for hover effects and height animation
-- Scroll-triggered fade-in using Intersection Observer
-- Grid layout with Tailwind CSS responsive classes
+- New `CoreShape` component using `useRef` and `useFrame` for independent rotation
+- Radial connection lines built as a separate `THREE.LineSegments` object in the `NetworkScene` memo
+- No new dependencies needed — uses existing Three.js primitives
 
