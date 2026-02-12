@@ -19,7 +19,7 @@ const WireNode = ({ position }: { position: [number, number, number] }) => {
 
   return (
     <mesh ref={ref} position={position}>
-      <icosahedronGeometry args={[0.55, 1]} />
+      <sphereGeometry args={[0.55, 10, 10]} />
       <meshBasicMaterial wireframe color="#888888" transparent opacity={0.22} />
     </mesh>
   );
