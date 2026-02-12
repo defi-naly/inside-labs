@@ -1,5 +1,3 @@
-import clients from "@/assets/clients.png";
-
 const stats = [
   { value: "200k", label: "Active app users" },
   { value: "50%", label: "Ticket sales via app" },
@@ -11,7 +9,6 @@ const SocialProofSection = () => {
   return (
     <section className="py-32 lg:py-40 px-6">
       <div className="mx-auto max-w-7xl">
-        {/* Case Study Stats */}
         <div className="text-center mb-16">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             Case Study: LAAX
@@ -34,22 +31,9 @@ const SocialProofSection = () => {
           ))}
         </div>
 
-        <p className="text-center mb-24 text-xs text-muted-foreground">
+        <p className="text-center text-xs text-muted-foreground">
           * Values in Swiss Franc (CHF). Winter 2018/19 season.
         </p>
-
-        {/* Logos */}
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-10">
-          Trusted by leading tourism brands
-        </p>
-        <div className="flex justify-center">
-          <img
-            src={clients}
-            alt="Client logos"
-            className="h-16 w-auto object-contain md:h-24"
-            style={{ filter: "brightness(0) invert(1)" }}
-          />
-        </div>
       </div>
     </section>
   );
