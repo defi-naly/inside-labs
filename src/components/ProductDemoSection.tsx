@@ -1,4 +1,4 @@
-import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award, ChevronRight, Utensils, Map, Mountain, CloudSun, Ticket, Trophy, Medal, CreditCard, Bell, Bike, Timer, Gift } from "lucide-react";
+import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award, Utensils, Map, Mountain, CloudSun, Ticket, Trophy, Medal, CreditCard, Bell, Bike, Timer, Gift } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -115,7 +115,6 @@ const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
 const ProductDemoSection = () => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -134,7 +133,6 @@ const ProductDemoSection = () => {
 
   const handlePillarClick = (i: number) => {
     setActiveIndex(i);
-    setExpandedIndex(expandedIndex === i ? null : i);
   };
 
   return (
@@ -183,113 +181,84 @@ const ProductDemoSection = () => {
           })}
         </div>
 
-        {/* Main layout: phone + interactive pillars */}
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-start">
-          {/* SVG Phone — left */}
-          <div
-            className="flex justify-center transition-all duration-700"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "scale(1)" : "scale(0.95)",
-              transitionDelay: "200ms",
-            }}
-          >
-            <ImageFrame activeIndex={activeIndex} />
+        {/* Pillar tab bar */}
+        <div
+          className="flex items-center justify-center gap-2 mb-8 transition-all duration-700"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(12px)",
+            transitionDelay: "200ms",
+          }}
+        >
+          {pillarsData.map((p, i) => {
+            const Icon = p.icon;
+            const isActive = activeIndex === i;
+            return (
+              <button
+                key={p.label}
+                onClick={() => handlePillarClick(i)}
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
+                  isActive
+                    ? "border-primary/40 bg-primary/10 text-foreground"
+                    : "border-border/40 bg-card/20 text-muted-foreground hover:border-border/60 hover:bg-card/40"
+                )}
+              >
+                <Icon size={14} className={isActive ? "text-primary" : "text-muted-foreground"} />
+                {p.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Image frame — full width, centered */}
+        <div
+          className="max-w-4xl mx-auto mb-10 transition-all duration-700"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "scale(1)" : "scale(0.97)",
+            transitionDelay: "300ms",
+          }}
+        >
+          <ImageFrame activeIndex={activeIndex} />
+        </div>
+
+        {/* Active pillar description + expanded features */}
+        <div
+          className="max-w-3xl mx-auto transition-all duration-500"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(16px)",
+            transitionDelay: "400ms",
+          }}
+        >
+          <div className="text-center mb-6">
+            <p className="text-lg font-semibold text-foreground mb-1">{pillarsData[activeIndex].label}</p>
+            <p className="text-sm text-muted-foreground">{pillarsData[activeIndex].desc}</p>
           </div>
 
-          {/* Interactive pillars — right */}
-          <div className="space-y-3">
-            {pillarsData.map((p, i) => {
-              const Icon = p.icon;
-              const isExpanded = expandedIndex === i;
-              const isActive = activeIndex === i;
-
-              return (
-                <div
-                  key={p.label}
-                  className={cn(
-                    "rounded-xl border transition-all duration-500 overflow-hidden cursor-pointer",
-                    isActive
-                      ? "border-primary/30 bg-card/60"
-                      : "border-border/40 bg-card/20 hover:border-border/60 hover:bg-card/40"
-                  )}
-                  style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "translateX(0)" : "translateX(24px)",
-                    transitionDelay: `${300 + i * 80}ms`,
-                  }}
-                  onClick={() => handlePillarClick(i)}
-                >
-                  {/* Header row */}
-                  <div className="flex items-center gap-3 px-4 py-3">
-                    <div
-                      className={cn(
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300",
-                        isActive
-                          ? "border-primary/30 bg-primary/10"
-                          : "border-border bg-card"
-                      )}
-                    >
-                      <Icon size={15} className={isActive ? "text-primary" : "text-muted-foreground"} />
-                    </div>
-                    <div className="flex-1">
-                      <p className={cn(
-                        "text-sm font-semibold mb-0.5 transition-colors",
-                        isActive ? "text-foreground" : "text-foreground/80"
-                      )}>
-                        {p.label}
-                      </p>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
-                    </div>
-                    <ChevronRight
-                      size={16}
-                      className={cn(
-                        "text-muted-foreground transition-transform duration-300 shrink-0",
-                        isExpanded && "rotate-90 text-primary"
-                      )}
-                    />
-                  </div>
-
-                  {/* Expanded feature list */}
-                  <div
-                    className="transition-all duration-500 ease-in-out overflow-hidden"
-                    style={{
-                      maxHeight: isExpanded ? `${p.features.length * 52 + 40}px` : "0px",
-                      opacity: isExpanded ? 1 : 0,
-                    }}
-                  >
-                    <div className="px-5 pb-4 space-y-1.5 border-t border-border/20 pt-3">
-                      {p.features.map((f, fi) => (
-                        <div
-                          key={fi}
-                          className="flex items-start gap-3 rounded-lg bg-card/40 px-4 py-2.5"
-                        >
-                          <f.icon size={14} className="text-primary shrink-0 mt-0.5" />
-                          <span className="text-sm text-foreground/80 leading-relaxed">{f.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* App store badges */}
-            <div
-              className="flex items-center gap-3 pt-4 transition-all duration-500"
-              style={{
-                opacity: visible ? 1 : 0,
-                transitionDelay: "800ms",
-              }}
-            >
-              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-                <Star size={12} className="text-primary fill-primary" />
-                <span className="font-semibold text-foreground">4.9</span> on App Store
+          {/* Feature grid */}
+          <div className="grid sm:grid-cols-2 gap-2">
+            {pillarsData[activeIndex].features.map((f, fi) => (
+              <div
+                key={fi}
+                className="flex items-start gap-3 rounded-xl border border-border/30 bg-card/30 px-4 py-3 transition-all duration-300"
+              >
+                <f.icon size={14} className="text-primary shrink-0 mt-0.5" />
+                <span className="text-sm text-foreground/80 leading-relaxed">{f.text}</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-                <Star size={12} className="text-primary fill-primary" />
-                <span className="font-semibold text-foreground">4.7</span> on Google Play
-              </div>
+            ))}
+          </div>
+
+          {/* App store badges */}
+          <div className="flex items-center justify-center gap-3 pt-8">
+            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+              <Star size={12} className="text-primary fill-primary" />
+              <span className="font-semibold text-foreground">4.9</span> on App Store
+            </div>
+            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+              <Star size={12} className="text-primary fill-primary" />
+              <span className="font-semibold text-foreground">4.7</span> on Google Play
             </div>
           </div>
         </div>
