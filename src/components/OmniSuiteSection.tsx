@@ -138,7 +138,7 @@ const OmniSuiteSection = () => {
             Our Platform
           </span>
           <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground lg:text-6xl">
-            Meet the Omni Suite.
+            Powered by the Omni Suite.
           </h2>
           <p className="text-lg leading-relaxed text-muted-foreground lg:text-xl max-w-2xl mx-auto">
             The all-in-one platform that turns fragmented guest data into
