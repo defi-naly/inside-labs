@@ -125,10 +125,7 @@ const OmniSuiteSection = () => {
 
   return (
     <>
-      <section
-        className="w-full border-t border-border/40"
-        style={{ background: "linear-gradient(180deg, hsl(230, 15%, 3%) 0%, hsl(230, 12%, 6%) 50%, hsl(230, 15%, 3%) 100%)" }}
-      >
+      <section className="w-full border-t border-border/40">
         <div className="mx-auto max-w-7xl px-6 py-32 lg:py-40">
         {/* Header — centred, selling */}
         <div className="mb-20 text-center max-w-3xl mx-auto">
