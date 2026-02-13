@@ -130,14 +130,18 @@ const OmniSuiteSection = () => {
         style={{ background: "linear-gradient(180deg, hsl(230, 15%, 3%) 0%, hsl(230, 12%, 6%) 50%, hsl(230, 15%, 3%) 100%)" }}
       >
         <div className="mx-auto max-w-7xl px-6 py-32 lg:py-40">
-        {/* Header */}
-        <div className="mb-16 max-w-2xl">
-          <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground lg:text-5xl">
+        {/* Header — centred, selling */}
+        <div className="mb-20 text-center max-w-3xl mx-auto">
+          <span className="inline-block mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+            Our Platform
+          </span>
+          <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground lg:text-6xl">
             Meet the Omni Suite.
           </h2>
-          <p className="text-lg leading-relaxed text-muted-foreground lg:text-xl">
-            Tourism's leading data-driven, event-triggered customer engagement
-            platform.
+          <p className="text-lg leading-relaxed text-muted-foreground lg:text-xl max-w-2xl mx-auto">
+            The all-in-one platform that turns fragmented guest data into
+            revenue-driving engagement — across every channel, every touchpoint,
+            every time.
           </p>
         </div>
 
