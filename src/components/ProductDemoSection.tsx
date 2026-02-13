@@ -122,7 +122,7 @@ const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
                 key={p.label}
                 src={p.screenImage}
                 alt={`${p.label} screen`}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                className="absolute inset-0 w-full h-full object-cover object-left transition-opacity duration-500"
                 style={{ opacity: i === activeIndex ? 1 : 0 }}
               />
             ))}
@@ -211,84 +211,81 @@ const ProductDemoSection = () => {
           })}
         </div>
 
-        {/* Pillar tab bar */}
-        <div
-          className="flex items-center justify-center gap-2 mb-8 transition-all duration-700"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(12px)",
-            transitionDelay: "200ms",
-          }}
-        >
-          {pillarsData.map((p, i) => {
-            const Icon = p.icon;
-            const isActive = activeIndex === i;
-            return (
-              <button
-                key={p.label}
-                onClick={() => handlePillarClick(i)}
-                className={cn(
-                  "flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
-                  isActive
-                    ? "border-primary/40 bg-primary/10 text-foreground"
-                    : "border-border/40 bg-card/20 text-muted-foreground hover:border-border/60 hover:bg-card/40"
-                )}
-              >
-                <Icon size={14} className={isActive ? "text-primary" : "text-muted-foreground"} />
-                {p.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Image frame — full width, centered */}
-        <div
-          className="max-w-4xl mx-auto mb-10 transition-all duration-700"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? "scale(1)" : "scale(0.97)",
-            transitionDelay: "300ms",
-          }}
-        >
-          <ImageFrame activeIndex={activeIndex} />
-        </div>
-
-        {/* Active pillar description + expanded features */}
-        <div
-          className="max-w-3xl mx-auto transition-all duration-500"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(16px)",
-            transitionDelay: "400ms",
-          }}
-        >
-          <div className="text-center mb-6">
-            <p className="text-lg font-semibold text-foreground mb-1">{pillarsData[activeIndex].label}</p>
-            <p className="text-sm text-muted-foreground">{pillarsData[activeIndex].desc}</p>
+        {/* Side-by-side: phone left, info right */}
+        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
+          {/* Phone — left */}
+          <div
+            className="flex justify-start transition-all duration-700"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(-20px)",
+              transitionDelay: "200ms",
+            }}
+          >
+            <ImageFrame activeIndex={activeIndex} />
           </div>
 
-          {/* Feature grid */}
-          <div className="grid sm:grid-cols-2 gap-2">
-            {pillarsData[activeIndex].features.map((f, fi) => (
-              <div
-                key={fi}
-                className="flex items-start gap-3 rounded-xl border border-border/30 bg-card/30 px-4 py-3 transition-all duration-300"
-              >
-                <f.icon size={14} className="text-primary shrink-0 mt-0.5" />
-                <span className="text-sm text-foreground/80 leading-relaxed">{f.text}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* App store badges */}
-          <div className="flex items-center justify-center gap-3 pt-8">
-            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-              <Star size={12} className="text-primary fill-primary" />
-              <span className="font-semibold text-foreground">4.9</span> on App Store
+          {/* Info — right */}
+          <div
+            className="transition-all duration-700"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(20px)",
+              transitionDelay: "300ms",
+            }}
+          >
+            {/* Pillar tabs */}
+            <div className="flex flex-wrap items-center gap-2 mb-8">
+              {pillarsData.map((p, i) => {
+                const Icon = p.icon;
+                const isActive = activeIndex === i;
+                return (
+                  <button
+                    key={p.label}
+                    onClick={() => handlePillarClick(i)}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
+                      isActive
+                        ? "border-primary/40 bg-primary/10 text-foreground"
+                        : "border-border/40 bg-card/20 text-muted-foreground hover:border-border/60 hover:bg-card/40"
+                    )}
+                  >
+                    <Icon size={14} className={isActive ? "text-primary" : "text-muted-foreground"} />
+                    {p.label}
+                  </button>
+                );
+              })}
             </div>
-            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-              <Star size={12} className="text-primary fill-primary" />
-              <span className="font-semibold text-foreground">4.7</span> on Google Play
+
+            {/* Active pillar description */}
+            <div className="mb-6">
+              <p className="text-xl font-semibold text-foreground mb-2">{pillarsData[activeIndex].label}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{pillarsData[activeIndex].desc}</p>
+            </div>
+
+            {/* Feature list */}
+            <div className="space-y-2 mb-8">
+              {pillarsData[activeIndex].features.map((f, fi) => (
+                <div
+                  key={fi}
+                  className="flex items-start gap-3 rounded-xl border border-border/30 bg-card/30 px-4 py-3 transition-all duration-300"
+                >
+                  <f.icon size={14} className="text-primary shrink-0 mt-0.5" />
+                  <span className="text-sm text-foreground/80 leading-relaxed">{f.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* App store badges */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                <Star size={12} className="text-primary fill-primary" />
+                <span className="font-semibold text-foreground">4.9</span> on App Store
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                <Star size={12} className="text-primary fill-primary" />
+                <span className="font-semibold text-foreground">4.7</span> on Google Play
+              </div>
             </div>
           </div>
         </div>
