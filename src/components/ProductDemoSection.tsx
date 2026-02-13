@@ -86,20 +86,14 @@ const stats = [
   { icon: Award, value: "#1", label: "Tourism App CH" },
 ];
 
-// Phone frame that fits the actual screenshot aspect ratio
-const PhoneFrame = ({ activeIndex }: { activeIndex: number }) => {
-  const pillar = pillarsData[activeIndex];
-
+// Clean image frame — no phone outline, just a rounded container
+const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
   return (
-    <div className="relative mx-auto w-[280px] lg:w-[340px]">
-      {/* Phone bezel frame */}
+    <div className="relative w-full max-w-[520px] mx-auto">
       <div
-        className="relative rounded-[40px] border-[6px] border-[hsl(230_15%_10%)] bg-[hsl(230_15%_8%)] overflow-hidden shadow-[0_25px_80px_rgba(225,29,72,0.08)]"
-        style={{ aspectRatio: "9 / 19.5" }}
+        className="relative rounded-2xl overflow-hidden border border-border/30 bg-card/30"
+        style={{ aspectRatio: "9 / 16" }}
       >
-        {/* Dynamic Island */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[72px] h-[22px] rounded-full bg-black z-20" />
-
         {/* Screenshots with crossfade */}
         {pillarsData.map((p, i) => (
           <img
@@ -110,25 +104,6 @@ const PhoneFrame = ({ activeIndex }: { activeIndex: number }) => {
             style={{ opacity: i === activeIndex ? 1 : 0 }}
           />
         ))}
-
-        {/* Bottom nav bar overlay */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-4 py-3 border-t border-white/[0.06] bg-black/60 backdrop-blur-md z-10">
-          {pillarsData.map((p, i) => (
-            <div key={p.label} className="flex flex-col items-center gap-0.5">
-              <p.icon
-                size={12}
-                className="transition-colors duration-300"
-                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-              />
-              <span
-                className="text-[7px] transition-colors duration-300"
-                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-              >
-                {p.label}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
@@ -206,7 +181,7 @@ const ProductDemoSection = () => {
         </div>
 
         {/* Main layout: phone + interactive pillars */}
-        <div className="grid lg:grid-cols-[auto_1fr] gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-start">
           {/* SVG Phone — left */}
           <div
             className="flex justify-center transition-all duration-700"
@@ -216,7 +191,7 @@ const ProductDemoSection = () => {
               transitionDelay: "200ms",
             }}
           >
-            <PhoneFrame activeIndex={activeIndex} />
+            <ImageFrame activeIndex={activeIndex} />
           </div>
 
           {/* Interactive pillars — right */}
@@ -243,16 +218,16 @@ const ProductDemoSection = () => {
                   onClick={() => handlePillarClick(i)}
                 >
                   {/* Header row */}
-                  <div className="flex items-center gap-4 px-5 py-4">
+                  <div className="flex items-center gap-3 px-4 py-3">
                     <div
                       className={cn(
-                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-300",
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300",
                         isActive
                           ? "border-primary/30 bg-primary/10"
                           : "border-border bg-card"
                       )}
                     >
-                      <Icon size={18} className={isActive ? "text-primary" : "text-muted-foreground"} />
+                      <Icon size={15} className={isActive ? "text-primary" : "text-muted-foreground"} />
                     </div>
                     <div className="flex-1">
                       <p className={cn(
