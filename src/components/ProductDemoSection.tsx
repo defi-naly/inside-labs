@@ -212,7 +212,7 @@ const ProductDemoSection = () => {
         </div>
 
         {/* Side-by-side: phone left, info right */}
-        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[320px_1fr] gap-10 lg:gap-16 items-center">
           {/* Phone — left */}
           <div
             className="flex justify-start transition-all duration-700"
