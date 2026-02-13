@@ -58,15 +58,19 @@ const ProblemSolutionSection = () => {
           }}
         >
           {/* Table header */}
-          <div className="grid grid-cols-[1fr_120px_120px] md:grid-cols-[1fr_160px_160px] items-center border-b border-border/40 px-6 py-4">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Feature
+          <div className="grid grid-cols-[1fr_110px_130px] md:grid-cols-[1fr_150px_180px] items-end border-b border-border/40 px-6 py-5">
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Capability
             </div>
-            <div className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Traditional
+            <div className="text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/60">
+                Traditional
+              </p>
             </div>
-            <div className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
-              Inside Labs
+            <div className="text-center">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
+                Inside Labs
+              </div>
             </div>
           </div>
 
@@ -75,33 +79,46 @@ const ProblemSolutionSection = () => {
             <div
               key={row.feature}
               className={cn(
-                "grid grid-cols-[1fr_120px_120px] md:grid-cols-[1fr_160px_160px] items-center px-6 py-3.5 transition-all duration-500 border-b border-border/10 last:border-b-0",
-                "hover:bg-card/40",
+                "grid grid-cols-[1fr_110px_130px] md:grid-cols-[1fr_150px_180px] items-center px-6 py-3.5 transition-all duration-500 border-b border-border/[0.06] last:border-b-0",
+                "hover:bg-primary/[0.02]",
                 visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
               )}
               style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <span className="text-sm text-foreground/90">{row.feature}</span>
+              <span className="text-sm text-foreground/80">{row.feature}</span>
 
               {/* Traditional */}
               <div className="flex justify-center">
                 {row.traditional === false ? (
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted/30">
-                    <X size={12} className="text-muted-foreground/60" />
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted/20 border border-border/30">
+                    <X size={11} className="text-muted-foreground/40" />
                   </div>
                 ) : (
-                  <span className="text-xs text-muted-foreground/70 font-medium">{row.traditional}</span>
+                  <span className="inline-flex rounded-full bg-muted/15 border border-border/20 px-2.5 py-0.5 text-[10px] text-muted-foreground/50 font-medium">
+                    {row.traditional}
+                  </span>
                 )}
               </div>
 
-              {/* Inside Labs */}
+              {/* Inside Labs — highlighted column */}
               <div className="flex justify-center">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 border border-primary/20">
-                  <Check size={12} className="text-primary" />
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/15 border border-primary/30 shadow-sm shadow-primary/10">
+                  <Check size={14} className="text-primary" strokeWidth={2.5} />
                 </div>
               </div>
             </div>
           ))}
+
+          {/* Summary footer */}
+          <div className="grid grid-cols-[1fr_110px_130px] md:grid-cols-[1fr_150px_180px] items-center border-t border-border/30 px-6 py-4 bg-primary/[0.03]">
+            <span className="text-xs font-semibold text-foreground/70">Score</span>
+            <div className="text-center">
+              <span className="text-lg font-bold text-muted-foreground/40">0/10</span>
+            </div>
+            <div className="text-center">
+              <span className="text-lg font-bold text-primary">10/10</span>
+            </div>
+          </div>
         </div>
 
         {/* CTA */}
