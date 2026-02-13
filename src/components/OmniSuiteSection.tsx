@@ -1,16 +1,10 @@
 import { useState } from "react";
 import BentoCard from "./BentoCard";
 import ExpandedCard from "./ExpandedCard";
-import usp1 from "@/assets/usp-1.png";
-import usp2 from "@/assets/usp-2.png";
-import usp3 from "@/assets/usp-3.png";
-import usp4 from "@/assets/usp-4.png";
-import usp5 from "@/assets/usp-5.png";
-
 const cards = [
   {
     headline: "Create long-lasting, meaningful, customer relationships",
-    image: usp1,
+    image: "/images/omni/omni-engage-header-m.png",
     accentColor: "#e11d48",
     expanded: {
       headline: "Create long-lasting, meaningful, customer relationships",
@@ -33,7 +27,7 @@ const cards = [
   },
   {
     headline: "Drive more qualified traffic to your e-commerce layer",
-    image: usp2,
+    image: "/images/usp/commerce-screen-m.jpg",
     accentColor: "#e11d48",
     expanded: {
       headline: "Drive more qualified traffic to your e-commerce layer",
@@ -56,7 +50,7 @@ const cards = [
   },
   {
     headline: "Launch a state of the art white-label app",
-    image: usp3,
+    image: "/images/usp/app-3screens-m.jpg",
     accentColor: "#e11d48",
     expanded: {
       headline: "Launch a state of the art white-label app",
@@ -79,7 +73,7 @@ const cards = [
   },
   {
     headline: "Start your own membership programs",
-    image: usp4,
+    image: "/images/usp/membership-overview.png",
     accentColor: "#e11d48",
     expanded: {
       headline: "Start your own membership programs",
@@ -102,7 +96,7 @@ const cards = [
   },
   {
     headline: "Enable personalized omni-channel communication",
-    image: usp5,
+    image: "/images/usp/campaign-guide-m.png",
     accentColor: "#e11d48",
     expanded: {
       headline: "Enable personalized omni-channel communication",
