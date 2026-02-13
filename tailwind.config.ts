@@ -84,6 +84,10 @@ export default {
           "0%, 100%": { opacity: "0.4", transform: "translateY(0)" },
           "50%": { opacity: "1", transform: "translateY(4px)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-8px) scale(1.02)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

@@ -125,7 +125,11 @@ const OmniSuiteSection = () => {
 
   return (
     <>
-      <section className="mx-auto w-full max-w-7xl px-6 py-32 lg:py-40 border-t border-border/40">
+      <section
+        className="w-full border-t border-border/40"
+        style={{ background: "linear-gradient(180deg, hsl(230, 15%, 3%) 0%, hsl(230, 12%, 6%) 50%, hsl(230, 15%, 3%) 100%)" }}
+      >
+        <div className="mx-auto max-w-7xl px-6 py-32 lg:py-40">
         {/* Header */}
         <div className="mb-16 max-w-2xl">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground lg:text-5xl">
@@ -179,6 +183,7 @@ const OmniSuiteSection = () => {
               onClick={() => setExpandedIndex(4)}
             />
           </div>
+        </div>
         </div>
       </section>
 
