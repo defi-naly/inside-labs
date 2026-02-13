@@ -82,30 +82,22 @@ const ProductDemoSection = () => {
         </div>
 
         {/* Main layout: app image + pillars */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
-          {/* Single hero app image — no frame, matches pillar height */}
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 lg:gap-12 items-stretch">
+          {/* Phone — left, large, no frame */}
           <div
-            className="relative flex items-center justify-center transition-all duration-700 order-2 lg:order-1"
+            className="relative flex items-center justify-center transition-all duration-700"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)",
               transitionDelay: "200ms",
             }}
           >
-            <div className="relative h-full flex items-center justify-center">
-              <img
-                src={omniAppPhone}
-                alt="Omni App"
-                className="h-full max-h-[480px] w-auto object-contain animate-[float_6s_ease-in-out_infinite] drop-shadow-2xl"
-              />
-              {/* Glow behind */}
-              <div
-                className="pointer-events-none absolute -inset-12 -z-10 rounded-full"
-                style={{
-                  background: "radial-gradient(ellipse at 50% 50%, hsl(355 85% 40% / 0.08), transparent 70%)",
-                }}
-              />
-            </div>
+            <img
+              src={omniAppPhone}
+              alt="Omni App"
+              className="w-auto max-w-[340px] lg:max-w-[380px] object-contain animate-[float_6s_ease-in-out_infinite] drop-shadow-[0_20px_60px_rgba(225,29,72,0.12)]"
+              style={{ mixBlendMode: "normal" }}
+            />
           </div>
 
           {/* Pillars list */}
