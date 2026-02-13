@@ -189,7 +189,7 @@ const WireframeMountain = () => {
         camera={{ position: [0, 2.2, 12], fov: 50 }}
         style={{ touchAction: "none", background: "transparent" }}
         gl={{ alpha: true, antialias: true }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
       >
         <MountainScene />
       </Canvas>
