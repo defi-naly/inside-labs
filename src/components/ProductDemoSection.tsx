@@ -86,122 +86,49 @@ const stats = [
   { icon: Award, value: "#1", label: "Tourism App CH" },
 ];
 
-// SVG Phone Frame component
+// Phone frame that fits the actual screenshot aspect ratio
 const PhoneFrame = ({ activeIndex }: { activeIndex: number }) => {
   const pillar = pillarsData[activeIndex];
 
-  const phoneContent = (isReflection = false) => (
-    <div className={cn("relative mx-auto w-[300px] lg:w-[360px]", isReflection && "pointer-events-none")}>
-      {/* Phone body SVG */}
-      <svg viewBox="0 0 320 650" className="w-full h-auto">
-        {/* Outer frame with edge highlight */}
-        <defs>
-          <linearGradient id="edgeHighlight" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.03)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-          </linearGradient>
-        </defs>
-        <rect x="2" y="2" width="316" height="646" rx="44" ry="44"
-          fill="none" stroke="url(#edgeHighlight)" strokeWidth="2"
-        />
-        {/* Phone body */}
-        <rect x="4" y="4" width="312" height="642" rx="42" ry="42"
-          fill="hsl(230 15% 8%)"
-        />
-        {/* Screen area */}
-        <rect x="12" y="12" width="296" height="626" rx="36" ry="36"
-          fill="hsl(230 20% 4%)"
-        />
-        {/* Dynamic Island */}
-        <rect x="120" y="18" width="80" height="24" rx="12" ry="12"
-          fill="hsl(0 0% 0%)"
-        />
-        {/* Side button right */}
-        <rect x="318" y="140" width="4" height="60" rx="2" fill="hsl(230 10% 15%)" />
-        {/* Side buttons left */}
-        <rect x="-2" y="120" width="4" height="30" rx="2" fill="hsl(230 10% 15%)" />
-        <rect x="-2" y="170" width="4" height="50" rx="2" fill="hsl(230 10% 15%)" />
-        <rect x="-2" y="230" width="4" height="50" rx="2" fill="hsl(230 10% 15%)" />
-      </svg>
-
-      {/* Screen content — real screenshots with crossfade */}
+  return (
+    <div className="relative mx-auto w-[280px] lg:w-[340px]">
+      {/* Phone bezel frame */}
       <div
-        className="absolute overflow-hidden"
-        style={{
-          top: "1.85%",
-          left: "3.75%",
-          right: "3.75%",
-          bottom: "1.85%",
-          borderRadius: "36px",
-        }}
+        className="relative rounded-[40px] border-[6px] border-[hsl(230_15%_10%)] bg-[hsl(230_15%_8%)] overflow-hidden shadow-[0_25px_80px_rgba(225,29,72,0.08)]"
+        style={{ aspectRatio: "9 / 19.5" }}
       >
-        {/* All screenshots stacked for crossfade */}
+        {/* Dynamic Island */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[72px] h-[22px] rounded-full bg-black z-20" />
+
+        {/* Screenshots with crossfade */}
         {pillarsData.map((p, i) => (
           <img
             key={p.label}
             src={p.screenImage}
             alt={`${p.label} screen`}
-            className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500"
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
             style={{ opacity: i === activeIndex ? 1 : 0 }}
           />
         ))}
 
         {/* Bottom nav bar overlay */}
-        {!isReflection && (
-          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-4 py-3 border-t border-white/[0.06] bg-black/60 backdrop-blur-md">
-            {pillarsData.map((p, i) => (
-              <div key={p.label} className="flex flex-col items-center gap-0.5">
-                <p.icon
-                  size={12}
-                  className="transition-colors duration-300"
-                  style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-                />
-                <span
-                  className="text-[7px] transition-colors duration-300"
-                  style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-                >
-                  {p.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Ambient glow sweep */}
-      <div
-        className="absolute inset-0 rounded-[44px] overflow-hidden pointer-events-none"
-        style={{ animation: "phone-glow 4s ease-in-out infinite" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
-      </div>
-    </div>
-  );
-
-  return (
-    <div style={{ perspective: "1200px" }}>
-      {/* 3D tilted phone */}
-      <div
-        style={{
-          transform: "rotateY(-8deg) rotateX(3deg)",
-          transformStyle: "preserve-3d",
-        }}
-      >
-        {phoneContent()}
-      </div>
-
-      {/* Floor reflection */}
-      <div
-        className="mt-[-20px] opacity-20 blur-[2px]"
-        style={{
-          transform: "rotateY(-8deg) rotateX(3deg) scaleY(-0.3)",
-          transformStyle: "preserve-3d",
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 60%)",
-          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 60%)",
-        }}
-      >
-        {phoneContent(true)}
+        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-4 py-3 border-t border-white/[0.06] bg-black/60 backdrop-blur-md z-10">
+          {pillarsData.map((p, i) => (
+            <div key={p.label} className="flex flex-col items-center gap-0.5">
+              <p.icon
+                size={12}
+                className="transition-colors duration-300"
+                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
+              />
+              <span
+                className="text-[7px] transition-colors duration-300"
+                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
+              >
+                {p.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -282,7 +209,7 @@ const ProductDemoSection = () => {
         <div className="grid lg:grid-cols-[auto_1fr] gap-12 lg:gap-16 items-start">
           {/* SVG Phone — left */}
           <div
-            className="flex justify-center transition-all duration-700 animate-[float_6s_ease-in-out_infinite]"
+            className="flex justify-center transition-all duration-700"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "scale(1)" : "scale(0.95)",
@@ -349,7 +276,7 @@ const ProductDemoSection = () => {
                   <div
                     className="transition-all duration-500 ease-in-out overflow-hidden"
                     style={{
-                      maxHeight: isExpanded ? `${p.features.length * 44 + 24}px` : "0px",
+                      maxHeight: isExpanded ? `${p.features.length * 52 + 40}px` : "0px",
                       opacity: isExpanded ? 1 : 0,
                     }}
                   >
