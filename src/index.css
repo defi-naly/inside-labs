@@ -76,3 +76,8 @@
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+@keyframes phone-glow {
+  0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+  50% { opacity: 0.6; transform: translateX(100%); }
+}

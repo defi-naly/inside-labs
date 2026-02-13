@@ -9,6 +9,7 @@ const pillarsData = [
     label: "For You",
     desc: "All the information you need to plan your adventure.",
     screenColor: "hsl(355 85% 50%)",
+    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-explore/m.jpg",
     features: [
       { icon: Bell, text: "Destination announcements (dashboard & push alerts)" },
       { icon: Utensils, text: "Gastro info, menus, opening times & bookables" },
@@ -23,6 +24,7 @@ const pillarsData = [
     icon: Radio,
     label: "Live",
     desc: "Real-time data & periodic updates of resort operations & conditions.",
+    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-live/m.jpg",
     screenColor: "hsl(200 80% 50%)",
     features: [
       { icon: CloudSun, text: "Webcams, weather and snow reports" },
@@ -36,6 +38,7 @@ const pillarsData = [
     icon: ShoppingBag,
     label: "Shop",
     desc: "A powerful mobile storefront — browse, book, and buy in a few taps.",
+    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-shop/m.jpg",
     screenColor: "hsl(30 90% 50%)",
     features: [
       { icon: Ticket, text: "Lift tickets, equipment rentals and parking passes" },
@@ -50,6 +53,7 @@ const pillarsData = [
     icon: Gamepad2,
     label: "Play",
     desc: "Gamification and community features that keep guests engaged.",
+    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-play/m.jpg",
     screenColor: "hsl(280 70% 55%)",
     features: [
       { icon: Timer, text: "My Story — season, daily recaps & performance tracking" },
@@ -63,6 +67,7 @@ const pillarsData = [
     icon: Wallet,
     label: "Wallet",
     desc: "Manage tickets, guestcards, payments and loyalty — all in one place.",
+    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-me/m.jpg",
     screenColor: "hsl(160 60% 45%)",
     features: [
       { icon: Ticket, text: "Upcoming tickets — railway, admission, guestcard offers all in one place" },
@@ -85,13 +90,20 @@ const stats = [
 const PhoneFrame = ({ activeIndex }: { activeIndex: number }) => {
   const pillar = pillarsData[activeIndex];
 
-  return (
-    <div className="relative mx-auto w-[280px] lg:w-[320px]">
+  const phoneContent = (isReflection = false) => (
+    <div className={cn("relative mx-auto w-[300px] lg:w-[360px]", isReflection && "pointer-events-none")}>
       {/* Phone body SVG */}
-      <svg viewBox="0 0 320 650" className="w-full h-auto drop-shadow-[0_25px_80px_rgba(225,29,72,0.1)]">
-        {/* Outer frame */}
+      <svg viewBox="0 0 320 650" className="w-full h-auto">
+        {/* Outer frame with edge highlight */}
+        <defs>
+          <linearGradient id="edgeHighlight" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.03)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+        </defs>
         <rect x="2" y="2" width="316" height="646" rx="44" ry="44"
-          fill="none" stroke="hsl(230 10% 20%)" strokeWidth="2"
+          fill="none" stroke="url(#edgeHighlight)" strokeWidth="2"
         />
         {/* Phone body */}
         <rect x="4" y="4" width="312" height="642" rx="42" ry="42"
@@ -113,75 +125,83 @@ const PhoneFrame = ({ activeIndex }: { activeIndex: number }) => {
         <rect x="-2" y="230" width="4" height="50" rx="2" fill="hsl(230 10% 15%)" />
       </svg>
 
-      {/* Screen content — positioned inside the phone */}
+      {/* Screen content — real screenshots with crossfade */}
       <div
-        className="absolute inset-0 flex flex-col overflow-hidden transition-all duration-500"
+        className="absolute overflow-hidden"
         style={{
-          top: "3.8%",
-          left: "5.6%",
-          right: "5.6%",
-          bottom: "3.8%",
-          borderRadius: "32px",
+          top: "1.85%",
+          left: "3.75%",
+          right: "3.75%",
+          bottom: "1.85%",
+          borderRadius: "36px",
         }}
       >
-        {/* Status bar */}
-        <div className="flex items-center justify-between px-6 pt-4 pb-2">
-          <span className="text-[9px] font-semibold text-white/70">9:41</span>
-          <div className="flex items-center gap-1">
-            <div className="h-1.5 w-1.5 rounded-full bg-white/50" />
-            <div className="h-1.5 w-1.5 rounded-full bg-white/50" />
-            <div className="h-1.5 w-3 rounded-full bg-white/50" />
+        {/* All screenshots stacked for crossfade */}
+        {pillarsData.map((p, i) => (
+          <img
+            key={p.label}
+            src={p.screenImage}
+            alt={`${p.label} screen`}
+            className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500"
+            style={{ opacity: i === activeIndex ? 1 : 0 }}
+          />
+        ))}
+
+        {/* Bottom nav bar overlay */}
+        {!isReflection && (
+          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-4 py-3 border-t border-white/[0.06] bg-black/60 backdrop-blur-md">
+            {pillarsData.map((p, i) => (
+              <div key={p.label} className="flex flex-col items-center gap-0.5">
+                <p.icon
+                  size={12}
+                  className="transition-colors duration-300"
+                  style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
+                />
+                <span
+                  className="text-[7px] transition-colors duration-300"
+                  style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
+                >
+                  {p.label}
+                </span>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
+      </div>
 
-        {/* Header area with gradient */}
-        <div
-          className="px-5 pt-8 pb-6 transition-all duration-500"
-          style={{
-            background: `linear-gradient(180deg, ${pillar.screenColor}30 0%, transparent 100%)`,
-          }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <pillar.icon size={16} className="text-white" />
-            <span className="text-xs font-bold text-white tracking-wide">{pillar.label}</span>
-          </div>
-          <p className="text-[10px] text-white/60 leading-relaxed">{pillar.desc}</p>
-        </div>
+      {/* Ambient glow sweep */}
+      <div
+        className="absolute inset-0 rounded-[44px] overflow-hidden pointer-events-none"
+        style={{ animation: "phone-glow 4s ease-in-out infinite" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
+      </div>
+    </div>
+  );
 
-        {/* Feature list */}
-        <div className="flex-1 px-4 space-y-1.5 overflow-hidden">
-          {pillar.features.slice(0, 5).map((f, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] px-3 py-2 transition-all duration-300"
-              style={{
-                animationDelay: `${i * 60}ms`,
-              }}
-            >
-              <f.icon size={11} style={{ color: pillar.screenColor }} className="shrink-0" />
-              <span className="text-[9px] text-white/80 leading-tight truncate">{f.text}</span>
-            </div>
-          ))}
-        </div>
+  return (
+    <div style={{ perspective: "1200px" }}>
+      {/* 3D tilted phone */}
+      <div
+        style={{
+          transform: "rotateY(-8deg) rotateX(3deg)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {phoneContent()}
+      </div>
 
-        {/* Bottom nav bar */}
-        <div className="flex items-center justify-around px-4 py-3 border-t border-white/[0.06] bg-black/40 backdrop-blur-sm mt-auto">
-          {pillarsData.map((p, i) => (
-            <div key={p.label} className="flex flex-col items-center gap-0.5">
-              <p.icon
-                size={12}
-                className="transition-colors duration-300"
-                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-              />
-              <span
-                className="text-[7px] transition-colors duration-300"
-                style={{ color: i === activeIndex ? pillar.screenColor : "rgba(255,255,255,0.3)" }}
-              >
-                {p.label}
-              </span>
-            </div>
-          ))}
-        </div>
+      {/* Floor reflection */}
+      <div
+        className="mt-[-20px] opacity-20 blur-[2px]"
+        style={{
+          transform: "rotateY(-8deg) rotateX(3deg) scaleY(-0.3)",
+          transformStyle: "preserve-3d",
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 60%)",
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 60%)",
+        }}
+      >
+        {phoneContent(true)}
       </div>
     </div>
   );
