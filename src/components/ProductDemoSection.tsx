@@ -1,7 +1,6 @@
-import { Compass, Radio, ShoppingBag, Gamepad2, Wallet } from "lucide-react";
+import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 import usp3 from "@/assets/usp-3.png";
-import usp4 from "@/assets/usp-4.png";
-import usp5 from "@/assets/usp-5.png";
 
 const pillars = [
   { icon: Compass, label: "For You", desc: "Personalized guides, trails & destination info" },
@@ -11,59 +10,149 @@ const pillars = [
   { icon: Wallet, label: "Wallet", desc: "Digital guestcard, loyalty & payments" },
 ];
 
+const stats = [
+  { icon: Star, value: "4.9", label: "App Store Rating", suffix: "★" },
+  { icon: Download, value: "200k+", label: "Downloads" },
+  { icon: Users, value: "62%", label: "Adoption Rate" },
+  { icon: Award, value: "#1", label: "Tourism App CH" },
+];
+
 const ProductDemoSection = () => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-32 lg:py-40 px-6 border-t border-border/40">
+    <section ref={ref} className="py-32 lg:py-40 px-6 border-t border-border/40">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-4">
-            The Omni App
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl mb-4">
-            For You. Live. Shop. Play. Wallet.
+        <div className="text-center mb-16">
+          <span className="inline-block mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+            Featuring the Omni App
+          </span>
+          <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-6">
+            The key to your resort.
           </h2>
-          <p className="mx-auto max-w-xl text-base text-muted-foreground">
-            A white-label native app that becomes the key to your resort —
-            configured to your destination's goals and your guests' needs.
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+            A white-label native app for iOS & Android that becomes the digital
+            heartbeat of your destination — personalized, data-driven, and loved
+            by guests.
           </p>
         </div>
 
-        {/* Pillars */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-20">
-          {pillars.map((p) => {
-            const Icon = p.icon;
+        {/* Stats bar */}
+        <div
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-3xl mx-auto transition-all duration-700"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+          }}
+        >
+          {stats.map((s, i) => {
+            const Icon = s.icon;
             return (
-              <div key={p.label} className="text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card">
-                  <Icon size={20} className="text-primary" />
-                </div>
-                <p className="text-sm font-semibold text-foreground mb-1">{p.label}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">{p.desc}</p>
+              <div
+                key={s.label}
+                className="text-center rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm px-4 py-5 transition-all duration-500"
+                style={{
+                  transitionDelay: `${i * 100}ms`,
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(16px)",
+                }}
+              >
+                <Icon size={16} className="mx-auto mb-2 text-primary" />
+                <p className="text-2xl font-bold text-foreground">{s.value}<span className="text-primary">{s.suffix || ""}</span></p>
+                <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
               </div>
             );
           })}
         </div>
 
-        {/* App screenshots */}
-        <div className="relative flex items-center justify-center gap-6 lg:gap-10">
-          <div className="w-1/3 max-w-[240px] rounded-2xl border border-border overflow-hidden shadow-xl shadow-primary/5 -rotate-3 translate-y-4">
-            <img src={usp5} alt="Omni App — communication" className="w-full h-auto" />
-          </div>
-          <div className="w-1/3 max-w-[280px] rounded-2xl border border-primary/20 overflow-hidden shadow-2xl shadow-primary/10 z-10 scale-105">
-            <img src={usp3} alt="Omni App — explore" className="w-full h-auto" />
-          </div>
-          <div className="w-1/3 max-w-[240px] rounded-2xl border border-border overflow-hidden shadow-xl shadow-primary/5 rotate-3 translate-y-4">
-            <img src={usp4} alt="Omni App — membership" className="w-full h-auto" />
+        {/* Main layout: app image + pillars */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Single hero app image */}
+          <div
+            className="relative flex items-center justify-center transition-all duration-700"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)",
+              transitionDelay: "200ms",
+            }}
+          >
+            <div className="relative w-full max-w-[320px] mx-auto">
+              <div className="rounded-3xl border border-border/40 overflow-hidden shadow-2xl shadow-primary/10">
+                <img
+                  src={usp3}
+                  alt="Omni App — Explore screen"
+                  className="w-full h-auto animate-[float_6s_ease-in-out_infinite]"
+                />
+              </div>
+              {/* Glow behind */}
+              <div
+                className="pointer-events-none absolute -inset-12 -z-10 rounded-full"
+                style={{
+                  background: "radial-gradient(ellipse at 50% 50%, hsl(355 85% 40% / 0.08), transparent 70%)",
+                }}
+              />
+            </div>
           </div>
 
-          {/* Glow behind */}
-          <div
-            className="pointer-events-none absolute -inset-16 -z-10 rounded-3xl"
-            style={{
-              background: "radial-gradient(ellipse at 50% 60%, hsl(355 85% 40% / 0.06), transparent 70%)",
-            }}
-          />
+          {/* Pillars list */}
+          <div className="space-y-5">
+            {pillars.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <div
+                  key={p.label}
+                  className="flex items-start gap-4 rounded-xl border border-border/40 bg-card/30 px-5 py-4 transition-all duration-500 hover:border-primary/20 hover:bg-card/60"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateX(0)" : "translateX(24px)",
+                    transitionDelay: `${300 + i * 100}ms`,
+                  }}
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-card">
+                    <Icon size={18} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground mb-0.5">{p.label}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* App store badges */}
+            <div
+              className="flex items-center gap-3 pt-4 transition-all duration-500"
+              style={{
+                opacity: visible ? 1 : 0,
+                transitionDelay: "800ms",
+              }}
+            >
+              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                <Star size={12} className="text-primary fill-primary" />
+                <span className="font-semibold text-foreground">4.9</span> on App Store
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                <Star size={12} className="text-primary fill-primary" />
+                <span className="font-semibold text-foreground">4.7</span> on Google Play
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
