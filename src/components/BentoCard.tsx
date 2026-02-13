@@ -41,54 +41,42 @@ const BentoCard = ({
       ref={ref}
       onClick={onClick}
       className={cn(
-        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border transition-all duration-500 ease-out",
+        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border/60 transition-all duration-500 ease-out min-h-[340px] lg:min-h-[400px]",
         "hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-[3px]",
         visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
         className
       )}
-      style={{
-        background: "linear-gradient(165deg, hsl(230 15% 6%) 0%, hsl(230 20% 4%) 50%, hsl(230 15% 5%) 100%)",
-      }}
     >
-      {/* Subtle red gradient mesh inside */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          background: `radial-gradient(ellipse at 70% 30%, ${accentColor}, transparent 70%)`,
-        }}
-      />
-
-      {/* Expand icon */}
-      <div className="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card/80 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30">
-        <ArrowUpRight size={14} className="text-secondary transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
-      </div>
-
-      {/* Text */}
-      <div className="relative z-10 px-7 pt-7 pb-3">
-        <h3 className="text-lg font-bold leading-snug text-foreground lg:text-xl pr-10">
-          {headline}
-        </h3>
-      </div>
-
-      {/* Image */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{
-          background: `linear-gradient(160deg, ${accentColor}08, ${accentColor}18)`,
-        }}
-      >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            background: `radial-gradient(ellipse at 80% 30%, ${accentColor}25, transparent 70%)`,
-          }}
-        />
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0">
         <img
           src={image}
           alt={headline}
-          className="relative z-10 mx-auto h-auto w-full max-w-[85%] object-contain pt-4 pb-2 transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover object-center animate-[float_6s_ease-in-out_infinite]"
           loading="lazy"
+          style={{ animationDelay: `${delay * 3}ms` }}
         />
+        {/* Dark gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+        {/* Accent glow */}
+        <div
+          className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
+          style={{
+            background: `radial-gradient(ellipse at 50% 50%, ${accentColor}, transparent 70%)`,
+          }}
+        />
+      </div>
+
+      {/* Expand icon */}
+      <div className="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-black/40 backdrop-blur-md transition-all duration-300 group-hover:border-primary/40 group-hover:bg-black/60">
+        <ArrowUpRight size={14} className="text-white/70 transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
+      </div>
+
+      {/* Text at bottom */}
+      <div className="relative z-10 flex h-full flex-col justify-end px-7 pb-7 pt-7">
+        <h3 className="text-lg font-bold leading-snug text-white lg:text-xl max-w-[85%] drop-shadow-lg">
+          {headline}
+        </h3>
       </div>
     </div>
   );
