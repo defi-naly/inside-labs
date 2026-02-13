@@ -1,0 +1,51 @@
+{
+  "sage-ai-braze-tools-review": {
+    "title": "Sage AI — Experiences with Braze's AI Tools",
+    "excerpt": "A hands-on review of four Braze Sage AI features: Intelligence Suite, Predictive Suite, Copywriting Assistant, and Image Generator.",
+    "body": [
+      { "type": "paragraph", "text": "AI-powered marketing tools promise to transform how we create and optimize campaigns. But how well do they actually work in practice? As a Digital Campaign Creator at Inside Labs, I've spent several months working with Braze's Sage AI tools across our destination clients. Here's an honest assessment of what works, what's promising, and what still needs improvement." },
+      { "type": "heading", "level": 2, "text": "1. Intelligence Suite" },
+      { "type": "paragraph", "text": "The Intelligence Suite is the most mature and valuable component of Sage AI. It includes Intelligent Timing (sending messages when each individual user is most likely to engage), Intelligent Channel (automatically selecting the best channel per user), and Intelligent Selection for A/B testing (automatically allocating more traffic to winning variants)." },
+      { "type": "paragraph", "text": "In our experience, Intelligent Timing alone has measurably improved open rates and click-through rates across campaigns. The ability to optimize send times per user — rather than choosing a single send time for an entire audience — is a genuine step forward for campaign performance." },
+      { "type": "heading", "level": 2, "text": "2. Predictive Suite" },
+      { "type": "paragraph", "text": "The Predictive Suite offers two main capabilities: predicting churn risk and predicting purchase likelihood. Both models analyze user behavior patterns to score each user on their probability of churning or making a purchase in a defined time window." },
+      { "type": "paragraph", "text": "These predictions are useful for segmentation — for example, creating targeted win-back campaigns for users with high churn risk, or exclusive upsell offers for users with high purchase intent. The accuracy improves over time as the models learn from more data." },
+      { "type": "heading", "level": 2, "text": "3. Copywriting Assistant" },
+      { "type": "paragraph", "text": "The Copywriting Assistant uses GPT to generate message copy based on prompts. It can produce subject lines, push notification text, and email body content. While it's a useful starting point for drafting, the output typically requires significant editing to match brand voice and ensure accuracy — particularly for tourism-specific content and multilingual campaigns." },
+      { "type": "heading", "level": 2, "text": "4. Image Generator" },
+      { "type": "paragraph", "text": "The Image Generator, powered by DALL-E 2, creates images from text prompts. In its current state, it's the least practical tool for our use case. Generated images rarely meet the quality standards needed for destination marketing, where authentic photography of real places and experiences is essential." },
+      { "type": "heading", "level": 2, "text": "Overall Assessment" },
+      { "type": "callout", "text": "The Intelligence Suite is highly valuable and delivers measurable results today. The Predictive Suite is promising and improves with more data. The Copywriting Assistant and Image Generator are still emerging — useful for ideation but not yet reliable enough for production use in tourism marketing." }
+    ]
+  },
+  "product-roadmap-update-january-2023": {
+    "title": "Product Roadmap Update — January 2023",
+    "excerpt": "A look back at H2 2022 milestones and a preview of what's coming in 2023: e-commerce, live page redesign, analytics, and Membership 4.0.",
+    "body": [
+      { "type": "paragraph", "text": "As we begin the new year, it's time for an update on where the Omni Suite stands and where we're headed. 2022 was a year of significant platform expansion, and 2023 will build on that foundation with major new capabilities across e-commerce, content, analytics, and membership." },
+      { "type": "heading", "level": 2, "text": "H2 2022 Milestones" },
+      { "type": "paragraph", "text": "The second half of 2022 delivered several foundational platform capabilities that set the stage for what's coming next:" },
+      { "type": "list", "items": [
+        "Multi-channel content hub — a unified system for managing content across app, web, and digital signage",
+        "App theming — customizable visual identity per destination, enabling true white-label experiences",
+        "Multi-tenant setup — infrastructure for serving multiple destinations from a shared platform",
+        "Email marketing integration — bringing email into the Omni Suite's campaign orchestration capabilities",
+        "Omni Competence Center — a dedicated support and enablement resource for destination teams"
+      ]},
+      { "type": "heading", "level": 2, "text": "2023 Focus Areas" },
+      { "type": "paragraph", "text": "Building on these foundations, our 2023 roadmap focuses on six major areas:" },
+      { "type": "heading", "level": 3, "text": "E-Commerce (Cariboo)" },
+      { "type": "paragraph", "text": "Our e-commerce engine, Cariboo, will receive major upgrades to support more product types, improved checkout flows, and deeper integration with destination inventory systems." },
+      { "type": "heading", "level": 3, "text": "Live Page Redesign" },
+      { "type": "paragraph", "text": "The Live section — showing real-time conditions, lift status, and facility information — is getting a complete UX overhaul to make it more intuitive and visually compelling." },
+      { "type": "heading", "level": 3, "text": "Analytics" },
+      { "type": "paragraph", "text": "Expanded analytics capabilities will give destination teams better visibility into guest behavior, campaign performance, and revenue attribution." },
+      { "type": "heading", "level": 3, "text": "Membership 4.0" },
+      { "type": "paragraph", "text": "The next generation of our membership system will introduce more flexible tier structures, improved rewards management, and better tools for driving member engagement and retention." },
+      { "type": "heading", "level": 3, "text": "Wallet, Notifications & Profile" },
+      { "type": "paragraph", "text": "Enhancements to the guest's personal area — their wallet for tickets and passes, notification center, and profile management — to create a more cohesive and useful experience." },
+      { "type": "heading", "level": 3, "text": "Personalization" },
+      { "type": "paragraph", "text": "Deeper personalization capabilities across the platform, from content recommendations to product suggestions, powered by improved guest profiling and behavioral data." }
+    ]
+  }
+}

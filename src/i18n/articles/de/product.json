@@ -1,0 +1,51 @@
+{
+  "sage-ai-braze-tools-review": {
+    "title": "Sage AI — Erfahrungen mit den AI Tools von Braze",
+    "excerpt": "Ein Praxisbericht zu vier Braze Sage AI Features: Intelligence Suite, Predictive Suite, Copywriting Assistant und Image Generator.",
+    "body": [
+      { "type": "paragraph", "text": "KI-gestützte Marketing-Tools versprechen, die Art und Weise zu transformieren, wie wir Kampagnen erstellen und optimieren. Aber wie gut funktionieren sie in der Praxis? Als Digital Campaign Creator bei Inside Labs habe ich mehrere Monate mit den Sage AI Tools von Braze bei unseren Destinationskunden gearbeitet. Hier ist eine ehrliche Einschätzung dessen, was funktioniert, was vielversprechend ist und was noch verbessert werden muss." },
+      { "type": "heading", "level": 2, "text": "1. Intelligence Suite" },
+      { "type": "paragraph", "text": "Die Intelligence Suite ist die ausgereifteste und wertvollste Komponente von Sage AI. Sie umfasst Intelligent Timing (Nachrichten senden, wenn der einzelne Nutzer am wahrscheinlichsten reagiert), Intelligent Channel (automatische Auswahl des besten Kanals pro Nutzer) und Intelligent Selection für A/B-Testing (automatische Zuweisung von mehr Traffic an gewinnende Varianten)." },
+      { "type": "paragraph", "text": "In unserer Erfahrung hat allein Intelligent Timing die Öffnungsraten und Klickraten über Kampagnen hinweg messbar verbessert. Die Möglichkeit, Sendezeiten pro Nutzer zu optimieren — statt eine einzige Sendezeit für eine gesamte Zielgruppe zu wählen — ist ein echter Fortschritt für die Kampagnenperformance." },
+      { "type": "heading", "level": 2, "text": "2. Predictive Suite" },
+      { "type": "paragraph", "text": "Die Predictive Suite bietet zwei Hauptfunktionen: Vorhersage des Abwanderungsrisikos und der Kaufwahrscheinlichkeit. Beide Modelle analysieren Nutzerverhaltens-Muster, um jeden Nutzer nach seiner Wahrscheinlichkeit für Abwanderung oder Kauf in einem definierten Zeitfenster zu bewerten." },
+      { "type": "paragraph", "text": "Diese Vorhersagen sind nützlich für die Segmentierung — zum Beispiel die Erstellung gezielter Win-Back-Kampagnen für Nutzer mit hohem Abwanderungsrisiko oder exklusive Upsell-Angebote für Nutzer mit hoher Kaufabsicht. Die Genauigkeit verbessert sich im Laufe der Zeit, da die Modelle aus mehr Daten lernen." },
+      { "type": "heading", "level": 2, "text": "3. Copywriting Assistant" },
+      { "type": "paragraph", "text": "Der Copywriting Assistant nutzt GPT, um Nachrichtentexte basierend auf Prompts zu generieren. Er kann Betreffzeilen, Push-Benachrichtigungstexte und E-Mail-Inhalte erstellen. Als Ausgangspunkt für Entwürfe ist er nützlich, aber die Ergebnisse erfordern typischerweise erhebliche Überarbeitung, um zur Markenstimme zu passen und Genauigkeit sicherzustellen — besonders bei tourismusspezifischen Inhalten und mehrsprachigen Kampagnen." },
+      { "type": "heading", "level": 2, "text": "4. Image Generator" },
+      { "type": "paragraph", "text": "Der Image Generator, angetrieben von DALL-E 2, erstellt Bilder aus Textprompts. In seinem aktuellen Zustand ist er das am wenigsten praktische Tool für unseren Anwendungsfall. Generierte Bilder erfüllen selten die Qualitätsstandards, die für Destinationsmarketing nötig sind, wo authentische Fotografie von realen Orten und Erlebnissen unerlässlich ist." },
+      { "type": "heading", "level": 2, "text": "Gesamtbewertung" },
+      { "type": "callout", "text": "Die Intelligence Suite ist sehr wertvoll und liefert heute messbare Ergebnisse. Die Predictive Suite ist vielversprechend und verbessert sich mit mehr Daten. Der Copywriting Assistant und Image Generator befinden sich noch im Frühstadium — nützlich für Ideenfindung, aber noch nicht zuverlässig genug für den Produktiveinsatz im Tourismusmarketing." }
+    ]
+  },
+  "product-roadmap-update-january-2023": {
+    "title": "Product Roadmap Update — Januar 2023",
+    "excerpt": "Ein Rückblick auf die Meilensteine im H2 2022 und ein Ausblick auf 2023: E-Commerce, Live-Page-Redesign, Analytics und Membership 4.0.",
+    "body": [
+      { "type": "paragraph", "text": "Zum Jahresbeginn ist es Zeit für ein Update, wo die Omni Suite steht und wohin die Reise geht. 2022 war ein Jahr bedeutender Plattformerweiterung, und 2023 wird auf diesem Fundament mit grossen neuen Fähigkeiten in E-Commerce, Content, Analytics und Membership aufbauen." },
+      { "type": "heading", "level": 2, "text": "Meilensteine H2 2022" },
+      { "type": "paragraph", "text": "Die zweite Hälfte von 2022 lieferte mehrere grundlegende Plattformfähigkeiten, die die Bühne für das Kommende bereiten:" },
+      { "type": "list", "items": [
+        "Multi-Channel Content Hub — ein einheitliches System zur Verwaltung von Inhalten über App, Web und Digital Signage",
+        "App Theming — anpassbare visuelle Identität pro Destination für echte White-Label-Erlebnisse",
+        "Multi-Tenant Setup — Infrastruktur zur Bedienung mehrerer Destinationen über eine gemeinsame Plattform",
+        "E-Mail-Marketing-Integration — Einbindung von E-Mail in die Kampagnenorchestrierung der Omni Suite",
+        "Omni Competence Center — eine dedizierte Support- und Befähigungsressource für Destinationsteams"
+      ]},
+      { "type": "heading", "level": 2, "text": "Fokusthemen 2023" },
+      { "type": "paragraph", "text": "Aufbauend auf diesen Grundlagen konzentriert sich unsere 2023-Roadmap auf sechs grosse Bereiche:" },
+      { "type": "heading", "level": 3, "text": "E-Commerce (Cariboo)" },
+      { "type": "paragraph", "text": "Unsere E-Commerce-Engine Cariboo wird grössere Upgrades erhalten, um mehr Produkttypen, verbesserte Checkout-Flows und eine tiefere Integration mit den Bestandssystemen der Destinationen zu unterstützen." },
+      { "type": "heading", "level": 3, "text": "Live-Page-Redesign" },
+      { "type": "paragraph", "text": "Der Live-Bereich — mit Echtzeitbedingungen, Liftstatus und Einrichtungsinformationen — erhält eine komplette UX-Überarbeitung, um ihn intuitiver und visuell ansprechender zu gestalten." },
+      { "type": "heading", "level": 3, "text": "Analytics" },
+      { "type": "paragraph", "text": "Erweiterte Analytics-Fähigkeiten werden Destinationsteams bessere Einblicke in Gästeverhalten, Kampagnenperformance und Umsatzattribution geben." },
+      { "type": "heading", "level": 3, "text": "Membership 4.0" },
+      { "type": "paragraph", "text": "Die nächste Generation unseres Mitgliedschaftssystems wird flexiblere Stufenstrukturen, verbessertes Belohnungsmanagement und bessere Tools zur Förderung von Mitglieder-Engagement und -Bindung einführen." },
+      { "type": "heading", "level": 3, "text": "Wallet, Benachrichtigungen & Profil" },
+      { "type": "paragraph", "text": "Verbesserungen im persönlichen Bereich des Gastes — Wallet für Tickets und Pässe, Benachrichtigungscenter und Profilverwaltung — für ein kohärenteres und nützlicheres Erlebnis." },
+      { "type": "heading", "level": 3, "text": "Personalisierung" },
+      { "type": "paragraph", "text": "Tiefere Personalisierungsfähigkeiten über die gesamte Plattform, von Inhaltsempfehlungen bis zu Produktvorschlägen, angetrieben durch verbessertes Gästeprofiling und Verhaltensdaten." }
+    ]
+  }
+}

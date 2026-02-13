@@ -1,24 +1,27 @@
 import logo from "@/assets/logo.svg";
-
-const footerLinks = {
-  Product: [
-    { label: "Omni Suite", href: "/omni-suite" },
-    { label: "Omni App", href: "/omni-app" },
-    { label: "Pricing", href: "/pricing" },
-  ],
-  Company: [
-    { label: "About", href: "/about" },
-    { label: "Career", href: "/career" },
-    { label: "Contact", href: "/contact" },
-  ],
-  Resources: [
-    { label: "Case Studies", href: "/case-studies" },
-    { label: "Blog", href: "/blog" },
-    { label: "Subscribe", href: "/subscribe" },
-  ],
-};
+import { useTranslation } from "@/i18n";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const footerLinks = {
+    [t("footer.sections.product")]: [
+      { label: t("footer.links.omniSuite"), href: "/product" },
+      { label: t("footer.links.omniApp"), href: "/product" },
+      { label: t("nav.bookDemo"), href: "/demo" },
+    ],
+    [t("footer.sections.company")]: [
+      { label: t("footer.links.about"), href: "/about" },
+      { label: t("footer.links.career"), href: "/about" },
+      { label: t("nav.bookDemo"), href: "/demo" },
+    ],
+    [t("footer.sections.resources")]: [
+      { label: t("footer.links.caseStudies"), href: "/use-cases" },
+      { label: t("footer.links.insights"), href: "/insights" },
+      { label: t("footer.links.subscribe"), href: "/subscribe" },
+    ],
+  };
+
   return (
     <footer className="border-t border-border/40 bg-background">
       <div className="mx-auto max-w-7xl px-6 py-16">
@@ -26,7 +29,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <img src={logo} alt="Inside Labs" className="mb-4 h-10 brightness-0 invert" />
             <p className="text-sm leading-relaxed text-secondary max-w-xs">
-              Engage with Intelligence. Tourism's leading data-driven customer engagement platform.
+              {t("footer.tagline")}
             </p>
           </div>
 
@@ -51,12 +54,12 @@ const Footer = () => {
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/40 pt-8 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Inside Labs AG. All rights reserved.
+            © {new Date().getFullYear()} {t("footer.copyright")}
           </p>
           <div className="flex gap-6">
-            <a href="/privacy" className="text-xs text-muted-foreground transition-colors hover:text-foreground">Privacy</a>
-            <a href="/terms" className="text-xs text-muted-foreground transition-colors hover:text-foreground">Terms</a>
-            <a href="/imprint" className="text-xs text-muted-foreground transition-colors hover:text-foreground">Imprint</a>
+            <a href="/privacy" className="text-xs text-muted-foreground transition-colors hover:text-foreground">{t("footer.privacy")}</a>
+            <a href="/terms" className="text-xs text-muted-foreground transition-colors hover:text-foreground">{t("footer.terms")}</a>
+            <a href="/imprint" className="text-xs text-muted-foreground transition-colors hover:text-foreground">{t("footer.imprint")}</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,614 @@
+{
+  "nav": {
+    "product": "Plattform",
+    "useCases": "Case Studies",
+    "about": "Über uns",
+    "insights": "Insights",
+    "bookDemo": "Demo anfragen"
+  },
+  "hero": {
+    "eyebrow": "Inside Labs",
+    "headline": "Engage with",
+    "headlineAccent": "Intelligence.",
+    "subtitle": "Verwandle anonyme Besucher in loyale Gäste.",
+    "logoBar": "Die führenden alpinen Destinationen Europas vertrauen auf uns"
+  },
+  "problemSolution": {
+    "eyebrow": "Das Upgrade",
+    "headline": "Verwandle jeden Touchpoint",
+    "headlineBr": "in einen bedeutungsvollen Moment.",
+    "subtitle": "Erlebe, was sich ändert, wenn du fragmentierte Tools durch eine einheitliche Engagement-Plattform ersetzt.",
+    "toggleOff": "Herkömmliche Tools",
+    "toggleOn": "Omni Suite",
+    "rows": [
+      {
+        "pain": "Fragmentierte Gästedaten in isolierten Systemen",
+        "solution": "Einheitliche Gästeprofile über alle Kanäle",
+        "statLabel": "Wiederholbesuche"
+      },
+      {
+        "pain": "Manuelle Einheitskampagnen per E-Mail",
+        "solution": "KI-gesteuerte Personalisierung über E-Mail, Push, SMS und In-App",
+        "statLabel": "Zustellrate"
+      },
+      {
+        "pain": "Keine native App für deine Destination",
+        "solution": "White-Label-App mit Mobile Commerce und Geo-Fencing",
+        "statLabel": "App-Nutzer"
+      },
+      {
+        "pain": "Keine Mitgliedschafts- oder Loyalitätsprogramme",
+        "solution": "Mitgliedschafts- & Loyalitätsprogramme mit Gamification",
+        "statLabel": "Erneuerungsrate"
+      },
+      {
+        "pain": "Einfacher E-Commerce auf nur einem Kanal",
+        "solution": "Integrierter E-Commerce mit Omni-Channel-Kommunikation",
+        "statLabel": "Umsatzsteigerung"
+      }
+    ],
+    "proofStats": [
+      { "label": "Destinationen live" },
+      { "label": "App-Downloads" },
+      { "label": "Ø App-Bewertung" }
+    ],
+    "cta": "So funktioniert's"
+  },
+  "socialProof": {
+    "eyebrow": "Bewiesene Resultate",
+    "headline": "Resultate, die für sich sprechen.",
+    "clients": [
+      { "category": "Mobile Commerce" },
+      { "category": "Digitaler Begleiter" },
+      { "category": "Gamification" },
+      { "category": "Digitale Transformation" }
+    ],
+    "clientStats": {
+      "laax": [
+        { "label": "App-Nutzer" },
+        { "label": "Umsatzsteigerung" },
+        { "label": "Umsatz (CHF)" }
+      ],
+      "zermatt": [
+        { "label": "Downloads" },
+        { "label": "Interaktionen" },
+        { "label": "App-Bewertung" }
+      ],
+      "bikekingdom": [
+        { "label": "Downloads" },
+        { "label": "Conversion" },
+        { "label": "Täglich aktiv" }
+      ],
+      "engadin": [
+        { "label": "Teilprojekte" },
+        { "label": "Gäste-CRM" },
+        { "label": "CMS-Migration" }
+      ]
+    },
+    "quotes": [
+      {
+        "text": "Die LAAX App ist die Plattform, die es uns ermöglicht, wirklich kundenorientiert zu werden und digitale Umsätze im grossen Stil zu generieren.",
+        "role": "CEO & Präsident, WAG"
+      },
+      {
+        "text": "Das digitale Gästeerlebnis entspricht jetzt der Weltklasse-Qualität unserer Berginfrastruktur.",
+        "role": "CEO, Zermatt Bergbahnen"
+      },
+      {
+        "text": "Eine einzigartige Symbiose zwischen der realen und digitalen Welt für jeden Mountainbiker.",
+        "role": "VP, Lenzerheide Marketing"
+      },
+      {
+        "text": "Schritt für Schritt können wir das digitale Kundenerlebnis personalisierter gestalten als je zuvor.",
+        "role": "Leiter Digitalmanagement, ESTM"
+      }
+    ]
+  },
+  "productDemo": {
+    "eyebrow": "Die Omni App",
+    "headline": "Der Schlüssel zu deinem Resort.",
+    "subtitle": "Eine White-Label-App für iOS & Android, die zum digitalen Herzstück deiner Destination wird — personalisiert, datengetrieben und geliebt von Gästen.",
+    "stats": [
+      { "label": "App Store Bewertung" },
+      { "label": "Downloads" },
+      { "label": "Adoptionsrate" },
+      { "label": "Tourismus-App CH" }
+    ],
+    "basedOn": "Basierend auf der Inside LAAX App — LAAX Resort, Schweiz",
+    "pillars": [
+      {
+        "label": "Für dich",
+        "desc": "Alle Informationen, die du für dein Abenteuer brauchst. Von Restaurants bis Wanderwege — alles personalisiert auf deinen Aufenthalt.",
+        "features": [
+          "Destinationsankündigungen & Push-Benachrichtigungen",
+          "Gastronomie-Infos, Speisekarten & buchbare Erlebnisse",
+          "Kuratierte Inhalte — Aktivitäts- & Tagesguides",
+          "Wander- & Biketrails, News & Events",
+          "Digitale Gästekarte, Angebote & Fahrpläne"
+        ]
+      },
+      {
+        "label": "Live",
+        "desc": "Echtzeitdaten & regelmässige Updates zum Betrieb und den Bedingungen im Resort.",
+        "features": [
+          "Webcams, Wetter- und Schneeberichte",
+          "Liftbetriebsstatus",
+          "Kartenbasierter Pisten- & Trailstatus nach Saison",
+          "Einrichtungsstatus — Restaurants, Cafés & Seen",
+          "Bergsicherheitsfunktionen"
+        ]
+      },
+      {
+        "label": "Shop",
+        "desc": "Ein leistungsstarker mobiler Shop — durchsuchen, buchen und kaufen in wenigen Klicks.",
+        "features": [
+          "Lifttickets, Verleih & Parkpässe",
+          "Erlebnisse, geführte Touren & Shuttletickets",
+          "Prämieneinlösungen & exklusive Angebote",
+          "F&B-Bestellungen & Tischreservierungen",
+          "Markenmerchandise & Eventtickets"
+        ]
+      },
+      {
+        "label": "Play",
+        "desc": "Gamification und Community-Features, die Gäste bei Laune halten.",
+        "features": [
+          "My Story — Rückblicke & Performance-Tracking",
+          "Ranglisten — Echtzeit- & Saisonrankings",
+          "Challenges & GEO-basierte Aktivitäten",
+          "Freunde & Destinations-Community-Features",
+          "Belohnungen, Erfolge & Abzeichen"
+        ]
+      },
+      {
+        "label": "Wallet",
+        "desc": "Verwalte Tickets, Gästekarten, Zahlungen und Loyalität — alles an einem Ort.",
+        "features": [
+          "Kommende Tickets — Bahn, Eintritt & Pässe",
+          "Digitale Gästekarten & Mitgliedschaften",
+          "Verwaltung von Gutscheinen & Coupons",
+          "Kreditkarten & Zahlungsmethoden verwalten",
+          "Loyalität — Punkte & Einlösungs-Tracking"
+        ]
+      }
+    ],
+    "onAppStore": "im App Store",
+    "onGooglePlay": "bei Google Play",
+    "appRatingsNote": "Inside LAAX App-Bewertungen"
+  },
+  "cta": {
+    "headline": "Bereit für intelligentes Engagement?",
+    "subtitle": "Entdecke, wie Inside Labs dein Gäste-Engagement transformieren kann. Erhalte eine personalisierte Demo mit deinen eigenen Daten.",
+    "primary": "Demo mit deinen Daten",
+    "secondary": "Pläne vergleichen"
+  },
+  "footer": {
+    "tagline": "Engage with Intelligence. Die führende datengetriebene Customer Engagement Plattform für den Tourismus.",
+    "sections": {
+      "product": "Produkt",
+      "company": "Unternehmen",
+      "resources": "Ressourcen"
+    },
+    "links": {
+      "omniSuite": "Omni Suite",
+      "omniApp": "Omni App",
+      "pricing": "Preise",
+      "about": "Über uns",
+      "career": "Karriere",
+      "contact": "Kontakt",
+      "caseStudies": "Case Studies",
+      "insights": "Insights",
+      "blog": "Blog",
+      "subscribe": "Newsletter"
+    },
+    "copyright": "Inside Labs AG. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "imprint": "Impressum"
+  },
+  "clients": {
+    "heading": "Die führenden alpinen Destinationen Europas"
+  },
+  "omniSuite": {
+    "title": "Die Omni Suite",
+    "tabs": [
+      {
+        "label": "Kenne deine Gäste",
+        "badge": "FEATURE",
+        "headline": "Kenne deine Gäste",
+        "body1": "Erstelle einheitliche Gästeprofile, die jede Interaktion verbinden — vom ersten Website-Besuch bis zum Kauf am Berg — in einer einzigen, umsetzbaren Ansicht.",
+        "body2": "Automatisierte Segmentierung und prädiktives Scoring zeigen deine wertvollsten Gäste und die entscheidenden Momente.",
+        "bullets": [
+          "Einheitliche Gästeprofile über alle Kanäle",
+          "Automatisiertes Journey Mapping & Segmentierung",
+          "Prädiktives Engagement-Scoring",
+          "Echtzeit-Verhaltenstrigger"
+        ],
+        "stats": [
+          { "label": "Wiederbesuchsrate" },
+          { "label": "Gästezufriedenheit" },
+          { "label": "höherer Lifetime Value" }
+        ]
+      },
+      {
+        "label": "Erreiche sie persönlich",
+        "badge": "FEATURE",
+        "headline": "Erreiche sie persönlich",
+        "body1": "Liefere die richtige Botschaft, auf dem richtigen Kanal, im richtigen Moment — powered by KI, die lernt, worauf jeder Gast reagiert.",
+        "body2": "Orchestriere E-Mail, Push, SMS und In-App-Nachrichten von einem Ort mit integrierter Mehrsprachigkeit.",
+        "bullets": [
+          "KI-gesteuerte Nachrichtenoptimierung",
+          "Intelligente Kanalauswahl pro Nutzer",
+          "Mehrsprachige Content-Erstellung",
+          "Echtzeit-Performance-Analytics"
+        ],
+        "stats": [
+          { "label": "Zustellrate" },
+          { "label": "Öffnungsrate vs. Branche" },
+          { "label": "Klickrate" }
+        ]
+      },
+      {
+        "label": "Steigere Umsätze",
+        "badge": "FEATURE",
+        "headline": "Steigere Umsätze",
+        "body1": "Verwandle jeden Touchpoint in eine Umsatzchance mit KI-gesteuerten Kampagnen, die Timing, Kanal und Angebot automatisch optimieren.",
+        "body2": "Echtzeit-Attribution zeigt genau, welche Kampagnen Buchungen generieren, damit du auf Bewährtes setzt.",
+        "bullets": [
+          "Kanalübergreifende Kampagnenorchestrierung",
+          "Dynamische Zielgruppensegmentierung",
+          "A/B-Testing mit automatischer Optimierung",
+          "Umsatzattributions-Tracking"
+        ],
+        "stats": [
+          { "label": "Conversion-Steigerung" },
+          { "label": "betrügerische Streitfälle" },
+          { "label": "Umsatzsteigerung" }
+        ]
+      },
+      {
+        "label": "Bringe sie zurück",
+        "badge": "FEATURE",
+        "headline": "Bringe sie zurück",
+        "body1": "Gestalte Mitgliedschaftsprogramme mit Stufen und intelligenten Belohnungen, die Gäste Saison für Saison engagiert halten.",
+        "body2": "Automatische Stufenprogression und personalisierte Vorteile machen Einmalbesucher zu lebenslangen Fans.",
+        "bullets": [
+          "Flexible Stufenstrukturen & Belohnungen",
+          "Punkte, Vergünstigungen & exklusiver Zugang",
+          "Automatische Stufenprogression",
+          "Mitglieder-Analytics-Dashboard"
+        ],
+        "stats": [
+          { "label": "Mitglieder-Ausgabensteigerung" },
+          { "label": "Erneuerungsrate" },
+          { "label": "Engagement-Boost" }
+        ]
+      }
+    ],
+    "trustedBy": "Vertraut von",
+    "destinations": "6 Destinationen",
+    "guests": "Gäste",
+    "rated": "bewertet",
+    "dashboard": {
+      "guestJourneyFunnel": "Gäste-Journey-Funnel",
+      "weeklyEngagement": "Wöchentliche Engagement-Heatmap",
+      "revenueByChannel": "Umsatz nach Kanal",
+      "conversionRate": "Conversion-Rate",
+      "membershipTiers": "Mitgliedschaftsstufen",
+      "renewalRate": "Erneuerungsrate",
+      "channelPerformance": "Kanalperformance",
+      "stages": ["Awareness", "Interesse", "Buchung", "Besuch", "Loyalität"],
+      "days": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+      "less": "Weniger",
+      "more": "Mehr",
+      "channels": ["Push", "E-Mail", "In-App", "SMS"],
+      "tableHeaders": { "channel": "Kanal", "sent": "Gesendet", "opened": "Geöffnet", "ctr": "CTR" },
+      "delivery": "Zustellung",
+      "messagesSent": "Nachrichten gesendet",
+      "avgOpenRate": "Ø Öffnungsrate",
+      "vsIndustry": "vs. Branche",
+      "totalMembers": "Gesamtmitglieder",
+      "revenueRetention": "Umsatzbindung",
+      "vsLastSeason": "+8% ggü. letzter Saison",
+      "annualRenewal": "jährliche Erneuerung",
+      "tiers": ["Bronze", "Silber", "Gold", "Platin"]
+    }
+  },
+  "omniComparison": {
+    "eyebrow": "Die Omni Suite",
+    "headline": "Einfach starten. Aussergewöhnlich skalieren.",
+    "subtitle": "Jede Stufe baut auf der vorherigen auf — wähle, wo du heute stehst, und wachse, wenn du bereit bist.",
+    "featureHeader": "Feature",
+    "features": ["Kampagnen", "Mobile App", "CRM / CDP", "Gamification", "Loyalität"],
+    "products": [
+      {
+        "name": "Omni Engage",
+        "tier": "Basis",
+        "tagline": "Verwandle Gästedaten in zielgerichtete Kampagnen, die konvertieren.",
+        "description": "Setze über 20 bewährte Kampagnen für Aktivierung, Monetarisierung und Bindung ein — basierend auf deinen E-Commerce-Daten.",
+        "features": [
+          "Wähle aus über 20 bewährten Kampagnen",
+          "Mache E-Commerce-Daten nutzbar",
+          "Gewinne wertvolle Dateneinblicke",
+          "Dynamische Nachrichten in der Buchungsmaschine",
+          "Erstelle, verfolge & aktiviere wertvolle Segmente"
+        ]
+      },
+      {
+        "name": "Omni Explore",
+        "tier": "Professional",
+        "tagline": "Eine White-Label-App und vollständige Kundendatenplattform.",
+        "description": "Kombiniere eine native Mobile App mit fortschrittlichem CRM, digitalen Mitgliedschaften und KI-Personalisierung für nachhaltige Gästebeziehungen.",
+        "badge": "Beliebteste Wahl",
+        "includes": "Alles aus Engage, plus:",
+        "features": [
+          "Multi-Channel-Automatisierung (App, E-Mail, Web, SMS, WhatsApp)",
+          "Kuratiere ein personalisiertes App-Erlebnis",
+          "Verkaufe jedes Produkt in deinem Katalog nativ",
+          "Up-/Cross-Selling basierend auf 500+ Datenpunkten",
+          "Starte attraktive Mitgliedschaftsprogramme",
+          "Koordiniere Inhalte über alle Kanäle"
+        ]
+      },
+      {
+        "name": "Omni Endeavour",
+        "tier": "Enterprise",
+        "tagline": "Gamification, Loyalität und grenzenloser Daten-Streaming.",
+        "description": "Schalte die volle Plattform frei mit grenzenlosem Daten-Streaming, individuellen Loyalitätsprogrammen und ausgefeilter Gamification.",
+        "includes": "Alles aus Explore, plus:",
+        "features": [
+          "Ausgefeilte Loyalitätsprogramme",
+          "Gamification-Mechanismen & Challenges",
+          "Streame alle Daten in deine Systeme",
+          "Personalisierte Belohnungen & Erfolge",
+          "Individuelle Integrationen & API-Zugang"
+        ]
+      }
+    ],
+    "requestDemo": "Demo anfragen",
+    "trustedBy": "Von 6 Destinationen weltweit genutzt"
+  },
+  "impact": {
+    "stats": [
+      { "label": "App-Downloads insgesamt" },
+      { "label": "Destinationen live" },
+      { "label": "Mobiler Umsatz" },
+      { "label": "Ø App-Bewertung" }
+    ]
+  },
+  "caseStudyCard": {
+    "readMore": "Zur vollständigen Story"
+  },
+  "caseStudies": {
+    "laax": {
+      "category": "Mobile Commerce & Gamification",
+      "story": "LAAX hat sich von einem traditionellen Skigebiet zu einer digital-nativen Destinationserfahrung gewandelt. Die Inside LAAX App wurde zum zentralen Touchpoint für Tickets, Verleih, Loyalität und Echtzeit-Bergbedingungen — mit einer 300%igen Steigerung des Online-Umsatzes.",
+      "bullets": [
+        "White-Label-App mit integriertem Ticketing und Mobile Commerce",
+        "Gamification-Ebene mit Challenges, Ranglisten und Loyalitätsbelohnungen",
+        "Echtzeit-Liftstatus, Schneeberichte und personalisierte Push-Benachrichtigungen",
+        "50% aller Ticketverkäufe auf In-App-Käufe migriert"
+      ],
+      "stats": [
+        { "label": "Aktive App-Nutzer" },
+        { "label": "Online-Umsatzsteigerung" },
+        { "label": "Umsatz (CHF)" }
+      ],
+      "quote": "Die LAAX App ist die Plattform, die es uns ermöglicht, wirklich kundenorientiert zu werden und digitale Umsätze im grossen Stil zu generieren."
+    },
+    "zermatt": {
+      "category": "Digitaler Gästebegleiter",
+      "story": "Zermatt Bergbahnen brauchte einen digitalen Begleiter, der dem Matterhorn würdig ist. Das Ergebnis: eine native App mit Live-Liftstatus, Pistenbedingungen und personalisierter Guest Journey — mit 116k Downloads und über 2,6 Millionen Interaktionen in den ersten Saisons.",
+      "bullets": [
+        "Live-Lift- und Pistenstatus mit Echtzeit-Bergdaten",
+        "Interaktive Trailkarten mit GPS-Tracking und Höhenprofilen",
+        "Personalisierte Empfehlungen basierend auf Können und Wetter",
+        "Mehrsprachiger Support für Zermatts internationales Publikum"
+      ],
+      "stats": [
+        { "label": "App-Downloads" },
+        { "label": "Gästeinteraktionen" },
+        { "label": "App-Store-Bewertung" }
+      ],
+      "quote": "Das digitale Gästeerlebnis entspricht jetzt der Weltklasse-Qualität unserer Berginfrastruktur."
+    },
+    "estm": {
+      "category": "Digitale Transformation",
+      "story": "Engadin St. Moritz startete eine umfassende digitale Transformation mit sechs vernetzten Teilprojekten — von einem Headless CMS für alle digitalen Touchpoints bis zu einem 360°-CRM, das Gästedaten über Buchungen, Aktivitäten und Kommunikation vereint.",
+      "bullets": [
+        "Headless-CMS-Architektur für Web, App und Digital Signage",
+        "Einheitliches 360°-Gäste-CRM mit Daten aus allen Kanälen",
+        "Multi-Destinations-Content-Hub für Subregionen und Partner",
+        "Integrierte Commerce-Ebene für Events, Erlebnisse und Pakete"
+      ],
+      "stats": [
+        { "label": "Teilprojekte umgesetzt" },
+        { "label": "Gäste-CRM-Ansicht" },
+        { "label": "Headless-CMS-Migration" }
+      ],
+      "quote": "Schritt für Schritt können wir das digitale Kundenerlebnis personalisierter gestalten als je zuvor."
+    },
+    "bikekingdom": {
+      "category": "Gamification & Sporttechnologie",
+      "story": "Bike Kingdom hat die Lenzerheide in eine gamifizierte Mountainbike-Destination verwandelt. Fahrer sammeln XP auf Trails, treten in Ranglisten an und schalten Belohnungen frei — mit einer 10,2% E-Commerce-Conversion-Rate und einer loyalen Community von über 40'000 Nutzern.",
+      "bullets": [
+        "Trail-Gamification mit XP, Abzeichen und saisonalen Challenges",
+        "GPS-getrackte Fahrten mit automatischem Segment-Timing und Ranglisten",
+        "Integrierter E-Commerce für Tagespässe, Bikeverleih und Ausrüstung",
+        "Community-Features zum Vernetzen und Teilen von Trail-Bedingungen"
+      ],
+      "stats": [
+        { "label": "App-Downloads" },
+        { "label": "Täglich aktive Nutzer" },
+        { "label": "Conversion-Rate" }
+      ],
+      "quote": "Eine einzigartige Symbiose zwischen der realen und digitalen Welt für jeden Mountainbiker."
+    },
+    "schwyz": {
+      "category": "Daten & Analytics",
+      "story": "Schwyz Tourismus hat gemeinsam mit Inside Labs eine regionenübergreifende Analytics-Plattform in vier Phasen aufgebaut — von der KPI-Definition und Datenintegration bis zu automatisierten Dashboards, die die Leistungsmessung im Tourismus grundlegend verändert haben.",
+      "bullets": [
+        "Regionenübergreifendes KPI-Framework für diverse Tourismus-Stakeholder",
+        "Automatisierte Dashboards mit Daten aus über 12 Quellen",
+        "Phasenweiser Rollout für Adoption auf jeder Organisationsebene",
+        "Prädiktive Modelle für Besucherströme und saisonale Nachfrageplanung"
+      ],
+      "stats": [
+        { "label": "Umsetzungsphasen" },
+        { "label": "KPI-Dashboards" },
+        { "label": "Datenbasierte Entscheidungen" }
+      ],
+      "quote": "Das Dashboard schafft eine datenbasierte Grundlage für wegweisende Entscheidungen in unserer gesamten Region."
+    },
+    "surselva": {
+      "category": "Regionale Gästeplattform",
+      "story": "mia SURSELVA hat eine regionale Gästeplattform geschaffen, die die gesamte Region Surselva unter einem digitalen Erlebnis vereint — eine Gästekarte mit integrierten Vorteilen, ein Entdeckungs-Feed für Aktivitäten und ein Shop, der Besucher mit lokalen Partnern verbindet.",
+      "bullets": [
+        "Digitale Gästekarte mit automatischer Aktivierung bei Check-in",
+        "Integrierter regionaler Shop für Aktivitäten, Transport und Erlebnisse",
+        "Entdeckungs-Feed mit personalisierten Empfehlungen nach Standort und Interesse",
+        "Mitgliedschaftssystem mit Stufen für wiederkehrende Besucher in der Region"
+      ],
+      "stats": [
+        { "label": "Einheitliche Gästekarte" },
+        { "label": "Partnerintegrationen" },
+        { "label": "Digitaler Concierge" }
+      ],
+      "quote": "Mit den technologischen Möglichkeiten der Omni Suite haben wir ein innovatives digitales Ökosystem für die gesamte Region aufgebaut."
+    }
+  },
+  "awards": [
+    "Best of Swiss Apps — Gold Design",
+    "Best of Swiss Apps — Gold Business",
+    "MILESTONE Award Innovation",
+    "Swiss Marketing Trophy",
+    "Swiss Mountain Award"
+  ],
+  "statsHero": [
+    { "label": "Jahre gemeinsame Tourismuserfahrung" },
+    { "label": "Jährliche aktive App-Nutzer" },
+    { "label": "Jährlicher Umsatz über die Omni Suite" }
+  ],
+  "originStory": {
+    "eyebrow": "Unsere Geschichte",
+    "headline": "Geboren am Berg.",
+    "subtitle": "Wir haben Tourismussoftware nicht aus einem Büro heraus entwickelt. Wir haben sie auf den Pisten eines der grössten Skigebiete Europas gebaut — weil wir die Probleme selbst erlebt haben, die wir lösen wollten.",
+    "milestones": [
+      {
+        "title": "Das Problem",
+        "description": "Innerhalb der Weisse Arena Gruppe in LAAX waren die Gästesysteme fragmentiert — Ticketing, Gastronomie, Bergdaten — alles in Silos. Wir haben es jeden Tag hautnah erlebt."
+      },
+      {
+        "title": "Die Gründung",
+        "description": "Kristian Paasila, Daniel Medina und Reto Gurtner gründeten die Inside Labs AG. Die INSIDE LAAX App startete mit Live-Bergdaten, Lift-Ticketing und Mobile Ordering."
+      },
+      {
+        "title": "Bestätigung",
+        "description": "Top 10 im Schweizer App Store — vor Airbnb. Gold bei Best of Swiss Apps für Design und Business. Der Ansatz funktionierte."
+      },
+      {
+        "title": "Unabhängigkeit",
+        "description": "Ein Management-Buyout machte Inside Labs 100% team-owned. Gewinn des MILESTONE Awards für Innovation. Start der Omni Suite, um den Erfolg von LAAX auf jede Destination zu übertragen."
+      },
+      {
+        "title": "Skalierung",
+        "description": "Bike Kingdom. Zermatt. Engadin St. Moritz. mia Surselva. Schwyz. Sechs Destinationen live, 300k+ jährliche Nutzer, CHF 30M+ mobiler Umsatz. Die Plattform, die wir uns gewünscht hatten — jetzt im Einsatz in den Alpen."
+      }
+    ],
+    "readMore": "Die ganze Geschichte lesen"
+  },
+  "teamSection": {
+    "eyebrow": "Das Team",
+    "headline": "Tourismus in unserer DNA.",
+    "description": "Wir entwickeln nicht nur für den Tourismus — wir kommen aus dem Tourismus. Unser Team ist in einem der grössten Skigebiete Europas aufgewachsen, mit Tourismus tief in unserer DNA.",
+    "boardTitle": "Verwaltungsrat",
+    "roles": {
+      "kristianCeo": "CEO & Mitgründer",
+      "julian": "Head of Product",
+      "michael": "Head of Customer Success",
+      "jeremy": "Head of Tech",
+      "silvan": "Head of Sales & Marketing",
+      "vanessa": "Customer Success & Engagement",
+      "franziska": "Customer Success",
+      "kristianBoard": "Mitgründer & Verwaltungsratspräsident",
+      "daniel": "Mitgründer & Verwaltungsratsmitglied",
+      "rasmus": "Verwaltungsratsmitglied",
+      "jeanPhilippe": "Verwaltungsratsmitglied"
+    }
+  },
+  "pages": {
+    "product": {
+      "eyebrow": "Die Omni Suite",
+      "headline": "Eine Plattform. Jeder Gäste-Touchpoint.",
+      "subtitle": "Von der ersten Entdeckung bis zum loyalen Fan — kenne deine Gäste, erreiche sie persönlich, steigere Umsätze und bringe sie zurück."
+    },
+    "useCases": {
+      "eyebrow": "Client Stories",
+      "headline": "Die Destinationen, die es beweisen.",
+      "subtitle": "Von 200k App-Nutzern bis CHF 19M mobilem Umsatz — erlebe, wie Europas führende alpine Destinationen ihr Gästeerlebnis transformiert haben."
+    },
+    "about": {
+      "eyebrow": "Über uns",
+      "headline": "Gebaut auf den Pisten.",
+      "subtitle": "Von einem einzelnen Skigebiet zu sechs alpinen Destinationen."
+    }
+  },
+  "insights": {
+    "page": {
+      "eyebrow": "Wissenszentrum",
+      "headline": "Insights",
+      "subtitle": "Guides, Strategien, Interviews und Produkt-Updates vom Team hinter der fortschrittlichsten Engagement-Plattform im Tourismus.",
+      "allCategories": "Alle",
+      "readArticle": "Artikel lesen",
+      "loadMore": "Mehr laden",
+      "noResults": "Keine Artikel in dieser Kategorie gefunden.",
+      "relatedInsights": "Verwandte Insights"
+    },
+    "categories": {
+      "guides": "Guides & Frameworks",
+      "strategy": "Strategische Einblicke",
+      "interviews": "Interviews",
+      "product": "Produkt & Technik",
+      "industry": "Branchennews"
+    },
+    "roles": {
+      "ceoCofounder": "CEO & Mitgründer",
+      "headProduct": "Head of Product",
+      "headTech": "Head of Tech",
+      "headSales": "Head of Sales & Marketing",
+      "digitalCampaignCreator": "Digital Campaign Creator",
+      "managingPartner": "Managing Partner & Product Lead",
+      "scientificProjectLead": "Scientific Project Lead, FH Graubünden",
+      "doctoralResearcher": "Doktorandin, Universität Lausanne"
+    }
+  },
+  "demo": {
+    "eyebrow": "Loslegen",
+    "headline": "Erlebe die Omni Suite in Aktion.",
+    "subtitle": "Erhalte eine personalisierte Demo mit den Daten deiner Destination. Unser Team zeigt dir, wie die Plattform funktioniert — und was sie für dich leisten kann.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Dein vollständiger Name",
+      "email": "Geschäftliche E-Mail",
+      "emailPlaceholder": "name@destination.com",
+      "company": "Unternehmen / Destination",
+      "companyPlaceholder": "z.B. Zermatt Bergbahnen",
+      "message": "Gibt es etwas, das wir vorbereiten sollen?",
+      "messagePlaceholder": "Optional — erzähle uns von deinen Zielen oder Fragen",
+      "submit": "Demo anfragen",
+      "privacy": "Wir teilen deine Daten niemals. Antwort innerhalb von 1 Werktag.",
+      "successHeadline": "Wir haben deine Anfrage erhalten!",
+      "successMessage": "Unser Team meldet sich innerhalb eines Werktags, um deine personalisierte Demo zu vereinbaren.",
+      "errorMessage": "Etwas ist schiefgegangen. Bitte versuche es erneut oder schreibe uns direkt."
+    },
+    "proof": {
+      "headline": "Vertraut von Europas führenden Destinationen",
+      "stats": [
+        { "value": "6", "label": "Destinationen live" },
+        { "value": "300k+", "label": "Jährliche App-Nutzer" },
+        { "value": "CHF 30M+", "label": "Mobiler Umsatz" },
+        { "value": "4.9★", "label": "App-Store-Bewertung" }
+      ]
+    }
+  }
+}

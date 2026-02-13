@@ -1,0 +1,54 @@
+{
+  "data-driven-destination-marketing": {
+    "title": "The Path to a Data-Driven Destination Marketing Organisation",
+    "excerpt": "Six foundational pillars that transform a traditional DMO into a data-driven marketing organization — from goal definition to operating model.",
+    "body": [
+      { "type": "paragraph", "text": "Marketing without data is like driving with closed eyes. Yet many destination marketing organizations still rely heavily on intuition and tradition rather than data-driven decision-making. This article outlines the six foundational pillars that define the path from traditional destination marketing to a truly data-driven organization." },
+      { "type": "quote", "text": "Marketing without data is like driving with closed eyes.", "author": "Kristian Paasila", "role": "CEO & Co-Founder, Inside Labs" },
+      { "type": "heading", "level": 2, "text": "Pillar 1: Goal Definition" },
+      { "type": "paragraph", "text": "The foundation of any data-driven approach is clarity about what you want to achieve. Before collecting a single data point, destinations need to define their strategic marketing goals — from guest acquisition targets to revenue objectives and loyalty metrics. Goals must be specific, measurable, and aligned with the overall destination strategy." },
+      { "type": "heading", "level": 2, "text": "Pillar 2: Data Collection & Analysis" },
+      { "type": "paragraph", "text": "With goals defined, the next step is establishing the infrastructure for systematic data collection and analysis. This means moving beyond ad-hoc reporting to structured data pipelines that capture guest interactions across every touchpoint — website visits, app usage, bookings, on-site behavior, and post-visit engagement." },
+      { "type": "heading", "level": 2, "text": "Pillar 3: Marketing Tech Stack" },
+      { "type": "paragraph", "text": "A data-driven DMO needs the right tools. The marketing technology stack connects data collection to activation — enabling automated campaigns, personalized messaging, and real-time guest engagement. The key is integration: tools must work together as a unified system, not as disconnected point solutions." },
+      { "type": "heading", "level": 2, "text": "Pillar 4: Campaigning & Engagement" },
+      { "type": "paragraph", "text": "Data and technology only create value when they drive action. This pillar focuses on translating data insights into concrete marketing campaigns and guest engagement initiatives. Data-driven campaigning means moving from seasonal, one-size-fits-all communication to continuous, personalized interactions triggered by guest behavior and context." },
+      { "type": "heading", "level": 2, "text": "Pillar 5: Reporting & Continuous Learning" },
+      { "type": "paragraph", "text": "A data-driven organization measures everything it does and learns from the results. Robust reporting infrastructure — from campaign performance dashboards to guest lifetime value tracking — creates the feedback loops necessary for continuous improvement. Every campaign becomes an opportunity to learn and optimize." },
+      { "type": "heading", "level": 2, "text": "Pillar 6: Operating Model, Roles & Skills" },
+      { "type": "paragraph", "text": "Becoming data-driven is ultimately an organizational transformation, not just a technology upgrade. This final pillar addresses the human side: the new roles required (data analysts, campaign managers, CRM specialists), the skills teams need to develop, and the operating model that makes data-driven marketing sustainable over time." },
+      { "type": "heading", "level": 2, "text": "Practical Recommendations" },
+      { "type": "list", "items": [
+        "Start with a clear assessment of your current data maturity and capability gaps",
+        "Invest in a unified data foundation before scaling marketing automation",
+        "Build cross-functional teams that combine marketing creativity with data expertise",
+        "Adopt an iterative approach — start small, measure results, and expand what works"
+      ]}
+    ]
+  },
+  "people-as-drivers-of-digital-change": {
+    "title": "People as Drivers of Digital Change",
+    "excerpt": "Digital transformation is driven by people, not technology. Three key areas — change management, new competencies, and operating models — define success.",
+    "body": [
+      { "type": "paragraph", "text": "The central thesis is clear: digital transformation in tourism is driven by people, not by technology. While many organizations focus their transformation efforts on selecting the right software or implementing new systems, the real determining factor for success lies in the people who use, manage, and champion these tools every day." },
+      { "type": "heading", "level": 2, "text": "Change Management" },
+      { "type": "paragraph", "text": "The first key area is change management. Digital transformation requires organizations to fundamentally rethink established processes, responsibilities, and ways of working. This doesn't happen naturally — it requires deliberate change management that addresses both the rational and emotional dimensions of transformation." },
+      { "type": "paragraph", "text": "Successful change management in tourism organizations means communicating a clear vision for the digital future, involving team members early in the transformation process, addressing fears and resistance openly, and celebrating early wins to build momentum." },
+      { "type": "heading", "level": 2, "text": "New Competencies and Responsibilities" },
+      { "type": "paragraph", "text": "Digital transformation demands new skill sets that many traditional tourism organizations do not yet possess. The article identifies eight key digital skill areas that organizations need to develop or acquire to succeed in the digital transformation journey." },
+      { "type": "list", "items": [
+        "Data literacy — the ability to collect, analyze, and act on data",
+        "Digital marketing — beyond traditional channels to automated, personalized campaigns",
+        "Content creation — producing engaging digital content for multiple platforms",
+        "Technology management — understanding and managing digital tools and platforms",
+        "User experience design — creating intuitive digital guest interactions",
+        "Project management — managing agile, iterative digital projects",
+        "Analytics & reporting — measuring performance and deriving actionable insights",
+        "Customer relationship management — building and maintaining digital guest relationships"
+      ]},
+      { "type": "heading", "level": 2, "text": "Operating Model" },
+      { "type": "paragraph", "text": "The third key area addresses the operating model. How should a digitally transformed tourism organization be structured? Traditional hierarchical models often create silos that hinder the cross-functional collaboration required for effective digital guest engagement. The article argues for more agile, team-based structures that bring together marketing, technology, and operations." },
+      { "type": "callout", "text": "Technology is the enabler, but people are the drivers. Organizations that invest in their teams' digital skills and create supportive operating models will outperform those that focus on technology alone." }
+    ]
+  }
+}

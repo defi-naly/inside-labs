@@ -1,0 +1,53 @@
+{
+  "interview-mauro-gotsch-data-strategies": {
+    "title": "5 Fragen, 5 Antworten: Datenstrategien im Tourismus",
+    "excerpt": "Dr. Mauro Gotsch von der FH Graubünden teilt Forschungserkenntnisse darüber, warum Datenstrategien für Tourismusdestinationen entscheidend sind.",
+    "body": [
+      { "type": "paragraph", "text": "Datenstrategien werden für Tourismusdestinationen unverzichtbar, doch viele Organisationen tun sich schwer damit, wo sie anfangen sollen. Wir sprachen mit Dr. Mauro Gotsch, wissenschaftlicher Projektleiter an der Fachhochschule Graubünden (FH Graubünden), über seine Forschungserkenntnisse zu Datenstrategien im Tourismus — und was Destinationen wissen müssen." },
+      { "type": "heading", "level": 2, "text": "Was haben Ihre Forschungsergebnisse über Datenstrategien im Tourismus ergeben?" },
+      { "type": "quote", "text": "Unsere Forschung zeigt, dass die Kluft zwischen Destinationen, die eine strukturierte Datenstrategie haben, und jenen, die keine haben, schnell wächst. Destinationen mit klaren Datenstrategien sind nicht nur effizienter in ihrem Marketing — sie liefern auch deutlich bessere Gästeerlebnisse.", "author": "Dr. Mauro Gotsch", "role": "Scientific Project Lead, FH Graubünden" },
+      { "type": "heading", "level": 2, "text": "Warum ist eine Datenstrategie so wichtig?" },
+      { "type": "paragraph", "text": "Dr. Gotsch identifiziert drei zentrale Herausforderungen, die eine Datenstrategie für moderne Tourismusorganisationen unverzichtbar machen:" },
+      { "type": "list", "items": [
+        "Die Gästeerwartungen an personalisierte Erlebnisse steigen weiter und erfordern datengestützte Erkenntnisse",
+        "Die Wettbewerbslandschaft wird zunehmend durch digitale Fähigkeiten definiert",
+        "Ressourcen sind begrenzt — Daten helfen Destinationen, Budgets dort einzusetzen, wo sie die grösste Wirkung erzielen"
+      ]},
+      { "type": "heading", "level": 2, "text": "Wie hängen KI und Datenstrategie zusammen?" },
+      { "type": "paragraph", "text": "Dr. Gotsch betont, dass KI nur so gut ist wie die Daten, auf denen sie aufbaut. Ohne eine solide Datenstrategie werden KI-Initiativen keine bedeutsamen Ergebnisse liefern. Er empfiehlt Destinationen, eine North Star Metric zu definieren — einen einzigen Schlüsselindikator, der alle Datenerhebungs- und KI-Bestrebungen auf ein gemeinsames Ziel ausrichtet." },
+      { "type": "heading", "level": 2, "text": "Was sind die grössten Herausforderungen beim Aufbau einer Datenstrategie?" },
+      { "type": "paragraph", "text": "Laut Dr. Gotschs Forschung definieren fünf Schlüsselkomponenten eine erfolgreiche Tourismus-Datenstrategie:" },
+      { "type": "list", "items": [
+        "Klare Zieldefinition, abgestimmt auf die strategischen Ziele der Destination",
+        "Systematische Datenerhebung über alle relevanten Gäste-Touchpoints",
+        "Eine einheitliche Dateninfrastruktur, die Silos zwischen Systemen aufbricht",
+        "Organisatorische Kompetenz — die richtigen Menschen mit den richtigen Fähigkeiten",
+        "Eine Kultur der datengestützten Entscheidungsfindung auf allen Ebenen"
+      ]},
+      { "type": "heading", "level": 2, "text": "Welche Rolle spielt das Tourism Trendforum?" },
+      { "type": "paragraph", "text": "Dr. Gotsch hebt das Tourism Trendforum als wichtige Plattform für den Wissensaustausch zwischen Wissenschaft und Tourismusbranche hervor. Die Veranstaltung bringt Forschende, Destinationsmanager und Technologieanbieter zusammen, um die neuesten Entwicklungen in Datenstrategie, digitaler Transformation und Gäste-Engagement zu diskutieren." }
+    ]
+  },
+  "interview-annika-aebli-gamification": {
+    "title": "Gamification im Tourismus: Wie spielerische Technologien das Gästeerlebnis verbessern",
+    "excerpt": "Forscherin Annika Aebli über intrinsische Motivationen, Ranglisten und das grösste Missverständnis über Gamification im Tourismus.",
+    "body": [
+      { "type": "paragraph", "text": "Gamification wird zunehmend als Instrument zur Verbesserung des Tourismuserlebnisses erforscht. Aber was sagt die Forschung tatsächlich? Wir sprachen mit Annika Aebli, Doktorandin an der Universität Lausanne, darüber, wie spielerische Technologien das Gästeerlebnis verbessern können — und wo die Fallstricke liegen." },
+      { "type": "heading", "level": 2, "text": "Was ist Gamification im Kontext des Tourismus?" },
+      { "type": "quote", "text": "Gamification im Tourismus bedeutet, Spielelemente — wie Punkte, Challenges, Ranglisten und Belohnungen — in spielfremden Kontexten anzuwenden, um das Gästeerlebnis zu verbessern. Es geht darum, den Besuch spannender, einprägsamer und unterhaltsamer zu machen und gleichzeitig Wert für die Destination zu schaffen.", "author": "Annika Aebli", "role": "Doktorandin, Universität Lausanne" },
+      { "type": "heading", "level": 2, "text": "Was zeigt die Forschung über Gamification und Gästeerlebnis?" },
+      { "type": "paragraph", "text": "Aeblis Forschung zeigt, dass die effektivsten Gamification-Ansätze intrinsische Motivationen ansprechen — den natürlichen Wunsch des Gastes nach Entdeckung, Leistung und sozialer Verbundenheit. Extrinsische Belohnungen wie Rabatte können anfängliches Engagement fördern, aber nachhaltige Teilnahme hängt von tieferen Motivationstreibern ab." },
+      { "type": "list", "items": [
+        "Intrinsische Motivationen (Neugier, Meisterschaft, soziale Zugehörigkeit) treiben langfristiges Engagement",
+        "Ranglisten sind besonders effektiv für wettbewerbsorientierte Gästesegmente",
+        "Leistungsdokumentation (den eigenen Fortschritt verfolgen) spricht ein breiteres Publikum an",
+        "Die Kombination aus individuellen und sozialen Spielelementen funktioniert am besten"
+      ]},
+      { "type": "heading", "level": 2, "text": "Welchen Nutzen können Destinationen erwarten?" },
+      { "type": "paragraph", "text": "Aebli verweist auf mehrere Vorteile: höheres Gäste-Engagement, längere Aufenthalte, mehr Wiederholungsbesuche und mehr Daten über Gästepräferenzen und -verhalten. Gamification schafft auch natürliche Touchpoints für Kommunikation — Erfolgsmeldungen, Challenge-Updates und Community-Interaktionen bieten allesamt Gelegenheiten für bedeutungsvolles Engagement." },
+      { "type": "heading", "level": 2, "text": "Was sind die Erfolgsfaktoren und Fallstricke?" },
+      { "type": "paragraph", "text": "Das grösste Missverständnis über Gamification ist laut Aebli, dass sie einfach als Ergänzung zu einem bestehenden Erlebnis eingeführt werden kann. Erfolgreiche Gamification erfordert eine tiefe Integration mit dem Kernangebot der Destination und ein gründliches Verständnis dessen, was die Zielgruppe motiviert." },
+      { "type": "quote", "text": "Der grösste Fehler, den Destinationen machen, ist zu glauben, Gamification könne einfach eingeführt werden. Es erfordert sorgfältiges Design, Integration mit dem realen Erlebnis und ein echtes Verständnis der Motivationen Ihrer Gäste.", "author": "Annika Aebli", "role": "Doktorandin, Universität Lausanne" }
+    ]
+  }
+}

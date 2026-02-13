@@ -1,0 +1,66 @@
+{
+  "digital-tourism-trend-radar-2024": {
+    "title": "Digital Tourism Trend Radar 2024",
+    "excerpt": "A survey of 80+ European tourism decision-makers reveals three focus areas shaping the future of digital guest engagement.",
+    "body": [
+      { "type": "paragraph", "text": "The Digital Tourism Trend Radar 2024 is a joint publication by Inside Labs and Visit Group. Based on a comprehensive survey of over 80 tourism decision-makers across Europe, the report identifies the key trends and priorities shaping the digital transformation of tourism destinations." },
+      { "type": "heading", "level": 2, "text": "Survey Methodology" },
+      { "type": "paragraph", "text": "Over 80 decision-makers from European tourism organizations participated in the study. Respondents represented a diverse mix of destination marketing organizations, mountain resorts, regional tourism boards, and hospitality groups. The survey examined current digital maturity levels, investment priorities, and strategic focus areas for the coming years." },
+      { "type": "heading", "level": 2, "text": "Focus Area 1: Understanding Guest Preferences and Behaviors" },
+      { "type": "paragraph", "text": "The first major theme emerging from the survey is the urgent need to better understand guest preferences and behaviors. Destinations recognize that building a comprehensive picture of who their guests are — what they search for, what they book, how they move through the destination — is the foundation for everything else." },
+      { "type": "list", "items": [
+        "Collecting and unifying guest data across touchpoints",
+        "Moving from anonymous traffic to known, authenticated profiles",
+        "Understanding the complete guest journey from inspiration to post-visit",
+        "Leveraging behavioral signals to anticipate needs"
+      ]},
+      { "type": "heading", "level": 2, "text": "Focus Area 2: Building Relationships Through Personalized Marketing" },
+      { "type": "paragraph", "text": "The second focus area is the shift from mass communication to personalized, relationship-based marketing. Destinations increasingly understand that generic newsletters and one-size-fits-all campaigns no longer meet guest expectations. The goal is to deliver the right message, on the right channel, at the right moment." },
+      { "type": "heading", "level": 2, "text": "Focus Area 3: Offering Customized Products to Increase Revenue" },
+      { "type": "paragraph", "text": "The third trend centers on revenue optimization through customized product offerings. Destinations that combine guest data with e-commerce capabilities can tailor product bundles, pricing, and upsell opportunities to individual guest profiles — significantly increasing conversion rates and average transaction values." },
+      { "type": "callout", "text": "The full Digital Tourism Trend Radar 2024 report is available for download in English and German. Contact Inside Labs or Visit Group for your copy." }
+    ]
+  },
+  "personalized-guest-experiences-guide": {
+    "title": "Personalized Guest Experiences and Greater Value Creation at Destinations",
+    "excerpt": "A practical guide featuring 16 campaign examples integrated along the customer journey — from inspiration to loyalty.",
+    "body": [
+      { "type": "paragraph", "text": "How can destinations create personalized guest experiences while increasing value creation? This guide provides a hands-on framework with 16 concrete campaign examples, each mapped to a specific stage of the customer journey. The focus is on actionable strategies that destinations can implement to strengthen guest relationships and drive revenue." },
+      { "type": "heading", "level": 2, "text": "The Customer Journey as a Framework" },
+      { "type": "paragraph", "text": "The guide is structured around the guest's complete journey with the destination — from the initial moment of inspiration, through planning and booking, the on-site experience, and finally post-visit engagement and loyalty building. Each phase presents unique opportunities for personalization and value creation." },
+      { "type": "heading", "level": 2, "text": "16 Campaign Examples" },
+      { "type": "paragraph", "text": "At the heart of the guide are 16 detailed campaign examples that demonstrate how destinations can implement personalized touchpoints at every stage. These are not theoretical concepts but proven approaches drawn from real destination implementations." },
+      { "type": "list", "items": [
+        "Inspiration phase: targeted content based on guest interests and past behavior",
+        "Planning phase: personalized recommendations and bundled product offers",
+        "Booking phase: dynamic pricing and contextual upselling",
+        "On-site phase: real-time, location-based messaging and activity suggestions",
+        "Post-visit phase: personalized follow-up campaigns and loyalty activation"
+      ]},
+      { "type": "heading", "level": 2, "text": "Personalization as a Value Driver" },
+      { "type": "paragraph", "text": "The guide demonstrates that personalization is not just about improving guest satisfaction — it directly drives measurable value creation. When destinations move from generic communication to individually tailored interactions, they see higher conversion rates, increased spend per guest, and stronger long-term loyalty." },
+      { "type": "callout", "text": "The full guide with all 16 campaign examples is available for download. It provides step-by-step implementation guidance for each campaign type." }
+    ]
+  },
+  "digital-maturity-destination-benchmark": {
+    "title": "Benchmarking Database for Digital Maturity of Destinations",
+    "excerpt": "A comprehensive research collaboration with the University of St. Gallen analyzing the digital maturity of European tourism destinations.",
+    "body": [
+      { "type": "paragraph", "text": "How digitally mature are European tourism destinations? In collaboration with the University of St. Gallen, Inside Labs AG has developed a comprehensive benchmarking database that provides the first systematic analysis of digital maturity across the tourism sector. The research offers destinations a structured framework to assess their own digital capabilities and identify areas for improvement." },
+      { "type": "heading", "level": 2, "text": "Research Partnership" },
+      { "type": "paragraph", "text": "This benchmarking initiative is the result of a research collaboration between Inside Labs AG and the University of St. Gallen (HSG). By combining Inside Labs' industry expertise and platform data with HSG's academic research methodology, the project bridges the gap between practical destination management and scientific analysis." },
+      { "type": "heading", "level": 2, "text": "What the Benchmark Measures" },
+      { "type": "paragraph", "text": "The benchmarking database evaluates destinations across multiple dimensions of digital maturity. It goes beyond simply measuring whether a destination has a website or an app — it assesses how deeply digital capabilities are integrated into the overall guest experience and business operations." },
+      { "type": "list", "items": [
+        "Digital guest touchpoints and their level of integration",
+        "Data infrastructure and the ability to build unified guest profiles",
+        "Personalization capabilities across marketing channels",
+        "E-commerce maturity and mobile commerce adoption",
+        "Organizational readiness and digital skill levels"
+      ]},
+      { "type": "heading", "level": 2, "text": "Value for Destinations" },
+      { "type": "paragraph", "text": "The benchmarking database enables destinations to objectively assess where they stand relative to their peers. Rather than relying on subjective assessments, destinations can use the framework to identify concrete gaps, prioritize investments, and track their digital maturity progress over time." },
+      { "type": "callout", "text": "The full benchmarking report with detailed methodology and destination-specific insights is available for download. Contact Inside Labs for access." }
+    ]
+  }
+}

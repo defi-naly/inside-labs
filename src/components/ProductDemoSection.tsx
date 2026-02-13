@@ -1,101 +1,51 @@
 import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award, Utensils, Map, Mountain, CloudSun, Ticket, Trophy, Medal, CreditCard, Bell, Bike, Timer, Gift } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/i18n";
 
-// Full feature data from insidelabs.tech/en/omni-app
-const pillarsData = [
-  {
-    icon: Compass,
-    label: "For You",
-    desc: "All the information you need to plan your adventure.",
-    screenColor: "hsl(355 85% 50%)",
-    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-explore/m.jpg",
-    features: [
-      { icon: Bell, text: "Destination announcements (dashboard & push alerts)" },
-      { icon: Utensils, text: "Gastro info, menus, opening times & bookables" },
-      { icon: Map, text: "Curated content — activity & full day guides" },
-      { icon: Bike, text: "Hiking & biking trails" },
-      { icon: Timer, text: "News & Events" },
-      { icon: Ticket, text: "Digital guestcard with promotions and special offers" },
-      { icon: Map, text: "Live point-to-point train/bus timetables" },
-    ],
-  },
-  {
-    icon: Radio,
-    label: "Live",
-    desc: "Real-time data & periodic updates of resort operations & conditions.",
-    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-live/m.jpg",
-    screenColor: "hsl(200 80% 50%)",
-    features: [
-      { icon: CloudSun, text: "Webcams, weather and snow reports" },
-      { icon: Mountain, text: "Lift operation status" },
-      { icon: Map, text: "Map-based slope status (winter) and trail status (summer)" },
-      { icon: Utensils, text: "Facility status (Restaurants, cafes, lakes etc)" },
-      { icon: Mountain, text: "Mountain safety functions" },
-    ],
-  },
-  {
-    icon: ShoppingBag,
-    label: "Shop",
-    desc: "A powerful mobile storefront — browse, book, and buy in a few taps.",
-    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-shop/m.jpg",
-    screenColor: "hsl(30 90% 50%)",
-    features: [
-      { icon: Ticket, text: "Lift tickets, equipment rentals and parking passes" },
-      { icon: Map, text: "Experiences, adventure packages, guided tours" },
-      { icon: Ticket, text: "Bus & shuttle tickets" },
-      { icon: Gift, text: "Rewards redemptions & exclusive offers" },
-      { icon: Utensils, text: "Food & Beverage ordering and dine-in reservations" },
-      { icon: ShoppingBag, text: "Branded merchandise & event tickets" },
-    ],
-  },
-  {
-    icon: Gamepad2,
-    label: "Play",
-    desc: "Gamification and community features that keep guests engaged.",
-    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-play/m.jpg",
-    screenColor: "hsl(280 70% 55%)",
-    features: [
-      { icon: Timer, text: "My Story — season, daily recaps & performance tracking" },
-      { icon: Trophy, text: "Leaderboards — real time, weekly, seasonal rankings" },
-      { icon: Map, text: "Challenges & GEO-based activities" },
-      { icon: Users, text: "Friends & destination community features" },
-      { icon: Medal, text: "Rewards & achievements, badge earning functionality" },
-    ],
-  },
-  {
-    icon: Wallet,
-    label: "Wallet",
-    desc: "Manage tickets, guestcards, payments and loyalty — all in one place.",
-    screenImage: "https://insidelabs.tech/images/2020/omni/theapp-me/m.jpg",
-    screenColor: "hsl(160 60% 45%)",
-    features: [
-      { icon: Ticket, text: "Upcoming tickets — railway, admission, guestcard offers all in one place" },
-      { icon: CreditCard, text: "Digital guest cards for overnight guests and memberships" },
-      { icon: Gift, text: "Management of vouchers & coupons" },
-      { icon: CreditCard, text: "Credit cards & payment methods management" },
-      { icon: Star, text: "Loyalty program — points balance & redemption tracking" },
-    ],
-  },
+const CYCLE_INTERVAL = 5000;
+const PAUSE_AFTER_CLICK = 10000;
+
+// Feature icons per pillar (not translated — icons stay the same)
+const pillarIcons = [
+  { icon: Compass, featureIcons: [Bell, Utensils, Map, Bike, Ticket] },
+  { icon: Radio, featureIcons: [CloudSun, Mountain, Map, Utensils, Mountain] },
+  { icon: ShoppingBag, featureIcons: [Ticket, Map, Gift, Utensils, ShoppingBag] },
+  { icon: Gamepad2, featureIcons: [Timer, Trophy, Map, Users, Medal] },
+  { icon: Wallet, featureIcons: [Ticket, CreditCard, Gift, CreditCard, Star] },
 ];
 
-const stats = [
-  { icon: Star, value: "4.9", label: "App Store Rating", suffix: "★" },
-  { icon: Download, value: "200k+", label: "Downloads" },
-  { icon: Users, value: "62%", label: "Adoption Rate" },
-  { icon: Award, value: "#1", label: "Tourism App CH" },
+const pillarScreenImages = [
+  "/images/app-screens/laax-explore.png",  // For You — Explore page
+  "/images/app-screens/laax-live.png",     // Live — Slopes, map, conditions
+  "/images/app-screens/laax-shop.png",     // Shop — Tickets, experiences, commerce
+  "/images/app-screens/laax-play.png",     // Play — Leaderboards, gamification
+  "/images/app-screens/laax-wallet.png",   // Wallet — Food ordering & payments
+];
+
+const pillarScreenColors = [
+  "hsl(355 85% 50%)",
+  "hsl(200 80% 50%)",
+  "hsl(30 90% 50%)",
+  "hsl(280 70% 55%)",
+  "hsl(160 60% 45%)",
+];
+
+const statConfig = [
+  { icon: Star, value: "4.9", suffix: "★" },
+  { icon: Download, value: "200k+" },
+  { icon: Users, value: "62%" },
+  { icon: Award, value: "#1" },
 ];
 
 // Themed phone frame
-const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
-  const pillar = pillarsData[activeIndex];
-
+const ImageFrame = ({ activeIndex, t }: { activeIndex: number; t: (key: string) => string }) => {
   return (
-    <div className="relative w-full max-w-[320px] mx-auto">
+    <div className="relative w-full max-w-[280px] mx-auto">
       {/* Outer glow */}
       <div
         className="absolute -inset-6 rounded-[3rem] opacity-25 blur-3xl transition-colors duration-500"
-        style={{ background: `radial-gradient(ellipse at center, ${pillar.screenColor}30, transparent 70%)` }}
+        style={{ background: `radial-gradient(ellipse at center, ${pillarScreenColors[activeIndex]}30, transparent 70%)` }}
       />
 
       {/* Phone shell */}
@@ -117,12 +67,12 @@ const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
 
           {/* Image area */}
           <div className="relative" style={{ aspectRatio: "9 / 19.5" }}>
-            {pillarsData.map((p, i) => (
+            {pillarScreenImages.map((src, i) => (
               <img
-                key={p.label}
-                src={p.screenImage}
-                alt={`${p.label} screen`}
-                className="absolute inset-0 w-full h-full object-cover object-left transition-opacity duration-500"
+                key={i}
+                src={src}
+                alt={`${t(`productDemo.pillars[${i}].label`)} screen`}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
                 style={{ opacity: i === activeIndex ? 1 : 0 }}
               />
             ))}
@@ -146,6 +96,8 @@ const ProductDemoSection = () => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const pausedUntil = useRef(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -161,8 +113,19 @@ const ProductDemoSection = () => {
     return () => observer.disconnect();
   }, []);
 
+  const cycleNext = useCallback(() => {
+    if (Date.now() < pausedUntil.current) return;
+    setActiveIndex((prev) => (prev + 1) % pillarIcons.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(cycleNext, CYCLE_INTERVAL);
+    return () => clearInterval(id);
+  }, [cycleNext]);
+
   const handlePillarClick = (i: number) => {
     setActiveIndex(i);
+    pausedUntil.current = Date.now() + PAUSE_AFTER_CLICK;
   };
 
   return (
@@ -171,31 +134,30 @@ const ProductDemoSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
-            Featuring the Omni App
+            {t("productDemo.eyebrow")}
           </span>
           <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-6">
-            The key to your resort.
+            {t("productDemo.headline")}
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            A white-label native app for iOS & Android that becomes the digital
-            heartbeat of your destination — personalized, data-driven, and loved
-            by guests.
+            {t("productDemo.subtitle")}
           </p>
         </div>
 
         {/* Stats bar */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 max-w-3xl mx-auto transition-all duration-700"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 max-w-3xl mx-auto transition-all duration-700"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(20px)",
           }}
         >
-          {stats.map((s, i) => {
+          {statConfig.map((s, i) => {
             const Icon = s.icon;
+            const label = t(`productDemo.stats[${i}].label`);
             return (
               <div
-                key={s.label}
+                key={label}
                 className="text-center rounded-xl border border-border/60 bg-card/50 backdrop-blur-sm px-4 py-5 transition-all duration-500"
                 style={{
                   transitionDelay: `${i * 100}ms`,
@@ -205,14 +167,48 @@ const ProductDemoSection = () => {
               >
                 <Icon size={16} className="mx-auto mb-2 text-primary" />
                 <p className="text-2xl font-bold text-foreground">{s.value}<span className="text-primary">{s.suffix || ""}</span></p>
-                <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
+                <p className="text-xs text-muted-foreground mt-1">{label}</p>
               </div>
+            );
+          })}
+        </div>
+        <p className="text-center text-[10px] text-muted-foreground/50 mb-20 max-w-3xl mx-auto">
+          {t("productDemo.basedOn")}
+        </p>
+
+        {/* Pillar tabs — full-width row above grid */}
+        <div
+          className="grid grid-cols-5 gap-3 mb-12 max-w-3xl mx-auto transition-all duration-700"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(16px)",
+            transitionDelay: "150ms",
+          }}
+        >
+          {pillarIcons.map((p, i) => {
+            const Icon = p.icon;
+            const isActive = activeIndex === i;
+            const label = t(`productDemo.pillars[${i}].label`);
+            return (
+              <button
+                key={i}
+                onClick={() => handlePillarClick(i)}
+                className={cn(
+                  "flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
+                  isActive
+                    ? "border-primary/40 bg-primary/10 text-foreground"
+                    : "border-border/40 bg-card/20 text-muted-foreground hover:border-border/60 hover:bg-card/40"
+                )}
+              >
+                <Icon size={14} className={isActive ? "text-primary" : "text-muted-foreground"} />
+                {label}
+              </button>
             );
           })}
         </div>
 
         {/* Side-by-side: phone left, info right */}
-        <div className="grid lg:grid-cols-[320px_1fr] gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-10 lg:gap-10 items-start max-w-3xl mx-auto">
           {/* Phone — left */}
           <div
             className="flex justify-start transition-all duration-700"
@@ -222,7 +218,7 @@ const ProductDemoSection = () => {
               transitionDelay: "200ms",
             }}
           >
-            <ImageFrame activeIndex={activeIndex} />
+            <ImageFrame activeIndex={activeIndex} t={t} />
           </div>
 
           {/* Info — right */}
@@ -234,58 +230,38 @@ const ProductDemoSection = () => {
               transitionDelay: "300ms",
             }}
           >
-            {/* Pillar tabs */}
-            <div className="flex flex-wrap items-center gap-2 mb-8">
-              {pillarsData.map((p, i) => {
-                const Icon = p.icon;
-                const isActive = activeIndex === i;
-                return (
-                  <button
-                    key={p.label}
-                    onClick={() => handlePillarClick(i)}
-                    className={cn(
-                      "flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
-                      isActive
-                        ? "border-primary/40 bg-primary/10 text-foreground"
-                        : "border-border/40 bg-card/20 text-muted-foreground hover:border-border/60 hover:bg-card/40"
-                    )}
-                  >
-                    <Icon size={14} className={isActive ? "text-primary" : "text-muted-foreground"} />
-                    {p.label}
-                  </button>
-                );
-              })}
-            </div>
-
             {/* Active pillar description */}
-            <div className="mb-6">
-              <p className="text-xl font-semibold text-foreground mb-2">{pillarsData[activeIndex].label}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{pillarsData[activeIndex].desc}</p>
+            <div className="mb-6 min-h-[4.5rem]">
+              <p className="text-2xl font-semibold text-foreground mb-2">{t(`productDemo.pillars[${activeIndex}].label`)}</p>
+              <p className="text-base text-muted-foreground leading-relaxed">{t(`productDemo.pillars[${activeIndex}].desc`)}</p>
             </div>
 
             {/* Feature list */}
             <div className="space-y-2 mb-8">
-              {pillarsData[activeIndex].features.map((f, fi) => (
+              {pillarIcons[activeIndex].featureIcons.map((FeatureIcon, fi) => (
                 <div
                   key={fi}
-                  className="flex items-start gap-3 rounded-xl border border-border/30 bg-card/30 px-4 py-3 transition-all duration-300"
+                  className="flex items-start gap-3 rounded-xl border border-border/30 bg-card/30 px-5 py-3.5 transition-all duration-300"
                 >
-                  <f.icon size={14} className="text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm text-foreground/80 leading-relaxed">{f.text}</span>
+                  <FeatureIcon size={16} className="text-primary shrink-0 mt-0.5" />
+                  <span className="text-base text-foreground/80 leading-relaxed">{t(`productDemo.pillars[${activeIndex}].features[${fi}]`)}</span>
                 </div>
               ))}
             </div>
 
             {/* App store badges */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-                <Star size={12} className="text-primary fill-primary" />
-                <span className="font-semibold text-foreground">4.9</span> on App Store
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                  <Star size={12} className="text-primary fill-primary" />
+                  <span className="font-semibold text-foreground">4.9</span> {t("productDemo.onAppStore")}
+                </div>
+                <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
+                  <Star size={12} className="text-primary fill-primary" />
+                  <span className="font-semibold text-foreground">4.7</span> {t("productDemo.onGooglePlay")}
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-4 py-2 text-xs text-muted-foreground">
-                <Star size={12} className="text-primary fill-primary" />
-                <span className="font-semibold text-foreground">4.7</span> on Google Play
-              </div>
+              <span className="text-[10px] text-muted-foreground/50">{t("productDemo.appRatingsNote")}</span>
             </div>
           </div>
         </div>

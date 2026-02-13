@@ -1,0 +1,23 @@
+{
+  "partnership-discover-swiss": {
+    "title": "Inside Labs AG wird Technologie Partner und Genossenschafter von discover.swiss",
+    "excerpt": "Eine strategische Partnerschaft, die die offene Dateninfrastruktur von discover.swiss mit der Omni Suite von Inside Labs für Customer Engagement, Loyalität und Gamification verbindet.",
+    "body": [
+      { "type": "paragraph", "text": "Die Inside Labs AG gibt stolz ihre Partnerschaft mit discover.swiss als Technologiepartner und Genossenschafter bekannt. Diese Zusammenarbeit vereint zwei komplementäre Stärken: das offene digitale Backend von discover.swiss für den Schweizer Tourismus und die Omni Suite von Inside Labs für Customer Engagement, Loyalität und Gamification." },
+      { "type": "heading", "level": 2, "text": "Was ist discover.swiss?" },
+      { "type": "paragraph", "text": "discover.swiss ist das offene digitale Backend für den Schweizer Tourismus. Als Genossenschaft bietet sie eine gemeinsame Dateninfrastruktur, die Tourismusdienstleister in der gesamten Schweiz verbindet — von Destinationen und Transportunternehmen bis zu Hotels und Aktivitätsanbietern. Die Plattform ermöglicht standardisierten Datenaustausch und schafft eine gemeinsame Grundlage für digitale Tourismusdienstleistungen." },
+      { "type": "heading", "level": 2, "text": "Das gemeinsame Angebot" },
+      { "type": "paragraph", "text": "Durch die Kombination der Dateninfrastruktur von discover.swiss mit der Omni Suite erhalten Destinationen Zugang zu einem leistungsstarken End-to-End-Digitalstack. discover.swiss liefert das Datenrückgrat — standardisierte Produktdaten, Verfügbarkeitsinformationen und Buchungsmöglichkeiten — während die Omni Suite diese Daten in personalisierte Gästeerlebnisse durch gezielte Kampagnen, Loyalitätsprogramme und Gamification transformiert." },
+      { "type": "list", "items": [
+        "Einheitliches Datenfundament von discover.swiss für personalisiertes Gäste-Engagement",
+        "Omni-Suite-Kampagnen, die Echtzeit-Produkt- und Verfügbarkeitsdaten nutzen",
+        "Loyalitäts- und Gamification-Programme, verbunden mit der gesamten Breite des Schweizer Tourismusangebots",
+        "Nahtlose Integration zwischen Dateninfrastruktur und gästeseitigen Touchpoints"
+      ]},
+      { "type": "quote", "text": "Mit discover.swiss erhalten wir Zugang zu einem leistungsstarken Datenfundament, das es uns ermöglicht, noch relevantere und personalisiertere Erlebnisse für Destinationsgäste zu schaffen.", "author": "Michael Eberle", "role": "Head of Customer Success, Inside Labs" },
+      { "type": "quote", "text": "Inside Labs bringt genau die Customer-Engagement-Expertise mit, die unsere Dateninfrastruktur ergänzt. Gemeinsam können wir Destinationen eine vollständige Digitallösung anbieten — von den Daten bis zum Gästeerlebnis.", "author": "Jon Erni", "role": "discover.swiss" },
+      { "type": "heading", "level": 2, "text": "Was das für Destinationen bedeutet" },
+      { "type": "paragraph", "text": "Für Tourismusdestinationen vereinfacht diese Partnerschaft die digitale Landschaft. Anstatt separate Lösungen für Datenmanagement und Gäste-Engagement zusammenzusetzen, können sie nun auf ein integriertes Angebot zugreifen, das die gesamte Kette abdeckt — von strukturierten Tourismusdaten bis hin zu personalisierter Gästekommunikation, Loyalitätsprogrammen und Gamification-Erlebnissen." }
+    ]
+  }
+}

@@ -183,7 +183,7 @@ const ProductCards = () => {
                 </ul>
 
                 <a
-                  href="/contact"
+                  href="/demo"
                   className={`mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all ${
                     isHero
                       ? "bg-primary text-primary-foreground hover:shadow-lg hover:shadow-primary/25"

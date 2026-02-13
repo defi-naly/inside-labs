@@ -365,7 +365,48 @@ const CommsDashboard = ({ bars }: { bars: number[] }) => {
   );
 };
 
-const dashboards = [CRMDashboard, EcommerceDashboard, AppDashboard, MembershipDashboard, CommsDashboard];
+// Card 5: Digital Transformation — Project delivery
+const TransformationDashboard = () => {
+  const projects = [
+    { name: "Headless CMS", status: "Live", pct: 100 },
+    { name: "360° Guest CRM", status: "Live", pct: 100 },
+    { name: "Content Hub", status: "Live", pct: 100 },
+    { name: "Commerce Layer", status: "Live", pct: 100 },
+    { name: "Partner Portal", status: "Live", pct: 100 },
+    { name: "Analytics Suite", status: "Live", pct: 100 },
+  ];
+
+  return (
+    <div className="rounded-xl border border-border/30 bg-black/20 p-5">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+          <Globe size={14} className="text-primary" />
+          Project Delivery
+        </div>
+        <span className="text-[10px] text-emerald-500 font-semibold">6/6 Live</span>
+      </div>
+      <div className="space-y-2.5">
+        {projects.map((p, i) => (
+          <div key={p.name} className="flex items-center gap-3">
+            <span className="text-[10px] text-foreground/80 w-24 shrink-0">{p.name}</span>
+            <div className="flex-1 h-5 rounded-md bg-muted/10 overflow-hidden relative">
+              <div
+                className="h-full rounded-md"
+                style={{
+                  width: `${p.pct}%`,
+                  background: `linear-gradient(90deg, hsl(355 85% ${40 + i * 3}%), hsl(355 85% ${50 + i * 3}%))`,
+                }}
+              />
+            </div>
+            <span className="text-[9px] font-semibold text-emerald-500 w-8 text-right shrink-0">{p.status}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export const dashboards = [CRMDashboard, EcommerceDashboard, AppDashboard, MembershipDashboard, CommsDashboard, TransformationDashboard];
 
 const ExpandedCard = ({ data, onClose }: ExpandedCardProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
