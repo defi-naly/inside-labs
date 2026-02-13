@@ -1,6 +1,6 @@
 import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
-import usp3 from "@/assets/usp-3.png";
+import omniAppPhone from "@/assets/omni-app-phone.png";
 
 const pillars = [
   { icon: Compass, label: "For You", desc: "Personalized guides, trails & destination info" },
@@ -95,7 +95,7 @@ const ProductDemoSection = () => {
             <div className="relative w-full max-w-[320px] mx-auto">
               <div className="rounded-3xl border border-border/40 overflow-hidden shadow-2xl shadow-primary/10">
                 <img
-                  src={usp3}
+                  src={omniAppPhone}
                   alt="Omni App — Explore screen"
                   className="w-full h-auto animate-[float_6s_ease-in-out_infinite]"
                 />
