@@ -1,30 +1,18 @@
 import { useRef, useEffect, useState } from "react";
-import {
-  Unplug,
-  UserX,
-  Mail,
-  TrendingDown,
-  Layers,
-  UserCheck,
-  Zap,
-  TrendingUp,
-  ChevronDown,
-  ArrowRight,
-} from "lucide-react";
+import { X, Check, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const problems = [
-  { icon: Unplug, title: "Fragmented Tools", desc: "Disconnected systems that don't talk to each other." },
-  { icon: UserX, title: "No Guest Data", desc: "Zero visibility into who your guests actually are." },
-  { icon: Mail, title: "Generic Messaging", desc: "One-size-fits-all campaigns that get ignored." },
-  { icon: TrendingDown, title: "One-Time Visits", desc: "Guests leave and never come back." },
-];
-
-const solutions = [
-  { icon: Layers, title: "Unified Platform", desc: "Every tool connected in a single dashboard." },
-  { icon: UserCheck, title: "Smart Profiles", desc: "Rich guest profiles built automatically." },
-  { icon: Zap, title: "Automated Campaigns", desc: "Personalised messages at the perfect moment." },
-  { icon: TrendingUp, title: "Repeat Buyers", desc: "Turn one-time visitors into loyal guests." },
+const rows = [
+  { feature: "Unified guest profiles", traditional: false, insideLabs: true },
+  { feature: "Cross-channel campaign automation", traditional: false, insideLabs: true },
+  { feature: "Real-time behavioral triggers", traditional: false, insideLabs: true },
+  { feature: "White-label native app", traditional: false, insideLabs: true },
+  { feature: "AI-powered personalization", traditional: false, insideLabs: true },
+  { feature: "Membership & loyalty programs", traditional: false, insideLabs: true },
+  { feature: "E-commerce integration", traditional: "Basic", insideLabs: true },
+  { feature: "Guest data & analytics", traditional: "Fragmented", insideLabs: true },
+  { feature: "Multi-language support", traditional: "Manual", insideLabs: true },
+  { feature: "Omni-channel messaging", traditional: false, insideLabs: true },
 ];
 
 const ProblemSolutionSection = () => {
@@ -39,7 +27,7 @@ const ProblemSolutionSection = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -48,73 +36,87 @@ const ProblemSolutionSection = () => {
   return (
     <section ref={ref} className="py-32 lg:py-40 px-6 border-t border-border/40">
       <div className="mx-auto max-w-4xl">
-        {/* Problem */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-3">
-            The problem
-          </p>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl">
-            Tourism brands lose guests after the first visit.
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="inline-block mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+            Why Inside Labs
+          </span>
+          <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl lg:text-5xl mb-4">
+            The unfair advantage.
           </h2>
+          <p className="mx-auto max-w-xl text-base text-muted-foreground leading-relaxed">
+            See how destinations powered by Inside Labs compare to those
+            relying on traditional, disconnected tools.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
-          {problems.map((item, i) => (
+        {/* Comparison table */}
+        <div
+          className="rounded-2xl border border-border/60 overflow-hidden"
+          style={{
+            background: "linear-gradient(165deg, hsl(230 15% 6%) 0%, hsl(230 20% 3%) 100%)",
+          }}
+        >
+          {/* Table header */}
+          <div className="grid grid-cols-[1fr_120px_120px] md:grid-cols-[1fr_160px_160px] items-center border-b border-border/40 px-6 py-4">
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Feature
+            </div>
+            <div className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Traditional
+            </div>
+            <div className="text-center text-xs font-semibold uppercase tracking-wider text-primary">
+              Inside Labs
+            </div>
+          </div>
+
+          {/* Rows */}
+          {rows.map((row, i) => (
             <div
-              key={item.title}
+              key={row.feature}
               className={cn(
-                "group rounded-xl border border-border/60 bg-card/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-muted/10 hover:border-muted-foreground/20",
-                visible ? "animate-fade-up" : "opacity-0 translate-y-6"
+                "grid grid-cols-[1fr_120px_120px] md:grid-cols-[1fr_160px_160px] items-center px-6 py-3.5 transition-all duration-500 border-b border-border/10 last:border-b-0",
+                "hover:bg-card/40",
+                visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
               )}
-              style={{ animationDelay: visible ? `${i * 100}ms` : undefined }}
+              style={{ transitionDelay: `${i * 60}ms` }}
             >
-              <item.icon size={24} className="text-muted-foreground mb-3" />
-              <h3 className="text-base font-semibold text-foreground mb-1">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+              <span className="text-sm text-foreground/90">{row.feature}</span>
+
+              {/* Traditional */}
+              <div className="flex justify-center">
+                {row.traditional === false ? (
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted/30">
+                    <X size={12} className="text-muted-foreground/60" />
+                  </div>
+                ) : (
+                  <span className="text-xs text-muted-foreground/70 font-medium">{row.traditional}</span>
+                )}
+              </div>
+
+              {/* Inside Labs */}
+              <div className="flex justify-center">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 border border-primary/20">
+                  <Check size={12} className="text-primary" />
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Animated Divider */}
-        <div className="flex flex-col items-center gap-1 mb-16">
-          <ChevronDown size={20} className={cn("text-primary", visible && "animate-pulse-slow")} />
-          <ChevronDown size={20} className={cn("text-primary/60", visible && "animate-pulse-slow")} style={{ animationDelay: "200ms" }} />
-          <ChevronDown size={20} className={cn("text-primary/30", visible && "animate-pulse-slow")} style={{ animationDelay: "400ms" }} />
-        </div>
-
-        {/* Solution */}
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            The solution
-          </p>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl">
-            One platform for the entire guest journey.
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-          {solutions.map((item, i) => (
-            <div
-              key={item.title}
-              className={cn(
-                "group rounded-xl border border-primary/10 bg-card/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 hover:border-primary/30",
-                visible ? "animate-fade-up" : "opacity-0 translate-y-6"
-              )}
-              style={{ animationDelay: visible ? `${400 + i * 100}ms` : undefined }}
-            >
-              <item.icon size={24} className="text-primary mb-3" />
-              <h3 className="text-base font-semibold text-foreground mb-1">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center">
+        {/* CTA */}
+        <div
+          className="text-center mt-10 transition-all duration-500"
+          style={{
+            opacity: visible ? 1 : 0,
+            transitionDelay: "700ms",
+          }}
+        >
           <a
             href="/product"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
           >
-            Learn how it works
+            See the full platform
             <ArrowRight size={14} />
           </a>
         </div>
