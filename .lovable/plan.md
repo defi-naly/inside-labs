@@ -1,51 +1,37 @@
 
 
-# Problem vs Solution - Visual Animated Showcase
+## Make the Phone Mockup 3D with Real App Screenshots
 
-## Concept
+### What Changes
 
-Replace the current plain text two-column layout with a visually rich, animated comparison. The section will use **scroll-triggered animations**, **iconography**, and a smooth **visual transition** from problem (grey/muted) to solution (crimson/primary) to create an emotional impact.
+**1. Add 3D perspective transform to the phone**
+- Apply CSS `perspective` and `rotateY`/`rotateX` transforms to give the flat SVG phone a convincing 3D tilt effect
+- Add a subtle reflection/shadow underneath for depth
+- Keep the floating animation but layer it with the 3D perspective
 
-## Layout
+**2. Replace icon-based screen content with real Inside Labs screenshots**
+- Load the actual app screenshots from insidelabs.tech for each pillar section:
+  - For You: `https://insidelabs.tech/images/2020/omni/theapp-explore/m.jpg`
+  - Live: `https://insidelabs.tech/images/2020/omni/theapp-live/m.jpg`
+  - Shop: `https://insidelabs.tech/images/2020/omni/theapp-shop/m.jpg`
+  - Play: `https://insidelabs.tech/images/2020/omni/theapp-play/m.jpg`
+  - Wallet: `https://insidelabs.tech/images/2020/omni/theapp-me/m.jpg`
+- The screenshot will fill the phone screen area, transitioning with a crossfade when switching pillars
 
-```text
-+--------------------------------------------------+
-|              THE PROBLEM                          |
-|                                                   |
-|   [icon]  Fragmented     [icon]  No Guest Data    |
-|            Tools                                  |
-|   [icon]  Generic        [icon]  One-Time         |
-|            Messaging              Visits           |
-|                                                   |
-|         --- animated divider / arrow ---          |
-|                                                   |
-|              THE SOLUTION                         |
-|                                                   |
-|   [icon]  Unified        [icon]  Smart Profiles   |
-|            Platform                               |
-|   [icon]  Automated      [icon]  Repeat           |
-|            Campaigns              Buyers           |
-|                                                   |
-|         [ Learn how it works -> ]                 |
-+--------------------------------------------------+
-```
+### Technical Details
 
-## Design Details
+**File: `src/components/ProductDemoSection.tsx`**
 
-- **Problem cards**: 4 pain points in a 2x2 grid, each with a muted icon (e.g., `Unplug`, `UserX`, `Mail`, `TrendingDown`), subtle muted border, and grey tones
-- **Solution cards**: 4 matching solutions in a 2x2 grid, each with a primary-colored icon (e.g., `Layers`, `UserCheck`, `Zap`, `TrendingUp`), primary border glow, crimson accent
-- **Animated divider**: A central animated arrow/chevron element that pulses, visually connecting problem to solution
-- **Scroll animations**: Each card fades in and slides up with staggered delays using CSS `@keyframes` and Intersection Observer
-- **Hover effects**: Cards lift slightly with a subtle glow on hover
+- Add `screenImage` URL to each pillar in `pillarsData`
+- Update the `PhoneFrame` component:
+  - Wrap the phone in a container with `perspective: 1200px`
+  - Apply `transform: rotateY(-8deg) rotateX(3deg)` for a subtle 3D angle
+  - Add an edge highlight gradient on the "near" side for realism
+  - Replace the icon-based screen content with an `<img>` element that loads each pillar's real screenshot, clipped to the phone screen bounds with `object-cover`
+  - Add a smooth crossfade transition between screenshots when switching pillars
+  - Keep the bottom nav bar overlaid on top of the screenshot for interactivity context
+- Add a soft floor reflection using a mirrored, blurred, low-opacity copy below the phone
 
-## Technical Approach
-
-1. **Add keyframes** to `tailwind.config.ts`: `fade-up` animation with staggered delay utilities
-2. **Rewrite `ProblemSolutionSection.tsx`**:
-   - Use `useRef` + `IntersectionObserver` to trigger animations when section enters viewport
-   - Stacked layout: Problem header + 2x2 grid, animated divider, Solution header + 2x2 grid
-   - Each card uses `opacity-0 translate-y-6` initially, transitions to `opacity-100 translate-y-0` with staggered delays
-   - Problem icons use `text-muted-foreground`, solution icons use `text-primary`
-   - Animated chevron between sections uses a CSS pulse/bounce animation
-3. **No new dependencies** -- pure CSS animations + React state via IntersectionObserver
+**File: `src/index.css`**
+- Add a `@keyframes phone-glow` animation for a subtle ambient light sweep across the 3D phone edges
 
