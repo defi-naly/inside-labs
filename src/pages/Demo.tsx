@@ -66,9 +66,9 @@ const Demo = () => {
 
               {/* Client logos */}
               <div className="flex items-center gap-5 opacity-40">
-                <img src="/images/logos/laax-logo.svg" alt="LAAX" className="h-6 brightness-0 invert" />
-                <img src="/images/logos/zermatt-logo.svg" alt="Zermatt" className="h-6 brightness-0 invert" />
-                <img src="/images/logos/engadin-logo.svg" alt="Engadin" className="h-5 brightness-0 invert" />
+                <img src="/images/logos/laax.svg" alt="LAAX" className="h-6 brightness-0 invert" />
+                <img src="/images/logos/zermatt.svg" alt="Zermatt" className="h-6 brightness-0 invert" />
+                <img src="/images/logos/engadin_logo.svg" alt="Engadin" className="h-5 brightness-0 invert" />
               </div>
             </div>
 
