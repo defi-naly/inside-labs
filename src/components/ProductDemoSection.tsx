@@ -89,18 +89,21 @@ const stats = [
 // Clean image frame — no phone outline, just a rounded container
 const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
   return (
-    <div className="relative w-full max-w-[520px] mx-auto">
-      <div
-        className="relative rounded-2xl overflow-hidden border border-border/30 bg-card/30"
-        style={{ aspectRatio: "9 / 16" }}
-      >
+    <div className="relative w-full max-w-[600px] mx-auto">
+      <div className="relative rounded-2xl overflow-hidden border border-border/30 bg-card/30">
+        {/* Use first image to set natural size */}
+        <img
+          src={pillarsData[0].screenImage}
+          alt="size reference"
+          className="w-full h-auto invisible"
+        />
         {/* Screenshots with crossfade */}
         {pillarsData.map((p, i) => (
           <img
             key={p.label}
             src={p.screenImage}
             alt={`${p.label} screen`}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+            className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
             style={{ opacity: i === activeIndex ? 1 : 0 }}
           />
         ))}
