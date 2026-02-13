@@ -82,24 +82,22 @@ const ProductDemoSection = () => {
         </div>
 
         {/* Main layout: app image + pillars */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Single hero app image */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+          {/* Single hero app image — no frame, matches pillar height */}
           <div
-            className="relative flex items-center justify-center transition-all duration-700"
+            className="relative flex items-center justify-center transition-all duration-700 order-2 lg:order-1"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.97)",
               transitionDelay: "200ms",
             }}
           >
-            <div className="relative w-full max-w-[320px] mx-auto">
-              <div className="rounded-3xl border border-border/40 overflow-hidden shadow-2xl shadow-primary/10">
-                <img
-                  src={omniAppPhone}
-                  alt="Omni App — Explore screen"
-                  className="w-full h-auto animate-[float_6s_ease-in-out_infinite]"
-                />
-              </div>
+            <div className="relative h-full flex items-center justify-center">
+              <img
+                src={omniAppPhone}
+                alt="Omni App"
+                className="h-full max-h-[480px] w-auto object-contain animate-[float_6s_ease-in-out_infinite] drop-shadow-2xl"
+              />
               {/* Glow behind */}
               <div
                 className="pointer-events-none absolute -inset-12 -z-10 rounded-full"
