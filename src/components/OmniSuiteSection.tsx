@@ -28,6 +28,7 @@ const cards = [
         { text: "Real-time behavioral triggers" },
       ],
       chartBars: [30, 45, 40, 55, 50, 65, 60, 72, 68, 80, 85, 92],
+      dashboardType: 0,
     },
   },
   {
@@ -50,6 +51,7 @@ const cards = [
         { text: "Revenue attribution tracking" },
       ],
       chartBars: [25, 35, 42, 38, 55, 48, 62, 70, 65, 78, 82, 90],
+      dashboardType: 1,
     },
   },
   {
@@ -72,6 +74,7 @@ const cards = [
         { text: "Offline-capable with sync" },
       ],
       chartBars: [20, 30, 45, 50, 48, 60, 65, 58, 72, 80, 88, 95],
+      dashboardType: 2,
     },
   },
   {
@@ -94,6 +97,7 @@ const cards = [
         { text: "Member analytics dashboard" },
       ],
       chartBars: [35, 40, 38, 50, 55, 52, 68, 72, 75, 82, 88, 94],
+      dashboardType: 3,
     },
   },
   {
@@ -116,6 +120,7 @@ const cards = [
         { text: "Real-time performance analytics" },
       ],
       chartBars: [40, 35, 50, 55, 60, 58, 70, 75, 72, 85, 90, 96],
+      dashboardType: 4,
     },
   },
 ];
