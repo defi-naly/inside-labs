@@ -86,27 +86,54 @@ const stats = [
   { icon: Award, value: "#1", label: "Tourism App CH" },
 ];
 
-// Clean image frame — no phone outline, just a rounded container
+// Themed image frame with device-like chrome
 const ImageFrame = ({ activeIndex }: { activeIndex: number }) => {
+  const pillar = pillarsData[activeIndex];
+
   return (
-    <div className="relative w-full max-w-[600px] mx-auto">
-      <div className="relative rounded-2xl overflow-hidden border border-border/30 bg-card/30">
-        {/* Use first image to set natural size */}
-        <img
-          src={pillarsData[0].screenImage}
-          alt="size reference"
-          className="w-full h-auto invisible"
-        />
-        {/* Screenshots with crossfade */}
-        {pillarsData.map((p, i) => (
+    <div className="relative w-full max-w-[600px] mx-auto group">
+      {/* Outer glow */}
+      <div
+        className="absolute -inset-4 rounded-3xl opacity-30 blur-2xl transition-colors duration-500"
+        style={{ background: `radial-gradient(ellipse at center, ${pillar.screenColor}20, transparent 70%)` }}
+      />
+
+      {/* Device chrome shell */}
+      <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+        {/* Top bar — browser/app chrome */}
+        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/30 bg-card/60">
+          {/* Traffic lights */}
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(0_70%_50%)]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(40_80%_50%)]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(120_50%_45%)]" />
+          </div>
+          {/* URL bar */}
+          <div className="flex-1 mx-4">
+            <div className="flex items-center gap-2 rounded-md bg-muted/40 border border-border/30 px-3 py-1">
+              <div className="w-3 h-3 rounded-full border border-muted-foreground/30" />
+              <span className="text-[10px] text-muted-foreground font-mono truncate">insidelabs.tech/omni-app/{pillar.label.toLowerCase().replace(" ", "-")}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Image area */}
+        <div className="relative bg-muted/10">
           <img
-            key={p.label}
-            src={p.screenImage}
-            alt={`${p.label} screen`}
-            className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
-            style={{ opacity: i === activeIndex ? 1 : 0 }}
+            src={pillarsData[0].screenImage}
+            alt="size reference"
+            className="w-full h-auto invisible"
           />
-        ))}
+          {pillarsData.map((p, i) => (
+            <img
+              key={p.label}
+              src={p.screenImage}
+              alt={`${p.label} screen`}
+              className="absolute inset-0 w-full h-full object-contain transition-opacity duration-500"
+              style={{ opacity: i === activeIndex ? 1 : 0 }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
