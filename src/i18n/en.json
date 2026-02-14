@@ -285,10 +285,6 @@
         ]
       }
     ],
-    "trustedBy": "Trusted by",
-    "destinations": "6 destinations",
-    "guests": "guests",
-    "rated": "rated",
     "dashboard": {
       "guestJourneyFunnel": "Guest Journey Funnel",
       "weeklyEngagement": "Weekly Engagement Heatmap",

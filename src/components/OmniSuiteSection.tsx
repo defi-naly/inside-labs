@@ -686,6 +686,34 @@ const OmniSuiteSection = () => {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-32 lg:py-40">
+        {/* Social proof stats */}
+        <div
+          className={cn(
+            "grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 transition-all duration-700",
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          )}
+          style={{ transitionDelay: "200ms" }}
+        >
+          {[
+            { value: "800k+", label: t("impact.stats[0].label") },
+            { value: "6", label: t("impact.stats[1].label") },
+            { value: "CHF 19M+", label: t("impact.stats[2].label") },
+            { value: "4+\u2605", label: t("impact.stats[3].label") },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="rounded-2xl border border-border/40 bg-black/20 backdrop-blur-sm px-6 py-5 text-center"
+            >
+              <div className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                {stat.value}
+              </div>
+              <div className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Section title */}
         <div
           className={cn(
@@ -727,24 +755,6 @@ const OmniSuiteSection = () => {
               </button>
             );
           })}
-        </div>
-
-        {/* Social proof line */}
-        <div
-          className={cn(
-            "flex items-center justify-center gap-3 mt-6 mb-0 transition-all duration-700",
-            visible ? "opacity-100" : "opacity-0"
-          )}
-          style={{ transitionDelay: "500ms" }}
-        >
-          <span className="text-xs text-muted-foreground/60">{t("omniSuite.trustedBy")}</span>
-          <span className="text-xs text-foreground font-semibold">{t("omniSuite.destinations")}</span>
-          <span className="h-3 w-px bg-border/40" />
-          <span className="text-xs text-foreground font-semibold">800k+</span>
-          <span className="text-xs text-muted-foreground/60">{t("omniSuite.guests")}</span>
-          <span className="h-3 w-px bg-border/40" />
-          <span className="text-xs text-foreground font-semibold">4+ ★</span>
-          <span className="text-xs text-muted-foreground/60">{t("omniSuite.rated")}</span>
         </div>
 
         {/* Content panel */}

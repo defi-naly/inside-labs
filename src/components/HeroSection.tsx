@@ -34,8 +34,8 @@ const HeroSection = () => {
       alt={logo.alt}
       className={
         logo.filter
-          ? "h-8 w-auto shrink-0 object-contain invert mix-blend-screen brightness-[2] opacity-60 md:h-10"
-          : "h-8 w-auto shrink-0 object-contain opacity-60 md:h-10"
+          ? "h-8 w-auto shrink-0 object-contain invert mix-blend-screen brightness-[2] opacity-60 md:h-10 pr-14"
+          : "h-8 w-auto shrink-0 object-contain opacity-60 md:h-10 pr-14"
       }
     />
   ));
@@ -107,7 +107,7 @@ const HeroSection = () => {
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
 
           {/* Scrolling track */}
-          <div className="flex animate-marquee items-center gap-14 hover:[animation-play-state:paused] will-change-transform">
+          <div className="flex animate-marquee items-center hover:[animation-play-state:paused] will-change-transform">
             {logoElements}
             {logoElements}
           </div>

@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import PageHero from "@/components/PageHero";
-import StatsHero from "@/components/about/StatsHero";
 import OmniSuiteSection from "@/components/OmniSuiteSection";
 import ProductDemoSection from "@/components/ProductDemoSection";
 import OmniComparisonSection from "@/components/OmniComparisonSection";
@@ -21,7 +20,6 @@ const Product = () => {
         subtitle={t("pages.product.subtitle")}
         imagePosition="center top"
       />
-      <StatsHero />
       <OmniSuiteSection />
       <ProductDemoSection />
       <OmniComparisonSection />
