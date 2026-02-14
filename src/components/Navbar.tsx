@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation, type Locale } from "@/i18n";
@@ -42,33 +43,33 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/60 backdrop-blur-xl">
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <div className="flex items-center gap-3">
-          <a href="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Inside Labs" className="h-8 brightness-0 invert" />
-          </a>
+          </Link>
         </div>
 
         {/* Desktop links — absolutely centered */}
         <div className="hidden items-center gap-1 md:flex absolute left-1/2 -translate-x-1/2">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-3">
           <LanguageToggle className="hidden md:inline-flex" />
-          <a
-            href="/demo"
+          <Link
+            to="/demo"
             className="hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/25 md:inline-flex"
           >
             {t("nav.bookDemo")}
             <ArrowRight size={14} />
-          </a>
+          </Link>
           <button
             onClick={() => setOpen(!open)}
             className="rounded-lg p-2 text-foreground transition-colors hover:text-primary md:hidden"
@@ -85,20 +86,22 @@ const Navbar = () => {
             <LanguageToggle />
           </div>
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="block rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:text-primary"
+              onClick={() => setOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="/demo"
+          <Link
+            to="/demo"
             className="mt-3 block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground"
+            onClick={() => setOpen(false)}
           >
             {t("nav.bookDemo")}
-          </a>
+          </Link>
         </div>
       )}
     </nav>
