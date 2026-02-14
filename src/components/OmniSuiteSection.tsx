@@ -714,26 +714,13 @@ const OmniSuiteSection = () => {
           ))}
         </div>
 
-        {/* Section title */}
-        <div
-          className={cn(
-            "text-center mb-10 transition-all duration-700",
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          )}
-          style={{ transitionDelay: "300ms" }}
-        >
-          <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-            {t("omniSuite.title")}
-          </h2>
-        </div>
-
         {/* Tab bar */}
         <div
           className={cn(
             "grid grid-cols-2 md:grid-cols-4 gap-3 mb-0 max-w-3xl mx-auto transition-all duration-700",
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           )}
-          style={{ transitionDelay: "400ms" }}
+          style={{ transitionDelay: "300ms" }}
         >
           {tabsConfig.map((tab, i) => {
             const isActive = activeTab === i;
