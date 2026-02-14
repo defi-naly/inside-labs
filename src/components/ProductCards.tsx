@@ -6,7 +6,7 @@ const products = [
     icon: Zap,
     description:
       "Start a personalized dialogue with your guests across marketing channels based on your e-commerce data. Deploy from 20+ proven campaigns.",
-    image: "/images/omni/omni-engage-header-m.png",
+    image: "/images/usp/commerce-screen-m.jpg",
     features: [
       "20+ proven campaign templates",
       "E-commerce data activation",
@@ -22,7 +22,7 @@ const products = [
     icon: Smartphone,
     description:
       "Everything in Engage, plus an award-winning white-label app, digital memberships, and advanced personalization AI at scale.",
-    image: "/images/omni/omni-explore-header-m.png",
+    image: "/images/usp/app-3screens-m.jpg",
     includes: "Omni Engage",
     features: [
       "White-label iOS & Android app",
@@ -42,7 +42,7 @@ const products = [
     icon: Trophy,
     description:
       "The most advanced engagement platform in travel. Limitless data streaming, sophisticated loyalty programs, and gamification experiences.",
-    image: "/images/omni/omni-endeavor-header-m.png",
+    image: "/images/usp/membership-overview.png",
     includes: "Omni Explore",
     features: [
       "All Omni Explore features",

@@ -36,56 +36,138 @@ const statConfig = [
   { icon: Award, value: "#1" },
 ];
 
-// Themed phone frame
+// iPhone 15 Pro — true 3D frame with visible edges
+const PHONE_DEPTH = 10; // px — thickness of the side rail
+
 const ImageFrame = ({ activeIndex, t }: { activeIndex: number; t: (key: string) => string }) => {
   return (
-    <div className="relative w-full max-w-[280px] mx-auto">
-      {/* Outer glow */}
+    <div
+      className="relative w-full max-w-[280px] mx-auto"
+      style={{ perspective: "900px" }}
+    >
+      {/* Outer glow — offset toward forward (right) edge */}
       <div
-        className="absolute -inset-6 rounded-[3rem] opacity-25 blur-3xl transition-colors duration-500"
-        style={{ background: `radial-gradient(ellipse at center, ${pillarScreenColors[activeIndex]}30, transparent 70%)` }}
+        className="absolute -inset-8 rounded-[3.5rem] opacity-30 blur-3xl transition-colors duration-500"
+        style={{ background: `radial-gradient(ellipse at 65% 50%, ${pillarScreenColors[activeIndex]}50, transparent 70%)` }}
       />
 
-      {/* Phone shell */}
-      <div className="relative rounded-[2.5rem] border-[3px] border-[hsl(230_12%_16%)] bg-[hsl(230_15%_6%)] p-[6px] shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
-        {/* Inner bezel */}
-        <div className="relative rounded-[2.2rem] overflow-hidden bg-black">
-          {/* Notch / Dynamic Island */}
-          <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[80px] h-[22px] rounded-full bg-[hsl(230_15%_6%)] z-20 border border-[hsl(230_10%_12%)]" />
+      {/* 3D rotation wrapper — everything inside lives in 3D space */}
+      <div
+        className="relative"
+        style={{
+          transform: "rotateY(14deg) rotateX(3deg)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        {/* ====== FRONT FACE — the phone screen ====== */}
+        <div
+          className="relative"
+          style={{
+            transform: `translateZ(${PHONE_DEPTH / 2}px)`,
+            transformStyle: "preserve-3d",
+          }}
+        >
+          {/* Titanium outer frame */}
+          <div
+            className="relative rounded-[2.8rem] p-[2.5px]"
+            style={{
+              background: "linear-gradient(135deg, hsl(230 8% 28%) 0%, hsl(230 8% 18%) 40%, hsl(230 8% 12%) 100%)",
+              boxShadow: `-30px 32px 70px rgba(0,0,0,0.65), -16px 20px 40px rgba(0,0,0,0.45), 0px 10px 70px rgba(0,0,0,0.3)`,
+            }}
+          >
+            {/* Frame specular highlight */}
+            <div
+              className="absolute inset-0 rounded-[2.8rem] pointer-events-none z-20"
+              style={{
+                background: "linear-gradient(145deg, rgba(255,255,255,0.14) 0%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 100%)",
+              }}
+            />
 
-          {/* Status bar */}
-          <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-8 pt-4">
-            <span className="text-[9px] font-semibold text-white/60">9:41</span>
-            <div className="flex items-center gap-1">
-              <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-              <div className="h-1.5 w-1.5 rounded-full bg-white/40" />
-              <div className="h-1.5 w-3 rounded-full bg-white/40" />
+            {/* Inner bezel ring */}
+            <div
+              className="relative rounded-[2.6rem] p-[3px]"
+              style={{ background: "hsl(230 15% 5%)" }}
+            >
+              {/* Screen glass */}
+              <div className="relative rounded-[2.4rem] overflow-hidden bg-black">
+                {/* Dynamic Island */}
+                <div
+                  className="absolute top-[10px] left-1/2 -translate-x-1/2 z-30"
+                  style={{ width: "90px", height: "28px" }}
+                >
+                  <div
+                    className="w-full h-full rounded-full"
+                    style={{
+                      background: "hsl(230 15% 4%)",
+                      boxShadow: "inset 0 0 3px rgba(0,0,0,0.9), 0 0 1px rgba(255,255,255,0.05)",
+                    }}
+                  />
+                </div>
+
+                {/* Status bar */}
+                <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-8 pt-[14px]">
+                  <span className="text-[9px] font-semibold text-white/70 tracking-tight">9:41</span>
+                  <div className="flex items-center gap-[3px]">
+                    <svg width="14" height="10" viewBox="0 0 14 10" className="opacity-50">
+                      <rect x="0" y="7" width="2.5" height="3" rx="0.5" fill="white" />
+                      <rect x="3.5" y="5" width="2.5" height="5" rx="0.5" fill="white" />
+                      <rect x="7" y="3" width="2.5" height="7" rx="0.5" fill="white" />
+                      <rect x="10.5" y="0" width="2.5" height="10" rx="0.5" fill="white" />
+                    </svg>
+                    <svg width="12" height="10" viewBox="0 0 12 10" className="opacity-50">
+                      <path d="M6 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="white" />
+                      <path d="M3.5 6.5a3.5 3.5 0 0 1 5 0" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+                      <path d="M1.5 4.5a6 6 0 0 1 9 0" stroke="white" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+                    </svg>
+                    <div className="flex items-center gap-[1px] opacity-50">
+                      <div className="w-[18px] h-[9px] rounded-[2px] border border-white/80 flex items-center p-[1.5px]">
+                        <div className="w-[70%] h-full rounded-[1px] bg-white" />
+                      </div>
+                      <div className="w-[1.5px] h-[4px] rounded-r-full bg-white/80" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Screenshot images — filter:blur(0px) forces own compositing layer for crisp raster */}
+                <div className="relative" style={{ aspectRatio: "9 / 19.5" }}>
+                  {pillarScreenImages.map((src, i) => (
+                    <img
+                      key={i}
+                      src={src}
+                      alt={`${t(`productDemo.pillars[${i}].label`)} screen`}
+                      className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                      style={{
+                        opacity: i === activeIndex ? 1 : 0,
+                        filter: "blur(0px)",
+                        WebkitFilter: "blur(0px)",
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Home indicator */}
+                <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-[100px] h-[4px] rounded-full bg-white/25 z-20" />
+              </div>
             </div>
           </div>
-
-          {/* Image area */}
-          <div className="relative" style={{ aspectRatio: "9 / 19.5" }}>
-            {pillarScreenImages.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`${t(`productDemo.pillars[${i}].label`)} screen`}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-                style={{ opacity: i === activeIndex ? 1 : 0 }}
-              />
-            ))}
-          </div>
-
-          {/* Home indicator */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[100px] h-[4px] rounded-full bg-white/20 z-10" />
         </div>
+
+        {/* ====== BACK FACE — sits behind front, peeks out on edges to show depth ====== */}
+        <div
+          className="absolute inset-0 rounded-[2.8rem] pointer-events-none"
+          style={{
+            transform: `translateZ(${-PHONE_DEPTH / 2}px)`,
+            background: "linear-gradient(135deg, hsl(230 8% 18%) 0%, hsl(230 8% 10%) 100%)",
+            boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.04)",
+          }}
+        />
       </div>
 
-      {/* Side buttons */}
-      <div className="absolute top-[100px] -right-[4px] w-[3px] h-[50px] rounded-r bg-[hsl(230_10%_14%)]" />
-      <div className="absolute top-[80px] -left-[4px] w-[3px] h-[24px] rounded-l bg-[hsl(230_10%_14%)]" />
-      <div className="absolute top-[120px] -left-[4px] w-[3px] h-[40px] rounded-l bg-[hsl(230_10%_14%)]" />
-      <div className="absolute top-[170px] -left-[4px] w-[3px] h-[40px] rounded-l bg-[hsl(230_10%_14%)]" />
+      {/* Reflection strip */}
+      <div
+        className="absolute -bottom-6 left-[5%] right-[15%] h-8 rounded-full blur-2xl opacity-25 transition-colors duration-500"
+        style={{ background: pillarScreenColors[activeIndex] }}
+      />
     </div>
   );
 };

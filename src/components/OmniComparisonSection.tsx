@@ -8,20 +8,20 @@ import { useTranslation } from "@/i18n";
 const productConfig = [
   {
     icon: Zap,
-    image: "/images/omni/omni-engage-header-m.png",
-    imagePosition: "object-center",
+    image: "/images/usp/commerce-screen-m.jpg",
+    imagePosition: "object-top",
     isHero: false,
   },
   {
     icon: Smartphone,
-    image: "/images/omni/omni-explore-header-m.png",
+    image: "/images/usp/app-3screens-m.jpg",
     imagePosition: "object-top",
     isHero: true,
   },
   {
     icon: Trophy,
-    image: "/images/omni/omni-endeavor-header-m.png",
-    imagePosition: "object-center",
+    image: "/images/usp/membership-overview.png",
+    imagePosition: "object-top",
     isHero: false,
   },
 ];
