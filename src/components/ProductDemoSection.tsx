@@ -1,10 +1,8 @@
 import { Compass, Radio, ShoppingBag, Gamepad2, Wallet, Star, Download, Users, Award, Utensils, Map, Mountain, CloudSun, Ticket, Trophy, Medal, CreditCard, Bell, Bike, Timer, Gift } from "lucide-react";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/i18n";
 
-const CYCLE_INTERVAL = 5000;
-const PAUSE_AFTER_CLICK = 10000;
 
 // Feature icons per pillar (not translated — icons stay the same)
 const pillarIcons = [
@@ -96,7 +94,6 @@ const ProductDemoSection = () => {
   const [visible, setVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const pausedUntil = useRef(0);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -112,21 +109,6 @@ const ProductDemoSection = () => {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
-
-  const cycleNext = useCallback(() => {
-    if (Date.now() < pausedUntil.current) return;
-    setActiveIndex((prev) => (prev + 1) % pillarIcons.length);
-  }, []);
-
-  useEffect(() => {
-    const id = setInterval(cycleNext, CYCLE_INTERVAL);
-    return () => clearInterval(id);
-  }, [cycleNext]);
-
-  const handlePillarClick = (i: number) => {
-    setActiveIndex(i);
-    pausedUntil.current = Date.now() + PAUSE_AFTER_CLICK;
-  };
 
   return (
     <section ref={ref} className="py-32 lg:py-40 px-6 border-t border-border/40">
@@ -192,7 +174,7 @@ const ProductDemoSection = () => {
             return (
               <button
                 key={i}
-                onClick={() => handlePillarClick(i)}
+                onClick={() => setActiveIndex(i)}
                 className={cn(
                   "flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 cursor-pointer",
                   isActive
